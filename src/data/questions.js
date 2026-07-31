@@ -79,14 +79,7 @@ export const QUESTIONS = [
     text: 'What is a gift or strength you see in me, even if I do not notice it myself?',
     subtext: 'Think about encouragement, kindness, wisdom, or leadership.'
   },
-  {
-    id: 'q1-3',
-    levelId: 'level-1',
-    type: 'question',
-    category: 'Personality',
-    text: 'If my personality were a song or genre of music, what would it sound like?',
-    subtext: 'Upbeat pop, calm acoustic, or full stadium energy?'
-  },
+
   {
     id: 'q1-4',
     levelId: 'level-1',
@@ -143,14 +136,7 @@ export const QUESTIONS = [
     text: 'What topic could I talk about for 30 minutes straight without stopping?',
     subtext: 'Name my ultimate topic of interest.'
   },
-  {
-    id: 'q1-11',
-    levelId: 'level-1',
-    type: 'question',
-    category: 'First Impressions',
-    text: 'What was the first thing you noticed about my vibe when we met?',
-    subtext: 'Did I seem quiet, confident, energetic, or warm?'
-  },
+
   {
     id: 'q1-12',
     levelId: 'level-1',
@@ -175,14 +161,7 @@ export const QUESTIONS = [
     text: 'In group hangouts, am I usually the planner, the hype person, or the one making sure everyone feels included?',
     subtext: 'Describe my role when we hang out.'
   },
-  {
-    id: 'q1-15',
-    levelId: 'level-1',
-    type: 'question',
-    category: 'Perception',
-    text: 'What is 1 talent or skill I have that you think I should use more often?',
-    subtext: 'Tell me where you see great potential in me.'
-  },
+
   {
     id: 'q1-16',
     levelId: 'level-1',
@@ -191,14 +170,7 @@ export const QUESTIONS = [
     text: 'When did our friendship move from small talk to real friendship?',
     subtext: 'Describe that specific moment.'
   },
-  {
-    id: 'q1-17',
-    levelId: 'level-1',
-    type: 'question',
-    category: 'Vibe Check',
-    text: 'If I were to host a 1-hour workshop, what would the topic be?',
-    subtext: 'Keep it fun, practical, or inspiring.'
-  },
+
   {
     id: 'q1-18',
     levelId: 'level-1',
@@ -467,14 +439,7 @@ export const QUESTIONS = [
   },
 
   // LEVEL 3: FAITH & LIFE WITH JESUS (25 QUESTIONS)
-  {
-    id: 'q3-1',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Spiritual Gifts',
-    text: 'How have you seen God work through you to encourage or help someone recently?',
-    subtext: 'Share a quick story of blessing someone else.'
-  },
+
   {
     id: 'q3-2',
     levelId: 'level-3',
@@ -563,14 +528,7 @@ export const QUESTIONS = [
     text: 'Describe a moment in church, prayer, or worship where you felt God\'s peace cover you.',
     subtext: 'What shifted in your heart?'
   },
-  {
-    id: 'q3-13',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Scripture',
-    text: 'What Bible story or passage gave you fresh hope or clarity recently?',
-    subtext: 'Share what stood out to you.'
-  },
+
   {
     id: 'q3-14',
     levelId: 'level-3',
@@ -611,14 +569,7 @@ export const QUESTIONS = [
     text: 'Why do you think having a local church family is important in a world where many people feel isolated?',
     subtext: 'Share why connection matters.'
   },
-  {
-    id: 'q3-19',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Calling',
-    text: 'How do you bring kindness, integrity, and faith into your everyday job or studies?',
-    subtext: 'Connecting daily work with purpose.'
-  },
+
   {
     id: 'q3-20',
     levelId: 'level-3',
@@ -666,6 +617,30 @@ export const QUESTIONS = [
     category: 'Hope',
     text: 'What gives you genuine hope for your future and for the Church moving forward?',
     subtext: 'Speak hope over the group.'
+  },
+  {
+    id: 'q3-26',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Surrender & Response',
+    text: 'If Jesus personally walked into the room right now and asked, "What do you want me to do for you?", how would you respond?',
+    subtext: 'Be completely honest with what your heart needs most.'
+  },
+  {
+    id: 'q3-27',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Calling & Response',
+    text: 'If God explicitly told you, "Leave your comfort zone and take this step," what area of your life would hurt or scare you most to step out of?',
+    subtext: 'Security, career, reputation, or convenience?'
+  },
+  {
+    id: 'q3-28',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Faith & Prompt',
+    text: 'If Jesus looked at your daily routine, what is 1 thing he would gently tell you to stop worrying about?',
+    subtext: 'Consider what anxiety takes up unnecessary space.'
   },
 
   // LEVEL 4: HEART TO HEART (25 DEEP & RAW QUESTIONS)
@@ -884,6 +859,23 @@ export const QUESTIONS = [
     category: 'Inner Renewal',
     text: 'What is 1 battle in your mind that you are learning to take captive and replace with God\'s peace?',
     subtext: 'Sharing how you guard your thoughts daily.'
+  },
+
+  {
+    id: 'q4-29',
+    levelId: 'level-4',
+    type: 'question',
+    category: 'Identity & Truth',
+    text: 'If Jesus whispered, "You don\'t have to prove anything to anyone anymore," what pressure in your life would drop immediately?',
+    subtext: 'Reflect on freedom from performance.'
+  },
+  {
+    id: 'q4-30',
+    levelId: 'level-4',
+    type: 'question',
+    category: 'Trust & Faith',
+    text: 'If God asked you to surrender your biggest dream and wait for him, what fear would surface first?',
+    subtext: 'A safe space to discuss fear of the unknown.'
   },
 
   // LEVEL 5: WILDCARDS & GROUP ACTIONS (15 CARDS)
