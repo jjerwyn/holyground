@@ -89,14 +89,16 @@ export default function CardDeck({
     }
   };
 
-  const animateNext = () => {
+  const animateNext = (direction = 1) => {
     if (isAnimatingRef.current || currentIndex >= deck.length - 1 || !topRef.current || !underRef.current) return;
     isAnimatingRef.current = true;
+
+    const sign = direction >= 0 ? 1 : -1;
 
     topRef.current.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.28s ease';
     underRef.current.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1)';
 
-    topRef.current.style.transform = 'translate3d(450px, 0px, 0px) rotate(25deg)';
+    topRef.current.style.transform = `translate3d(${sign * 450}px, 0px, 0px) rotate(${sign * 25}deg)`;
     topRef.current.style.opacity = '0';
     underRef.current.style.transform = 'translateY(0px) scale(1)';
 
@@ -195,7 +197,7 @@ export default function CardDeck({
       const draggedDistance = Math.abs(currentXRef.current);
 
       if (draggedDistance > threshold && currentIndex < deck.length - 1) {
-        animateNext();
+        animateNext(currentXRef.current);
       } else if (draggedDistance > 0) {
         topRef.current.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.28s ease';
         underRef.current.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1)';
