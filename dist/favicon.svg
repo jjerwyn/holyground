@@ -1,0 +1,21 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer Holy Ground Base Curves -->
+  <path d="M 6 38 C 16 33, 32 33, 42 38" stroke="#D97706" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M 12 42 C 20 39, 28 39, 36 42" stroke="#D97706" stroke-width="2.5" stroke-linecap="round" stroke-opacity="0.6"/>
+  
+  <!-- Sacred Flame -->
+  <path d="M 24 8 C 24 8, 16 20, 16 27 C 16 31.4 19.6 35 24 35 C 28.4 35 32 31.4 32 27 C 32 20, 24 8, 24 8 Z" fill="url(#flameGrad)"/>
+  <path d="M 24 16 C 24 16, 20 23, 20 27.5 C 20 29.7 21.8 31.5 24 31.5 C 26.2 31.5 28 29.7 28 27.5 C 28 23, 24 16, 24 16 Z" fill="#FFF7ED" fill-opacity="0.9"/>
+  
+  <!-- Radiating Ray Elements -->
+  <circle cx="24" cy="6" r="2" fill="#D97706"/>
+  <path d="M 14 12 L 11 9" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+  <path d="M 34 12 L 37 9" stroke="#D97706" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+  
+  <defs>
+    <linearGradient id="flameGrad" x1="24" y1="8" x2="24" y2="35" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#C2410C"/>
+    </linearGradient>
+  </defs>
+</svg>
