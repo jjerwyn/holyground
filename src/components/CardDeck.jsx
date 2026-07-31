@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { ChevronRight, ChevronLeft, RotateCw, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import HolyGroundLogo from './HolyGroundLogo';
@@ -13,17 +12,45 @@ export default function CardDeck({
   onRestartDeck, 
   onBackToMenu 
 }) {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [autoReveal, setAutoReveal] = useState(() => {
+    try {
+      const saved = localStorage.getItem('holyground_auto_reveal');
+      return saved !== null ? JSON.parse(saved) : true;
+    } catch {
+      return true;
+    }
+  });
+
+  const [isFlipped, setIsFlipped] = useState(autoReveal);
+  const [shouldAnimateFlip, setShouldAnimateFlip] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
 
-  const x = useMotionValue(0);
-  const rotate = useTransform(x, [-200, 200], [-12, 12]);
-  const opacity = useTransform(x, [-200, -100, 0, 100, 200], [0.5, 1, 1, 1, 0.5]);
+  const topRef = useRef(null);
+  const underRef = useRef(null);
+
+  const isAnimatingRef = useRef(false);
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const currentXRef = useRef(0);
+  const skipLayoutResetRef = useRef(false);
 
   const activeCard = deck[currentIndex];
+  const nextCardTarget = deck[Math.min(currentIndex + 1, deck.length - 1)];
+
+  const isWildcard = activeCard?.type === 'wildcard';
+  const cardAccent = isWildcard ? '#059669' : (currentLevel?.accentColor || '#c59b27');
 
   useEffect(() => {
-    setIsFlipped(false);
+    try {
+      localStorage.setItem('holyground_auto_reveal', JSON.stringify(autoReveal));
+    } catch (e) {
+      // Ignore storage errors
+    }
+  }, [autoReveal]);
+
+  useEffect(() => {
+    setIsFlipped(autoReveal);
+    setShouldAnimateFlip(false);
     
     if (deck.length > 0 && currentIndex >= deck.length) {
       setIsCompleted(true);
@@ -35,33 +62,166 @@ export default function CardDeck({
     } else {
       setIsCompleted(false);
     }
-  }, [currentIndex, deck.length]);
+  }, [currentIndex, deck.length, autoReveal]);
+
+  // Synchronously reset transform positions before browser paint on index change
+  useLayoutEffect(() => {
+    if (skipLayoutResetRef.current) {
+      skipLayoutResetRef.current = false;
+      return;
+    }
+    if (topRef.current) {
+      topRef.current.style.transition = 'none';
+      topRef.current.style.transform = 'translate3d(0px, 0px, 0px) rotate(0deg)';
+      topRef.current.style.opacity = '1';
+    }
+    if (underRef.current) {
+      underRef.current.style.transition = 'none';
+      underRef.current.style.transform = 'translateY(8px) scale(0.96)';
+    }
+    isAnimatingRef.current = false;
+  }, [currentIndex]);
+
+  const handleToggleFlip = () => {
+    if (!isFlipped) {
+      setShouldAnimateFlip(true);
+      setIsFlipped(true);
+    }
+  };
+
+  const animateNext = () => {
+    if (isAnimatingRef.current || currentIndex >= deck.length - 1 || !topRef.current || !underRef.current) return;
+    isAnimatingRef.current = true;
+
+    topRef.current.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.28s ease';
+    underRef.current.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1)';
+
+    topRef.current.style.transform = 'translate3d(450px, 0px, 0px) rotate(25deg)';
+    topRef.current.style.opacity = '0';
+    underRef.current.style.transform = 'translateY(0px) scale(1)';
+
+    setTimeout(() => {
+      setShouldAnimateFlip(false);
+      onNextCard();
+    }, 280);
+  };
+
+  const animatePrev = () => {
+    if (isAnimatingRef.current || currentIndex <= 0 || !topRef.current || !underRef.current) return;
+    isAnimatingRef.current = true;
+
+    setShouldAnimateFlip(false);
+
+    // 1. Prepare top card off-screen on the right with opacity 0
+    topRef.current.style.transition = 'none';
+    topRef.current.style.transform = 'translate3d(450px, -15px, 0px) rotate(22deg)';
+    topRef.current.style.opacity = '0';
+    underRef.current.style.transition = 'none';
+    underRef.current.style.transform = 'translateY(0px) scale(1)';
+
+    // 2. Skip the useLayoutEffect reset so it doesn't kill our animation
+    skipLayoutResetRef.current = true;
+
+    // 3. Trigger parent state change to previous card
+    onPrevCard();
+    setIsFlipped(autoReveal);
+
+    // 4. Animate top card landing smoothly back on top (from right -> center)
+    requestAnimationFrame(() => {
+      if (!topRef.current || !underRef.current) return;
+      topRef.current.style.transition = 'transform 0.32s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.28s ease';
+      underRef.current.style.transition = 'transform 0.32s cubic-bezier(0.25, 1, 0.5, 1)';
+
+      topRef.current.style.transform = 'translate3d(0px, 0px, 0px) rotate(0deg)';
+      topRef.current.style.opacity = '1';
+      underRef.current.style.transform = 'translateY(8px) scale(0.96)';
+
+      setTimeout(() => {
+        isAnimatingRef.current = false;
+      }, 320);
+    });
+  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === 'Space' || e.key === ' ') {
         e.preventDefault();
-        setIsFlipped((prev) => !prev);
+        handleToggleFlip();
+      } else if (e.key === 'ArrowRight') {
+        animateNext();
+      } else if (e.key === 'ArrowLeft') {
+        animatePrev();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [currentIndex, deck.length]);
 
-  const handleDragEnd = (event, info) => {
-    const swipeThreshold = 60;
-    const velocityThreshold = 200;
-
-    if (info.offset.x < -swipeThreshold || info.velocity.x < -velocityThreshold) {
-      onNextCard();
-    } else if ((info.offset.x > swipeThreshold || info.velocity.x > velocityThreshold) && currentIndex > 0) {
-      onPrevCard();
-    }
+  // Pointer & Touch Handlers using global window listeners (100% Matching deck-preview.html)
+  const handlePointerDown = (e) => {
+    if (isAnimatingRef.current || !topRef.current || !underRef.current) return;
+    isDraggingRef.current = true;
+    startXRef.current = e.clientX || (e.touches && e.touches[0]?.clientX);
+    currentXRef.current = 0;
+    topRef.current.style.transition = 'none';
+    underRef.current.style.transition = 'none';
   };
 
+  useEffect(() => {
+    const handlePointerMove = (e) => {
+      if (!isDraggingRef.current || !topRef.current || !underRef.current) return;
+      const clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
+      if (clientX === undefined) return;
+
+      const x = clientX - startXRef.current;
+      currentXRef.current = x;
+
+      const rotate = x * 0.08;
+      const opacity = 1 - Math.abs(x) / 600;
+      const progress = Math.min(Math.abs(x) / 180, 1);
+      const scale = 0.96 + (0.04 * progress);
+      const y = 8 - (8 * progress);
+
+      topRef.current.style.transform = `translate3d(${x}px, 0px, 0px) rotate(${rotate}deg)`;
+      topRef.current.style.opacity = opacity;
+      underRef.current.style.transform = `translateY(${y}px) scale(${scale})`;
+    };
+
+    const handlePointerUp = () => {
+      if (!isDraggingRef.current || !topRef.current || !underRef.current) return;
+      isDraggingRef.current = false;
+
+      const threshold = 50;
+      const draggedDistance = Math.abs(currentXRef.current);
+
+      if (draggedDistance > threshold && currentIndex < deck.length - 1) {
+        animateNext();
+      } else if (draggedDistance > 0) {
+        topRef.current.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.28s ease';
+        underRef.current.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1)';
+        topRef.current.style.transform = 'translate3d(0px, 0px, 0px) rotate(0deg)';
+        topRef.current.style.opacity = '1';
+        underRef.current.style.transform = 'translateY(8px) scale(0.96)';
+      }
+      currentXRef.current = 0;
+    };
+
+    window.addEventListener('mousemove', handlePointerMove);
+    window.addEventListener('mouseup', handlePointerUp);
+    window.addEventListener('touchmove', handlePointerMove, { passive: true });
+    window.addEventListener('touchend', handlePointerUp);
+
+    return () => {
+      window.removeEventListener('mousemove', handlePointerMove);
+      window.removeEventListener('mouseup', handlePointerUp);
+      window.removeEventListener('touchmove', handlePointerMove);
+      window.removeEventListener('touchend', handlePointerUp);
+    };
+  }, [currentIndex, deck.length]);
+
   const handleCardClick = () => {
-    if (Math.abs(x.get()) > 10) return;
-    setIsFlipped((prev) => !prev);
+    if (Math.abs(currentXRef.current) > 10) return;
+    handleToggleFlip();
   };
 
   if (isCompleted || !activeCard) {
@@ -150,14 +310,12 @@ export default function CardDeck({
     );
   }
 
-  const isWildcard = activeCard.type === 'wildcard';
-  const cardAccent = isWildcard ? '#059669' : (currentLevel?.accentColor || '#c59b27');
-
   return (
     <div className="card-stack-wrapper">
       {/* Physical Card Stack Container */}
       <div className="card-physical-container">
-        {/* Ghost Deck Stack Layers */}
+        
+        {/* Ghost Deck Stack Layer (Card #3+) */}
         {currentIndex + 2 < deck.length && (
           <div style={{
             position: 'absolute',
@@ -171,226 +329,195 @@ export default function CardDeck({
             boxShadow: '0 4px 16px rgba(18, 24, 38, 0.03)'
           }} />
         )}
-        {currentIndex + 1 < deck.length && (
-          <div style={{
-            position: 'absolute',
-            width: '95%',
-            height: '96%',
-            borderRadius: '28px',
-            background: '#ffffff',
-            border: '1px solid rgba(18, 24, 38, 0.08)',
-            transform: 'translateY(8px) scale(0.96)',
-            zIndex: 2,
-            boxShadow: '0 8px 24px rgba(18, 24, 38, 0.04)'
-          }} />
-        )}
 
-        {/* Active Physical Card */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCard.id}
+        {/* Underneath Card Layer (100% Matching deck-preview.html) */}
+        {nextCardTarget && (
+          <div
+            ref={underRef}
             style={{
-              x,
-              rotate,
-              opacity,
               position: 'absolute',
               width: '100%',
               height: '100%',
-              zIndex: 10,
-              cursor: 'grab'
+              borderRadius: '28px',
+              background: '#ffffff',
+              border: `1.5px solid ${cardAccent}`,
+              boxShadow: '0 8px 24px rgba(18, 24, 38, 0.06)',
+              transform: 'translateY(8px) scale(0.96)',
+              zIndex: 2,
+              pointerEvents: 'none',
+              overflow: 'hidden'
             }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            onDragEnd={handleDragEnd}
-            whileTap={{ cursor: 'grabbing', scale: 0.985 }}
-            onClick={handleCardClick}
           >
-            {/* 3D Card Container */}
-            <div style={{
-              width: '100%',
-              height: '100%',
-              position: 'relative',
-              perspective: '1000px',
-              WebkitPerspective: '1000px'
+            <div 
+            className={`card-3d-inner ${autoReveal ? 'flipped' : ''}`}
+            style={{ transition: 'none' }}
+          >
+            {/* UNFLIPPED CARD FRONT COVER */}
+            <div className="card-face card-face-front" style={{
+              border: `1.5px solid ${cardAccent}`,
+              boxShadow: '0 16px 36px -10px rgba(18, 24, 38, 0.06)',
+              padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              textAlign: 'center'
             }}>
-              <motion.div
-                animate={{ rotateY: isFlipped ? 180 : 0 }}
-                transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  position: 'relative',
-                  transformStyle: 'preserve-3d',
-                  WebkitTransformStyle: 'preserve-3d',
-                  willChange: 'transform'
-                }}
-              >
-                {/* UNFLIPPED CARD FRONT COVER */}
-                <div style={{
-                  position: 'absolute',
-                  width: '100%',
-                  height: '100%',
-                  backfaceVisibility: 'hidden',
-                  WebkitBackfaceVisibility: 'hidden',
-                  visibility: isFlipped ? 'hidden' : 'visible',
-                  opacity: isFlipped ? 0 : 1,
-                  pointerEvents: isFlipped ? 'none' : 'auto',
-                  transform: 'rotateY(0deg) translateZ(1px)',
-                  WebkitTransform: 'rotateY(0deg) translateZ(1px)',
-                  isolation: 'isolate',
-                  borderRadius: '28px',
-                  background: '#ffffff',
-                  border: `1.5px solid ${cardAccent}`,
-                  boxShadow: `0 16px 36px -10px rgba(18, 24, 38, 0.1)`,
-                  padding: 'clamp(20px, 4vh, 32px) clamp(16px, 4vw, 24px)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  textAlign: 'center'
-                }}>
-                  {/* Inner Debossed Border Frame */}
-                  <div className="editorial-inner-border" />
-
-                  {/* Top Level Pill */}
-                  <div style={{
-                    padding: '4px 14px',
-                    background: '#ffffff',
-                    border: `1px solid ${cardAccent}40`,
-                    borderRadius: '20px',
-                    fontSize: '0.7rem',
-                    fontWeight: 800,
-                    color: cardAccent,
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                    position: 'relative',
-                    zIndex: 2,
-                    boxShadow: '0 2px 6px rgba(18, 24, 38, 0.03)'
-                  }}>
-                    <span>{currentLevel ? `LEVEL ${currentLevel.number}` : 'HOLY GROUND'}</span>
-                  </div>
-
-                  {/* Center Emblem */}
-                  <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '10px',
-                    position: 'relative',
-                    zIndex: 2
-                  }}>
-                    <HolyGroundLogo size={48} color={cardAccent} glow={false} />
-
-                    <h3 className="font-serif" style={{
-                      fontSize: 'clamp(1.25rem, 4vw, 1.5rem)',
-                      fontWeight: 700,
-                      letterSpacing: '0.06em',
-                      color: '#121826',
-                      textTransform: 'uppercase'
-                    }}>
-                      HOLY GROUND
-                    </h3>
-                    <p style={{ fontSize: '0.72rem', color: '#6b7280', fontWeight: 600, letterSpacing: '0.06em' }}>
-                      CARD #{currentIndex + 1} OF {deck.length}
-                    </p>
-                  </div>
-
-                  {/* Bottom Touch Hint */}
-                  <div style={{
-                    fontSize: '0.72rem',
-                    color: '#9ca3af',
-                    fontWeight: 600,
-                    letterSpacing: '0.03em',
-                    position: 'relative',
-                    zIndex: 2
-                  }}>
-                    <span>Tap or Space to flip • Swipe for next</span>
-                  </div>
-                </div>
-
-                {/* REVEALED QUESTION SIDE */}
-                <div style={{
-                  position: 'absolute',
-                  width: '100%',
-                  height: '100%',
-                  backfaceVisibility: 'hidden',
-                  WebkitBackfaceVisibility: 'hidden',
-                  visibility: !isFlipped ? 'hidden' : 'visible',
-                  opacity: !isFlipped ? 0 : 1,
-                  pointerEvents: !isFlipped ? 'none' : 'auto',
-                  transform: 'rotateY(180deg) translateZ(1px)',
-                  WebkitTransform: 'rotateY(180deg) translateZ(1px)',
-                  isolation: 'isolate',
-                  borderRadius: '28px',
-                  background: '#ffffff',
-                  border: `1.5px solid ${cardAccent}`,
-                  boxShadow: `0 16px 36px -10px rgba(18, 24, 38, 0.12)`,
-                  padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  textAlign: 'center'
-                }}>
-                  {/* Inner Debossed Border Frame */}
-                  <div className="editorial-inner-border" />
-
-                  {/* Revealed Header */}
-                  <div style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    position: 'relative',
-                    zIndex: 2,
-                    paddingBottom: '4px'
-                  }}>
-                    <span style={{
-                      fontSize: '0.7rem',
-                      fontWeight: 800,
-                      color: cardAccent,
-                      letterSpacing: '0.1em',
-                      textTransform: 'uppercase'
-                    }}>
-                      HOLY GROUND
-                    </span>
-
-                    <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 700 }}>
-                      #{currentIndex + 1} / {deck.length}
-                    </span>
-                  </div>
-
-                  {/* Question Text (Plus Jakarta Sans for optimal sentence legibility) */}
-                  <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: 'auto 0',
-                    padding: '8px 4px',
-                    position: 'relative',
-                    zIndex: 2,
-                    width: '100%',
-                    maxHeight: '85%',
-                    overflowY: 'auto'
-                  }}>
-                    <p className="card-question-text" style={{
-                      fontSize: 'clamp(1.05rem, 3.4vw, 1.28rem)',
-                      fontWeight: 600,
-                      lineHeight: 1.55,
-                      color: '#121826',
-                      letterSpacing: '-0.01em'
-                    }}>
-                      "{activeCard.text}"
-                    </p>
-                  </div>
-
-                  <div style={{ height: '4px' }} />
-                </div>
-              </motion.div>
+              <div className="editorial-inner-border" />
+              <div style={{
+                padding: '4px 14px',
+                background: '#ffffff',
+                border: `1px solid ${cardAccent}40`,
+                borderRadius: '20px',
+                fontSize: '0.7rem',
+                fontWeight: 800,
+                color: cardAccent,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase'
+              }}>
+                <span>{currentLevel ? `LEVEL ${currentLevel.number}` : 'HOLY GROUND'}</span>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                <HolyGroundLogo size={48} color={cardAccent} glow={false} />
+                <h3 className="font-serif" style={{ fontSize: '1.4rem', fontWeight: 700, letterSpacing: '0.06em', color: '#121826', textTransform: 'uppercase' }}>
+                  HOLY GROUND
+                </h3>
+                <p style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
+                  CARD #{currentIndex + 2} OF {deck.length}
+                </p>
+              </div>
+              <div style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
+                <span>Drag / Swipe left or right • Tap to flip</span>
+              </div>
             </div>
-          </motion.div>
-        </AnimatePresence>
+
+            {/* REVEALED QUESTION SIDE */}
+            <div className="card-face card-face-back" style={{
+              border: `1.5px solid ${cardAccent}`,
+              boxShadow: '0 16px 36px -10px rgba(18, 24, 38, 0.06)',
+              padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              textAlign: 'center'
+            }}>
+              <div className="editorial-inner-border" />
+              <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '0.7rem', fontWeight: 800, color: cardAccent, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                  HOLY GROUND
+                </span>
+                <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 700 }}>
+                  #{currentIndex + 2} / {deck.length}
+                </span>
+              </div>
+              <div style={{ margin: 'auto 0', padding: '0 8px', width: '100%' }}>
+                <p className="card-question-text" style={{ fontSize: 'clamp(1.05rem, 3.4vw, 1.28rem)', fontWeight: 600, lineHeight: 1.55, color: '#121826' }}>
+                  "{nextCardTarget.text}"
+                </p>
+              </div>
+              <div></div>
+            </div>
+          </div>
+          </div>
+        )}
+
+        {/* Active Top Card (100% Direct DOM Ref Physics & Animation Engine matching deck-preview.html) */}
+        <div
+          ref={topRef}
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            zIndex: 10,
+            cursor: 'grab',
+            touchAction: 'none',
+            transform: 'translate3d(0px, 0px, 0px) rotate(0deg)',
+            opacity: 1,
+            willChange: 'transform'
+          }}
+          onMouseDown={handlePointerDown}
+          onTouchStart={handlePointerDown}
+          onClick={handleCardClick}
+        >
+          {/* 3D Card Container */}
+          <div 
+            className={`card-3d-inner ${isFlipped ? 'flipped' : ''}`}
+            style={{
+              transition: shouldAnimateFlip ? 'transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)' : 'none'
+            }}
+          >
+            {/* UNFLIPPED CARD FRONT COVER */}
+            <div className="card-face card-face-front" style={{
+              border: `1.5px solid ${cardAccent}`,
+              boxShadow: '0 16px 36px -10px rgba(18, 24, 38, 0.12)',
+              padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              textAlign: 'center'
+            }}>
+              <div className="editorial-inner-border" />
+              <div style={{
+                padding: '4px 14px',
+                background: '#ffffff',
+                border: `1px solid ${cardAccent}40`,
+                borderRadius: '20px',
+                fontSize: '0.7rem',
+                fontWeight: 800,
+                color: cardAccent,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase'
+              }}>
+                <span>{currentLevel ? `LEVEL ${currentLevel.number}` : 'HOLY GROUND'}</span>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                <HolyGroundLogo size={48} color={cardAccent} glow={false} />
+                <h3 className="font-serif" style={{ fontSize: '1.4rem', fontWeight: 700, letterSpacing: '0.06em', color: '#121826', textTransform: 'uppercase' }}>
+                  HOLY GROUND
+                </h3>
+                <p style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
+                  CARD #{currentIndex + 1} OF {deck.length}
+                </p>
+              </div>
+
+              <div style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
+                <span>Drag / Swipe left or right • Tap to flip</span>
+              </div>
+            </div>
+
+            {/* REVEALED QUESTION SIDE */}
+            <div className="card-face card-face-back" style={{
+              border: `1.5px solid ${cardAccent}`,
+              boxShadow: '0 16px 36px -10px rgba(18, 24, 38, 0.12)',
+              padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              textAlign: 'center'
+            }}>
+              <div className="editorial-inner-border" />
+              <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ fontSize: '0.7rem', fontWeight: 800, color: cardAccent, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                  HOLY GROUND
+                </span>
+                <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 700 }}>
+                  #{currentIndex + 1} / {deck.length}
+                </span>
+              </div>
+
+              <div style={{ margin: 'auto 0', padding: '0 8px', width: '100%' }}>
+                <p className="card-question-text" style={{ fontSize: 'clamp(1.05rem, 3.4vw, 1.28rem)', fontWeight: 600, lineHeight: 1.55, color: '#121826' }}>
+                  "{activeCard.text}"
+                </p>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Touch Control Buttons */}
@@ -400,10 +527,10 @@ export default function CardDeck({
         justifyContent: 'center',
         gap: '14px',
         width: '100%',
-        paddingBottom: '8px'
+        paddingBottom: '4px'
       }}>
         <button
-          onClick={onPrevCard}
+          onClick={animatePrev}
           disabled={currentIndex === 0}
           style={{
             width: '48px',
@@ -418,56 +545,83 @@ export default function CardDeck({
             cursor: currentIndex === 0 ? 'not-allowed' : 'pointer',
             boxShadow: '0 4px 12px rgba(18, 24, 38, 0.04)',
             transition: 'all 0.2s ease',
-            flexShrink: 0
+            flexShrink: 0,
+            opacity: currentIndex === 0 ? 0.4 : 1
           }}
         >
           <ChevronLeft size={22} />
         </button>
 
         <button
-          onClick={() => setIsFlipped(!isFlipped)}
+          onClick={handleToggleFlip}
           style={{
-            padding: '12px 24px',
+            padding: '12px 22px',
             borderRadius: '24px',
             background: '#ffffff',
             border: `1.5px solid ${cardAccent}`,
             color: '#121826',
             fontWeight: 800,
-            fontSize: '0.82rem',
+            fontSize: '0.8rem',
             letterSpacing: '0.06em',
             textTransform: 'uppercase',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            boxShadow: `0 4px 14px ${cardAccent}18`,
+            boxShadow: `0 4px 14px rgba(197, 155, 39, 0.18)`,
             whiteSpace: 'nowrap'
           }}
         >
-          <RotateCw size={15} color={cardAccent} />
+          🔄
           <span>{isFlipped ? 'Show Cover' : 'Flip Question'}</span>
         </button>
 
         <button
-          onClick={onNextCard}
+          onClick={animateNext}
+          disabled={currentIndex === deck.length - 1}
           style={{
             width: '48px',
             height: '48px',
             borderRadius: '50%',
-            background: cardAccent,
+            background: currentIndex === deck.length - 1 ? '#e5e7eb' : cardAccent,
             border: 'none',
             color: '#ffffff',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            cursor: 'pointer',
-            boxShadow: `0 6px 20px ${cardAccent}35`,
+            cursor: currentIndex === deck.length - 1 ? 'not-allowed' : 'pointer',
+            boxShadow: currentIndex === deck.length - 1 ? 'none' : `0 6px 20px ${cardAccent}35`,
             flexShrink: 0
           }}
         >
           <ChevronRight size={24} strokeWidth={2.5} />
         </button>
       </div>
+
+      {/* Auto-Reveal Preference Pill Button */}
+      <button
+        onClick={() => setAutoReveal((prev) => !prev)}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          padding: '8px 18px',
+          borderRadius: '20px',
+          background: autoReveal ? '#121826' : '#ffffff',
+          color: autoReveal ? '#ffffff' : '#121826',
+          border: '1px solid rgba(18, 24, 38, 0.14)',
+          fontSize: '0.74rem',
+          fontWeight: 800,
+          letterSpacing: '0.05em',
+          cursor: 'pointer',
+          boxShadow: '0 2px 8px rgba(18, 24, 38, 0.03)',
+          transition: 'all 0.2s ease',
+          margin: '0 auto'
+        }}
+      >
+        {autoReveal && <span>⚡</span>}
+        <span>Auto-Reveal Question: <strong>{autoReveal ? 'ON' : 'OFF'}</strong></span>
+      </button>
     </div>
   );
 }

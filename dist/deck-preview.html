@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Holy Ground - Interactive Card Deck & Physics Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #fbf9f4;
+      --font-serif: 'Bodoni Moda', serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --text-primary: #121826;
+      --text-muted: #9ca3af;
+      --accent: #c59b27;
+      --accent-light: rgba(197, 155, 39, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100dvh;
+      background-color: var(--bg-main);
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 12px;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+    }
+
+    .header-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: #ffffff;
+      border: 1px solid var(--accent-light);
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(18, 24, 38, 0.03);
+    }
+
+    .header-counter {
+      font-size: 0.78rem;
+      font-weight: 800;
+      background: #ffffff;
+      padding: 6px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(18, 24, 38, 0.12);
+      box-shadow: 0 2px 8px rgba(18, 24, 38, 0.03);
+    }
+
+    /* Card Stack Outer Container */
+    .deck-wrapper {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      margin: auto 0;
+    }
+
+    .card-stack-viewport {
+      position: relative;
+      width: 100%;
+      height: clamp(350px, 56vh, 450px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+    }
+
+    /* Ghost Under Card Layer */
+    .card-underneath {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 28px;
+      background: #ffffff;
+      border: 1.5px solid var(--accent);
+      box-shadow: 0 8px 24px rgba(18, 24, 38, 0.06);
+      transform: translateY(8px) scale(0.96);
+      transition: transform 0.1s ease-out;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    /* Top Active Card Element */
+    .card-active {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      cursor: grab;
+      touch-action: none;
+      will-change: transform;
+    }
+
+    .card-active:active {
+      cursor: grabbing;
+    }
+
+    .card-3d-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
+    }
+
+    .card-3d-inner.flipped {
+      transform: rotateY(180deg);
+    }
+
+    /* Card Faces */
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 28px;
+      background: #ffffff;
+      border: 1.5px solid var(--accent);
+      box-shadow: 0 16px 36px -10px rgba(18, 24, 38, 0.12);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      isolation: isolate;
+      padding: clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
+
+    .card-face-front {
+      transform: rotateY(0deg) translateZ(1px);
+    }
+
+    .card-face-back {
+      transform: rotateY(180deg) translateZ(1px);
+    }
+
+    .editorial-inner-border {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      border: 1px solid rgba(18, 24, 38, 0.08);
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    .font-serif {
+      font-family: var(--font-serif);
+    }
+
+    /* Controls Bar */
+    .controls-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid rgba(18, 24, 38, 0.14);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(18, 24, 38, 0.04);
+      transition: all 0.2s ease;
+      font-size: 1.2rem;
+    }
+
+    .btn-circle:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-circle-accent {
+      background: var(--accent);
+      border: none;
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(197, 155, 39, 0.35);
+    }
+
+    .btn-circle-accent:disabled {
+      background: #e5e7eb;
+      color: #9ca3af;
+      box-shadow: none;
+    }
+
+    .btn-flip {
+      padding: 12px 22px;
+      border-radius: 24px;
+      background: #ffffff;
+      border: 1.5px solid var(--accent);
+      color: var(--text-primary);
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(197, 155, 39, 0.18);
+    }
+
+    /* Auto-Reveal Preference Pill */
+    .toggle-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 20px;
+      background: #ffffff;
+      border: 1px solid rgba(18, 24, 38, 0.14);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(18, 24, 38, 0.03);
+      transition: all 0.2s ease;
+    }
+
+    .toggle-pill.active {
+      background: #121826;
+      color: #ffffff;
+      border-color: #121826;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-badge">
+      <span>LEVEL 3 • FAITH & DOUBT</span>
+    </div>
+    <div class="header-counter" id="counter-label">1 / 5</div>
+  </header>
+
+  <!-- Main Card Stack -->
+  <div class="deck-wrapper">
+    <div class="card-stack-viewport">
+
+      <!-- Underneath Ghost Card -->
+      <div class="card-underneath" id="card-under">
+        <div class="card-3d-inner" id="card-under-3d">
+          
+          <!-- Front Cover Face -->
+          <div class="card-face card-face-front">
+            <div class="editorial-inner-border"></div>
+            <div style="padding: 4px 14px; background: #fff; border: 1px solid rgba(197, 155, 39, 0.4); border-radius: 20px; font-size: 0.7rem; font-weight: 800; color: var(--accent); letter-spacing: 0.1em;">
+              LEVEL 3
+            </div>
+            <div>
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M 10 2 H 14 V 7 H 19.5 V 11 H 14 V 22 H 10 V 11 H 4.5 V 7 H 10 Z" />
+              </svg>
+              <h3 class="font-serif" style="font-size: 1.4rem; font-weight: 700; margin-top: 8px; letter-spacing: 0.06em;">HOLY GROUND</h3>
+              <p style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; margin-top: 4px;" id="under-num-cover">CARD #2 OF 5</p>
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">
+              <span>Drag / Swipe left or right • Tap to flip</span>
+            </div>
+          </div>
+
+          <!-- Revealed Question Face -->
+          <div class="card-face card-face-back">
+            <div class="editorial-inner-border"></div>
+            <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.7rem; font-weight: 800; color: var(--accent); letter-spacing: 0.1em;">HOLY GROUND</span>
+              <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700;" id="under-num-back">#2 / 5</span>
+            </div>
+            <div style="margin: auto 0; padding: 0 8px;">
+              <p style="font-size: clamp(1.05rem, 3.4vw, 1.28rem); font-weight: 600; line-height: 1.55; color: #121826;" id="under-question-text">
+                "When was a time you felt God's presence most clearly in your daily routine?"
+              </p>
+            </div>
+            <div></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Active Top Card -->
+      <div class="card-active" id="card-top">
+        <div class="card-3d-inner" id="card-3d">
+          
+          <!-- Front Cover Face -->
+          <div class="card-face card-face-front">
+            <div class="editorial-inner-border"></div>
+            <div style="padding: 4px 14px; background: #fff; border: 1px solid rgba(197, 155, 39, 0.4); border-radius: 20px; font-size: 0.7rem; font-weight: 800; color: var(--accent); letter-spacing: 0.1em;">
+              LEVEL 3
+            </div>
+            <div>
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M 10 2 H 14 V 7 H 19.5 V 11 H 14 V 22 H 10 V 11 H 4.5 V 7 H 10 Z" />
+              </svg>
+              <h3 class="font-serif" style="font-size: 1.4rem; font-weight: 700; margin-top: 8px; letter-spacing: 0.06em;">HOLY GROUND</h3>
+              <p style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; margin-top: 4px;" id="card-num-cover">CARD #1 OF 5</p>
+            </div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">
+              <span>Drag / Swipe left or right • Tap to flip</span>
+            </div>
+          </div>
+
+          <!-- Revealed Question Face -->
+          <div class="card-face card-face-back">
+            <div class="editorial-inner-border"></div>
+            <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.7rem; font-weight: 800; color: var(--accent); letter-spacing: 0.1em;">HOLY GROUND</span>
+              <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700;" id="card-num-back">#1 / 5</span>
+            </div>
+            <div style="margin: auto 0; padding: 0 8px;">
+              <p style="font-size: clamp(1.05rem, 3.4vw, 1.28rem); font-weight: 600; line-height: 1.55; color: #121826;" id="question-text">
+                "What is a prayer you prayed that God answered differently than you expected?"
+              </p>
+            </div>
+            <div></div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Controls -->
+    <div class="controls-row">
+      <button class="btn-circle" id="btn-prev">‹</button>
+      <button class="btn-flip" id="btn-flip">🔄 <span id="flip-label">Flip Question</span></button>
+      <button class="btn-circle btn-circle-accent" id="btn-next">›</button>
+    </div>
+
+    <!-- Auto-Reveal Preference Pill -->
+    <button class="toggle-pill active" id="toggle-auto-reveal">
+      <span id="auto-status-icon">⚡</span>
+      <span>Auto-Reveal Question: <strong id="auto-status-text">ON</strong></span>
+    </button>
+  </div>
+
+  <script>
+    const SAMPLE_DECK = [
+      "What is a prayer you prayed that God answered differently than you expected?",
+      "When was a time you felt God's presence most clearly in your daily routine?",
+      "What is a doubt or question about faith you've hesitated to share out loud?",
+      "How has your understanding of community changed over the past year?",
+      "What is one piece of encouragement you feel led to give someone in this room?"
+    ];
+
+    let currentIndex = 0;
+    let isFlipped = true; // Default auto-reveal ON
+    let autoRevealMode = true;
+    let isAnimating = false;
+
+    // DOM Elements
+    const cardTop = document.getElementById('card-top');
+    const card3D = document.getElementById('card-3d');
+    const cardUnder = document.getElementById('card-under');
+    const cardUnder3D = document.getElementById('card-under-3d');
+
+    const questionText = document.getElementById('question-text');
+    const underQuestionText = document.getElementById('under-question-text');
+    
+    const counterLabel = document.getElementById('counter-label');
+    const cardNumCover = document.getElementById('card-num-cover');
+    const cardNumBack = document.getElementById('card-num-back');
+    const underNumCover = document.getElementById('under-num-cover');
+    const underNumBack = document.getElementById('under-num-back');
+
+    const btnFlip = document.getElementById('btn-flip');
+    const flipLabel = document.getElementById('flip-label');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const toggleAutoReveal = document.getElementById('toggle-auto-reveal');
+    const autoStatusText = document.getElementById('auto-status-text');
+    const autoStatusIcon = document.getElementById('auto-status-icon');
+
+    function renderUnderCard(targetIdx) {
+      const idx = Math.min(Math.max(targetIdx, 0), SAMPLE_DECK.length - 1);
+      underQuestionText.textContent = `"${SAMPLE_DECK[idx]}"`;
+      underNumCover.textContent = `CARD #${idx + 1} OF ${SAMPLE_DECK.length}`;
+      underNumBack.textContent = `#${idx + 1} / ${SAMPLE_DECK.length}`;
+
+      if (autoRevealMode) {
+        cardUnder3D.classList.add('flipped');
+      } else {
+        cardUnder3D.classList.remove('flipped');
+      }
+    }
+
+    function updateCardUI() {
+      // Top Active Card Content
+      questionText.textContent = `"${SAMPLE_DECK[currentIndex]}"`;
+      counterLabel.textContent = `${currentIndex + 1} / ${SAMPLE_DECK.length}`;
+      cardNumCover.textContent = `CARD #${currentIndex + 1} OF ${SAMPLE_DECK.length}`;
+      cardNumBack.textContent = `#${currentIndex + 1} / ${SAMPLE_DECK.length}`;
+
+      if (isFlipped) {
+        card3D.classList.add('flipped');
+        flipLabel.textContent = "Show Cover";
+      } else {
+        card3D.classList.remove('flipped');
+        flipLabel.textContent = "Flip Question";
+      }
+
+      // Render default next card underneath
+      renderUnderCard(currentIndex + 1);
+
+      // Disable state
+      btnPrev.disabled = currentIndex <= 0;
+      btnNext.disabled = currentIndex >= SAMPLE_DECK.length - 1;
+    }
+
+    function setFlippedState(flipped) {
+      isFlipped = flipped;
+      if (isFlipped) {
+        card3D.classList.add('flipped');
+        flipLabel.textContent = "Show Cover";
+      } else {
+        card3D.classList.remove('flipped');
+        flipLabel.textContent = "Flip Question";
+      }
+    }
+
+    // Drag & Physics Engine
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+
+    function handlePointerDown(e) {
+      if (isAnimating) return;
+      isDragging = true;
+      startX = e.clientX || (e.touches && e.touches[0].clientX);
+      cardTop.style.transition = 'none';
+      cardUnder.style.transition = 'none';
+      renderUnderCard(currentIndex + 1);
+    }
+
+    function handlePointerMove(e) {
+      if (!isDragging) return;
+      const x = (e.clientX || (e.touches && e.touches[0].clientX)) - startX;
+      currentX = x;
+
+      const rotate = x * 0.08;
+      const opacity = 1 - Math.abs(x) / 600;
+
+      // Move top card
+      cardTop.style.transform = `translate3d(${x}px, 0, 0) rotate(${rotate}deg)`;
+      cardTop.style.opacity = opacity;
+
+      // Underneath card scales up and lifts dynamically
+      const progress = Math.min(Math.abs(x) / 180, 1);
+      const underScale = 0.96 + (0.04 * progress);
+      const underY = 8 - (8 * progress);
+      cardUnder.style.transform = `translateY(${underY}px) scale(${underScale})`;
+    }
+
+    function handlePointerUp() {
+      if (!isDragging) return;
+      isDragging = false;
+
+      const threshold = 50;
+      if (Math.abs(currentX) > threshold && currentIndex < SAMPLE_DECK.length - 1) {
+        animateCardOut();
+      } else {
+        // Snap Back
+        cardTop.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.28s ease';
+        cardUnder.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1)';
+        cardTop.style.transform = 'translate3d(0, 0, 0) rotate(0deg)';
+        cardTop.style.opacity = '1';
+        cardUnder.style.transform = 'translateY(8px) scale(0.96)';
+      }
+      currentX = 0;
+    }
+
+    // Always leave out to the RIGHT (+450px)
+    function animateCardOut() {
+      if (isAnimating || currentIndex >= SAMPLE_DECK.length - 1) return;
+      isAnimating = true;
+
+      const nextIndex = currentIndex + 1;
+      renderUnderCard(nextIndex);
+
+      cardTop.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.28s ease';
+      cardUnder.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1)';
+
+      cardTop.style.transform = `translate3d(450px, 0, 0) rotate(25deg)`;
+      cardTop.style.opacity = '0';
+      cardUnder.style.transform = 'translateY(0px) scale(1)';
+
+      setTimeout(() => {
+        currentIndex = nextIndex;
+        
+        cardTop.style.transition = 'none';
+        cardTop.style.transform = 'translate3d(0, 0, 0) rotate(0deg)';
+        cardTop.style.opacity = '1';
+        cardUnder.style.transform = 'translateY(8px) scale(0.96)';
+
+        setFlippedState(autoRevealMode);
+        updateCardUI();
+        isAnimating = false;
+      }, 280);
+    }
+
+    // Always come back IN from the SAME SIDE (RIGHT, +450px)
+    function animateCardBack() {
+      if (isAnimating || currentIndex <= 0) return;
+      isAnimating = true;
+
+      const prevIndex = currentIndex - 1;
+
+      // 1. Set underneath card to CURRENT card content, sitting at scale(1)
+      renderUnderCard(currentIndex);
+      cardUnder.style.transition = 'none';
+      cardUnder.style.transform = 'translateY(0px) scale(1)';
+
+      // 2. Set top card to PREVIOUS card content, positioned off-screen on the RIGHT (+450px)
+      currentIndex = prevIndex;
+      questionText.textContent = `"${SAMPLE_DECK[currentIndex]}"`;
+      counterLabel.textContent = `${currentIndex + 1} / ${SAMPLE_DECK.length}`;
+      cardNumCover.textContent = `CARD #${currentIndex + 1} OF ${SAMPLE_DECK.length}`;
+      cardNumBack.textContent = `#${currentIndex + 1} / ${SAMPLE_DECK.length}`;
+      setFlippedState(autoRevealMode);
+
+      cardTop.style.transition = 'none';
+      cardTop.style.transform = 'translate3d(450px, -15px, 0) rotate(22deg)';
+      cardTop.style.opacity = '0';
+
+      // Force reflow
+      cardTop.offsetHeight;
+
+      // 3. Animate top card coming back IN from the RIGHT (+450px -> 0px) and landing on top!
+      cardTop.style.transition = 'transform 0.32s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.28s ease';
+      cardUnder.style.transition = 'transform 0.32s cubic-bezier(0.25, 1, 0.5, 1)';
+
+      cardTop.style.transform = 'translate3d(0, 0, 0) rotate(0deg)';
+      cardTop.style.opacity = '1';
+      cardUnder.style.transform = 'translateY(8px) scale(0.96)';
+
+      setTimeout(() => {
+        updateCardUI();
+        isAnimating = false;
+      }, 320);
+    }
+
+    // Touch & Pointer Listeners
+    cardTop.addEventListener('mousedown', handlePointerDown);
+    window.addEventListener('mousemove', handlePointerMove);
+    window.addEventListener('mouseup', handlePointerUp);
+
+    cardTop.addEventListener('touchstart', handlePointerDown, { passive: true });
+    window.addEventListener('touchmove', handlePointerMove, { passive: true });
+    window.addEventListener('touchend', handlePointerUp);
+
+    // Button Controls
+    btnFlip.addEventListener('click', () => {
+      if (!isFlipped) setFlippedState(true);
+    });
+
+    btnNext.addEventListener('click', () => {
+      animateCardOut();
+    });
+
+    btnPrev.addEventListener('click', () => {
+      animateCardBack();
+    });
+
+    toggleAutoReveal.addEventListener('click', () => {
+      autoRevealMode = !autoRevealMode;
+      if (autoRevealMode) {
+        toggleAutoReveal.classList.add('active');
+        autoStatusText.textContent = "ON";
+        autoStatusIcon.textContent = "⚡";
+        setFlippedState(true);
+      } else {
+        toggleAutoReveal.classList.remove('active');
+        autoStatusText.textContent = "OFF";
+        autoStatusIcon.textContent = "";
+        setFlippedState(false);
+      }
+      updateCardUI();
+    });
+
+    // Initial setup
+    updateCardUI();
+  </script>
+</body>
+</html>
