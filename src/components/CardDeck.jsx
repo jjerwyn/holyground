@@ -215,16 +215,17 @@ export default function CardDeck({
             }}>
               <motion.div
                 animate={{ rotateY: isFlipped ? 180 : 0 }}
-                transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
                 style={{
                   width: '100%',
                   height: '100%',
                   position: 'relative',
                   transformStyle: 'preserve-3d',
-                  WebkitTransformStyle: 'preserve-3d'
+                  WebkitTransformStyle: 'preserve-3d',
+                  willChange: 'transform'
                 }}
               >
-                {/* UNFLIPPED CARD FRONT COVER (EDITORIAL MATERIAL DESIGN) */}
+                {/* UNFLIPPED CARD FRONT COVER */}
                 <div style={{
                   position: 'absolute',
                   width: '100%',
@@ -234,33 +235,33 @@ export default function CardDeck({
                   visibility: isFlipped ? 'hidden' : 'visible',
                   opacity: isFlipped ? 0 : 1,
                   pointerEvents: isFlipped ? 'none' : 'auto',
-                  transform: 'translateZ(2px)',
-                  WebkitTransform: 'translateZ(2px)',
+                  transform: 'rotateY(0deg) translateZ(1px)',
+                  WebkitTransform: 'rotateY(0deg) translateZ(1px)',
+                  isolation: 'isolate',
                   borderRadius: '28px',
                   background: '#ffffff',
                   border: `1.5px solid ${cardAccent}`,
-                  boxShadow: `0 30px 60px -15px rgba(18, 24, 38, 0.12), 0 0 25px ${cardAccent}15`,
-                  padding: '32px 20px',
+                  boxShadow: `0 16px 36px -10px rgba(18, 24, 38, 0.1)`,
+                  padding: 'clamp(20px, 4vh, 32px) clamp(16px, 4vw, 24px)',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  textAlign: 'center',
-                  transition: 'opacity 0.25s ease, visibility 0.25s ease'
+                  textAlign: 'center'
                 }}>
                   {/* Inner Debossed Border Frame */}
                   <div className="editorial-inner-border" />
 
                   {/* Top Level Pill */}
                   <div style={{
-                    padding: '5px 16px',
+                    padding: '4px 14px',
                     background: '#ffffff',
                     border: `1px solid ${cardAccent}40`,
                     borderRadius: '20px',
-                    fontSize: '0.72rem',
+                    fontSize: '0.7rem',
                     fontWeight: 800,
                     color: cardAccent,
-                    letterSpacing: '0.12em',
+                    letterSpacing: '0.1em',
                     textTransform: 'uppercase',
                     position: 'relative',
                     zIndex: 2,
@@ -274,14 +275,14 @@ export default function CardDeck({
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    gap: '12px',
+                    gap: '10px',
                     position: 'relative',
                     zIndex: 2
                   }}>
-                    <HolyGroundLogo size={58} color={cardAccent} glow={false} />
+                    <HolyGroundLogo size={48} color={cardAccent} glow={false} />
 
                     <h3 className="font-serif" style={{
-                      fontSize: '1.5rem',
+                      fontSize: 'clamp(1.25rem, 4vw, 1.5rem)',
                       fontWeight: 700,
                       letterSpacing: '0.06em',
                       color: '#121826',
@@ -289,25 +290,25 @@ export default function CardDeck({
                     }}>
                       HOLY GROUND
                     </h3>
-                    <p style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 600, letterSpacing: '0.06em' }}>
+                    <p style={{ fontSize: '0.72rem', color: '#6b7280', fontWeight: 600, letterSpacing: '0.06em' }}>
                       CARD #{currentIndex + 1} OF {deck.length}
                     </p>
                   </div>
 
                   {/* Bottom Touch Hint */}
                   <div style={{
-                    fontSize: '0.78rem',
+                    fontSize: '0.72rem',
                     color: '#9ca3af',
                     fontWeight: 600,
-                    letterSpacing: '0.04em',
+                    letterSpacing: '0.03em',
                     position: 'relative',
                     zIndex: 2
                   }}>
-                    <span>Tap or Space to flip • Swipe or Arrows for next</span>
+                    <span>Tap or Space to flip • Swipe for next</span>
                   </div>
                 </div>
 
-                {/* REVEALED QUESTION SIDE (PURE EDITORIAL TYPOGRAPHY) */}
+                {/* REVEALED QUESTION SIDE */}
                 <div style={{
                   position: 'absolute',
                   width: '100%',
@@ -317,19 +318,19 @@ export default function CardDeck({
                   visibility: !isFlipped ? 'hidden' : 'visible',
                   opacity: !isFlipped ? 0 : 1,
                   pointerEvents: !isFlipped ? 'none' : 'auto',
-                  transform: 'rotateY(180deg) translateZ(2px)',
-                  WebkitTransform: 'rotateY(180deg) translateZ(2px)',
+                  transform: 'rotateY(180deg) translateZ(1px)',
+                  WebkitTransform: 'rotateY(180deg) translateZ(1px)',
+                  isolation: 'isolate',
                   borderRadius: '28px',
                   background: '#ffffff',
                   border: `1.5px solid ${cardAccent}`,
-                  boxShadow: `0 30px 60px -15px rgba(18, 24, 38, 0.14), 0 0 30px ${cardAccent}18`,
-                  padding: '36px 24px',
+                  boxShadow: `0 16px 36px -10px rgba(18, 24, 38, 0.12)`,
+                  padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  textAlign: 'center',
-                  transition: 'opacity 0.25s ease, visibility 0.25s ease'
+                  textAlign: 'center'
                 }}>
                   {/* Inner Debossed Border Frame */}
                   <div className="editorial-inner-border" />
@@ -341,19 +342,20 @@ export default function CardDeck({
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     position: 'relative',
-                    zIndex: 2
+                    zIndex: 2,
+                    paddingBottom: '4px'
                   }}>
                     <span style={{
-                      fontSize: '0.72rem',
+                      fontSize: '0.7rem',
                       fontWeight: 800,
                       color: cardAccent,
-                      letterSpacing: '0.12em',
+                      letterSpacing: '0.1em',
                       textTransform: 'uppercase'
                     }}>
                       HOLY GROUND
                     </span>
 
-                    <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 700 }}>
+                    <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 700 }}>
                       #{currentIndex + 1} / {deck.length}
                     </span>
                   </div>
@@ -365,16 +367,17 @@ export default function CardDeck({
                     alignItems: 'center',
                     justifyContent: 'center',
                     margin: 'auto 0',
-                    padding: '0 4px',
+                    padding: '8px 4px',
                     position: 'relative',
                     zIndex: 2,
-                    maxHeight: '80%',
+                    width: '100%',
+                    maxHeight: '85%',
                     overflowY: 'auto'
                   }}>
                     <p className="font-serif" style={{
-                      fontSize: 'clamp(1.15rem, 3.8vw, 1.42rem)',
+                      fontSize: 'clamp(1.1rem, 3.6vw, 1.38rem)',
                       fontWeight: 600,
-                      lineHeight: 1.5,
+                      lineHeight: 1.45,
                       color: '#121826',
                       letterSpacing: '-0.01em'
                     }}>
@@ -382,7 +385,7 @@ export default function CardDeck({
                     </p>
                   </div>
 
-                  <div style={{ height: '8px' }} />
+                  <div style={{ height: '4px' }} />
                 </div>
               </motion.div>
             </div>

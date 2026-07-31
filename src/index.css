@@ -100,10 +100,10 @@ h1, h2, h3, .heading-editorial {
   -webkit-backface-visibility: hidden;
 }
 
-/* Header Mobile Responsiveness */
+/* Header Layout & Components */
 .app-header {
   width: 100%;
-  padding: 16px 32px;
+  padding: 14px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -113,63 +113,142 @@ h1, h2, h3, .heading-editorial {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(18, 24, 38, 0.08);
-  padding-top: max(16px, env(safe-area-inset-top));
+  padding-top: max(14px, env(safe-area-inset-top));
+}
+
+.header-left-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.header-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid rgba(18, 24, 38, 0.14);
+  color: #121826;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(18, 24, 38, 0.03);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.header-level-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: #ffffff;
+  border: 1px solid rgba(18, 24, 38, 0.14);
+  border-radius: 20px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(18, 24, 38, 0.03);
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.header-level-title span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.header-right-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.header-shuffle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(18, 24, 38, 0.14);
+  color: #121826;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(18, 24, 38, 0.03);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.header-counter {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #121826;
+  background: #ffffff;
+  padding: 6px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(18, 24, 38, 0.12);
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 8px rgba(18, 24, 38, 0.03);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 @media (max-width: 640px) {
   .app-header {
-    padding: 10px 14px;
+    padding: 10px 12px;
     padding-top: max(10px, env(safe-area-inset-top));
-    gap: 8px;
-  }
-  
-  .header-level-title {
-    max-width: 130px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 0.7rem !important;
-    padding: 4px 10px !important;
+    gap: 6px;
   }
 
-  .header-level-title span {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .header-level-title {
+    max-width: 140px;
+    font-size: 0.68rem;
+    padding: 4px 8px;
+    gap: 4px;
   }
 
   .header-back-btn {
-    padding: 6px 12px !important;
-    font-size: 0.75rem !important;
+    padding: 6px 10px;
+    font-size: 0.74rem;
   }
 
   .header-counter {
-    padding: 4px 10px !important;
-    font-size: 0.75rem !important;
+    padding: 4px 8px;
+    font-size: 0.72rem;
   }
 
   .header-shuffle-btn {
-    width: 32px !important;
-    height: 32px !important;
+    width: 32px;
+    height: 32px;
   }
 }
 
 /* Responsive Card Deck Dimensions */
 .card-stack-wrapper {
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   padding: 0 16px;
 }
 
 .card-physical-container {
   position: relative;
   width: 100%;
-  height: clamp(380px, 58vh, 470px);
+  height: clamp(340px, 56vh, 460px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -177,8 +256,11 @@ h1, h2, h3, .heading-editorial {
 
 @media (max-width: 480px) {
   .card-stack-wrapper {
-    gap: 16px;
+    gap: 12px;
     padding: 0 12px;
+  }
+  .card-physical-container {
+    height: clamp(320px, 53vh, 430px);
   }
 }
 

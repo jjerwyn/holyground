@@ -195,7 +195,7 @@ export default function App() {
         )}
       </main>
 
-      <Footer />
+      {!currentLevel && <Footer />}
     </div>
   );
 }
