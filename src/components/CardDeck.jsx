@@ -94,7 +94,8 @@ export default function CardDeck({
     if (isAnimatingRef.current || currentIndex >= deck.length || !topRef.current || !underRef.current) return;
     isAnimatingRef.current = true;
 
-    const sign = direction >= 0 ? 1 : -1;
+    const dirNum = typeof direction === 'number' ? direction : 1;
+    const sign = dirNum >= 0 ? 1 : -1;
 
     topRef.current.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.28s ease';
     underRef.current.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -725,7 +726,7 @@ export default function CardDeck({
         </button>
 
         <button
-          onClick={animateNext}
+          onClick={() => animateNext(1)}
           disabled={currentIndex === deck.length}
           style={{
             width: '48px',
