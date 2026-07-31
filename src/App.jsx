@@ -139,19 +139,7 @@ export default function App() {
     window.history.pushState({}, '', '/');
   };
 
-  // Keyboard navigation shortcuts
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (!currentLevel) return;
-      if (e.key === 'ArrowRight') {
-        handleNextCard();
-      } else if (e.key === 'ArrowLeft') {
-        handlePrevCard();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentLevel, currentIndex, deck.length]);
+
 
   return (
     <div style={{
