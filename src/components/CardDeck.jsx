@@ -360,7 +360,7 @@ export default function CardDeck({
                     </span>
                   </div>
 
-                  {/* Editorial Serif Question */}
+                  {/* Question Text (Plus Jakarta Sans for optimal sentence legibility) */}
                   <div style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -374,10 +374,10 @@ export default function CardDeck({
                     maxHeight: '85%',
                     overflowY: 'auto'
                   }}>
-                    <p className="font-serif" style={{
-                      fontSize: 'clamp(1.1rem, 3.6vw, 1.38rem)',
+                    <p className="card-question-text" style={{
+                      fontSize: 'clamp(1.05rem, 3.4vw, 1.28rem)',
                       fontWeight: 600,
-                      lineHeight: 1.45,
+                      lineHeight: 1.55,
                       color: '#121826',
                       letterSpacing: '-0.01em'
                     }}>
