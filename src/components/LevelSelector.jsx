@@ -1,8 +1,23 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Compass, MessageCircle, Cross, HeartHandshake, Zap, Play, Shuffle } from 'lucide-react';
+import { Compass, MessageCircle, HeartHandshake, Zap, Play, Shuffle } from 'lucide-react';
 import { LEVELS } from '../data/questions';
 import HolyGroundLogo from './HolyGroundLogo';
+
+const ChristianCross = ({ size = 22, color = "#D97706", strokeWidth = 1.8 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke={color}
+    strokeWidth={strokeWidth}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M 10 2 H 14 V 7 H 19.5 V 11 H 14 V 22 H 10 V 11 H 4.5 V 7 H 10 Z" />
+  </svg>
+);
 
 export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
   const getLevelIcon = (id) => {
@@ -12,7 +27,7 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
       case 'level-2':
         return <MessageCircle size={22} color="#0284C7" strokeWidth={2} />;
       case 'level-3':
-        return <Cross size={22} color="#D97706" strokeWidth={2} />;
+        return <ChristianCross size={22} color="#D97706" strokeWidth={2} />;
       case 'level-4':
         return <HeartHandshake size={22} color="#8B5CF6" strokeWidth={2} />;
       case 'wildcards':
