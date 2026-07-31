@@ -174,7 +174,8 @@ export default function App() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '20px 0'
+        padding: '16px 0',
+        width: '100%'
       }}>
         {!currentLevel ? (
           <LevelSelector

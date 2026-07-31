@@ -154,30 +154,15 @@ export default function CardDeck({
   const cardAccent = isWildcard ? '#059669' : (currentLevel?.accentColor || '#c59b27');
 
   return (
-    <div style={{
-      width: '100%',
-      maxWidth: '400px',
-      margin: '0 auto',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '24px'
-    }}>
+    <div className="card-stack-wrapper">
       {/* Physical Card Stack Container */}
-      <div style={{
-        position: 'relative',
-        width: '100%',
-        height: '480px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
+      <div className="card-physical-container">
         {/* Ghost Deck Stack Layers */}
         {currentIndex + 2 < deck.length && (
           <div style={{
             position: 'absolute',
             width: '90%',
-            height: '440px',
+            height: '92%',
             borderRadius: '28px',
             background: 'rgba(255, 255, 255, 0.65)',
             border: '1px solid rgba(18, 24, 38, 0.06)',
@@ -190,7 +175,7 @@ export default function CardDeck({
           <div style={{
             position: 'absolute',
             width: '95%',
-            height: '455px',
+            height: '96%',
             borderRadius: '28px',
             background: '#ffffff',
             border: '1px solid rgba(18, 24, 38, 0.08)',
@@ -210,7 +195,7 @@ export default function CardDeck({
               opacity,
               position: 'absolute',
               width: '100%',
-              height: '470px',
+              height: '100%',
               zIndex: 10,
               cursor: 'grab'
             }}
@@ -225,7 +210,8 @@ export default function CardDeck({
               width: '100%',
               height: '100%',
               position: 'relative',
-              perspective: '1000px'
+              perspective: '1000px',
+              WebkitPerspective: '1000px'
             }}>
               <motion.div
                 animate={{ rotateY: isFlipped ? 180 : 0 }}
@@ -234,7 +220,8 @@ export default function CardDeck({
                   width: '100%',
                   height: '100%',
                   position: 'relative',
-                  transformStyle: 'preserve-3d'
+                  transformStyle: 'preserve-3d',
+                  WebkitTransformStyle: 'preserve-3d'
                 }}
               >
                 {/* UNFLIPPED CARD FRONT COVER (EDITORIAL MATERIAL DESIGN) */}
@@ -244,16 +231,22 @@ export default function CardDeck({
                   height: '100%',
                   backfaceVisibility: 'hidden',
                   WebkitBackfaceVisibility: 'hidden',
+                  visibility: isFlipped ? 'hidden' : 'visible',
+                  opacity: isFlipped ? 0 : 1,
+                  pointerEvents: isFlipped ? 'none' : 'auto',
+                  transform: 'translateZ(2px)',
+                  WebkitTransform: 'translateZ(2px)',
                   borderRadius: '28px',
                   background: '#ffffff',
                   border: `1.5px solid ${cardAccent}`,
                   boxShadow: `0 30px 60px -15px rgba(18, 24, 38, 0.12), 0 0 25px ${cardAccent}15`,
-                  padding: '36px 24px',
+                  padding: '32px 20px',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  textAlign: 'center'
+                  textAlign: 'center',
+                  transition: 'opacity 0.25s ease, visibility 0.25s ease'
                 }}>
                   {/* Inner Debossed Border Frame */}
                   <div className="editorial-inner-border" />
@@ -281,14 +274,14 @@ export default function CardDeck({
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    gap: '14px',
+                    gap: '12px',
                     position: 'relative',
                     zIndex: 2
                   }}>
-                    <HolyGroundLogo size={64} color={cardAccent} glow={false} />
+                    <HolyGroundLogo size={58} color={cardAccent} glow={false} />
 
                     <h3 className="font-serif" style={{
-                      fontSize: '1.65rem',
+                      fontSize: '1.5rem',
                       fontWeight: 700,
                       letterSpacing: '0.06em',
                       color: '#121826',
@@ -296,14 +289,14 @@ export default function CardDeck({
                     }}>
                       HOLY GROUND
                     </h3>
-                    <p style={{ fontSize: '0.78rem', color: '#6b7280', fontWeight: 600, letterSpacing: '0.06em' }}>
+                    <p style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 600, letterSpacing: '0.06em' }}>
                       CARD #{currentIndex + 1} OF {deck.length}
                     </p>
                   </div>
 
                   {/* Bottom Touch Hint */}
                   <div style={{
-                    fontSize: '0.8rem',
+                    fontSize: '0.78rem',
                     color: '#9ca3af',
                     fontWeight: 600,
                     letterSpacing: '0.04em',
@@ -321,17 +314,22 @@ export default function CardDeck({
                   height: '100%',
                   backfaceVisibility: 'hidden',
                   WebkitBackfaceVisibility: 'hidden',
-                  transform: 'rotateY(180deg)',
+                  visibility: !isFlipped ? 'hidden' : 'visible',
+                  opacity: !isFlipped ? 0 : 1,
+                  pointerEvents: !isFlipped ? 'none' : 'auto',
+                  transform: 'rotateY(180deg) translateZ(2px)',
+                  WebkitTransform: 'rotateY(180deg) translateZ(2px)',
                   borderRadius: '28px',
                   background: '#ffffff',
                   border: `1.5px solid ${cardAccent}`,
                   boxShadow: `0 30px 60px -15px rgba(18, 24, 38, 0.14), 0 0 30px ${cardAccent}18`,
-                  padding: '40px 28px',
+                  padding: '36px 24px',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  textAlign: 'center'
+                  textAlign: 'center',
+                  transition: 'opacity 0.25s ease, visibility 0.25s ease'
                 }}>
                   {/* Inner Debossed Border Frame */}
                   <div className="editorial-inner-border" />
@@ -367,12 +365,14 @@ export default function CardDeck({
                     alignItems: 'center',
                     justifyContent: 'center',
                     margin: 'auto 0',
-                    padding: '0 6px',
+                    padding: '0 4px',
                     position: 'relative',
-                    zIndex: 2
+                    zIndex: 2,
+                    maxHeight: '80%',
+                    overflowY: 'auto'
                   }}>
                     <p className="font-serif" style={{
-                      fontSize: '1.42rem',
+                      fontSize: 'clamp(1.15rem, 3.8vw, 1.42rem)',
                       fontWeight: 600,
                       lineHeight: 1.5,
                       color: '#121826',
@@ -382,7 +382,7 @@ export default function CardDeck({
                     </p>
                   </div>
 
-                  <div style={{ height: '12px' }} />
+                  <div style={{ height: '8px' }} />
                 </div>
               </motion.div>
             </div>
@@ -395,15 +395,16 @@ export default function CardDeck({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: '16px',
-        width: '100%'
+        gap: '14px',
+        width: '100%',
+        paddingBottom: '8px'
       }}>
         <button
           onClick={onPrevCard}
           disabled={currentIndex === 0}
           style={{
-            width: '52px',
-            height: '52px',
+            width: '48px',
+            height: '48px',
             borderRadius: '50%',
             background: '#ffffff',
             border: '1px solid rgba(18, 24, 38, 0.14)',
@@ -413,7 +414,8 @@ export default function CardDeck({
             justifyContent: 'center',
             cursor: currentIndex === 0 ? 'not-allowed' : 'pointer',
             boxShadow: '0 4px 12px rgba(18, 24, 38, 0.04)',
-            transition: 'all 0.2s ease'
+            transition: 'all 0.2s ease',
+            flexShrink: 0
           }}
         >
           <ChevronLeft size={22} />
@@ -422,20 +424,21 @@ export default function CardDeck({
         <button
           onClick={() => setIsFlipped(!isFlipped)}
           style={{
-            padding: '14px 28px',
+            padding: '12px 24px',
             borderRadius: '24px',
             background: '#ffffff',
             border: `1.5px solid ${cardAccent}`,
             color: '#121826',
             fontWeight: 800,
-            fontSize: '0.85rem',
+            fontSize: '0.82rem',
             letterSpacing: '0.06em',
             textTransform: 'uppercase',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            boxShadow: `0 4px 14px ${cardAccent}18`
+            boxShadow: `0 4px 14px ${cardAccent}18`,
+            whiteSpace: 'nowrap'
           }}
         >
           <RotateCw size={15} color={cardAccent} />
@@ -445,8 +448,8 @@ export default function CardDeck({
         <button
           onClick={onNextCard}
           style={{
-            width: '52px',
-            height: '52px',
+            width: '48px',
+            height: '48px',
             borderRadius: '50%',
             background: cardAccent,
             border: 'none',
@@ -455,7 +458,8 @@ export default function CardDeck({
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            boxShadow: `0 6px 20px ${cardAccent}35`
+            boxShadow: `0 6px 20px ${cardAccent}35`,
+            flexShrink: 0
           }}
         >
           <ChevronRight size={24} strokeWidth={2.5} />
