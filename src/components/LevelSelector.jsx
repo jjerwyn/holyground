@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Compass, Heart, Flame, Zap, Play, Shuffle } from 'lucide-react';
+import { Compass, MessageCircle, Cross, HeartHandshake, Zap, Play, Shuffle } from 'lucide-react';
 import { LEVELS } from '../data/questions';
 import HolyGroundLogo from './HolyGroundLogo';
 
@@ -10,9 +10,11 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
       case 'level-1':
         return <Compass size={22} color="#E11D48" strokeWidth={2} />;
       case 'level-2':
-        return <Heart size={22} color="#0284C7" strokeWidth={2} />;
+        return <MessageCircle size={22} color="#0284C7" strokeWidth={2} />;
       case 'level-3':
-        return <Flame size={22} color="#D97706" strokeWidth={2} />;
+        return <Cross size={22} color="#D97706" strokeWidth={2} />;
+      case 'level-4':
+        return <HeartHandshake size={22} color="#8B5CF6" strokeWidth={2} />;
       case 'wildcards':
         return <Zap size={22} color="#059669" strokeWidth={2} />;
       default:
@@ -209,7 +211,7 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
         }}
       >
         <Shuffle size={18} color="#c59b27" />
-        <span>Mix All Decks (90+ Cards)</span>
+        <span>Mix All Decks (115 Cards)</span>
       </motion.button>
     </div>
   );

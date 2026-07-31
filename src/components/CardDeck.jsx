@@ -37,6 +37,17 @@ export default function CardDeck({
     }
   }, [currentIndex, deck.length]);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.code === 'Space' || e.key === ' ') {
+        e.preventDefault();
+        setIsFlipped((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const handleDragEnd = (event, info) => {
     const swipeThreshold = 60;
     const velocityThreshold = 200;
@@ -299,7 +310,7 @@ export default function CardDeck({
                     position: 'relative',
                     zIndex: 2
                   }}>
-                    <span>Tap to flip • Swipe left for next</span>
+                    <span>Tap or Space to flip • Swipe or Arrows for next</span>
                   </div>
                 </div>
 
