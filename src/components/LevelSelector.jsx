@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Compass, MessageCircle, HeartHandshake, Zap, Play, Shuffle } from 'lucide-react';
+import { Compass, MessageCircle, HeartHandshake, Zap, Shuffle } from 'lucide-react';
 import { LEVELS } from '../data/questions';
 import HolyGroundLogo from './HolyGroundLogo';
 
@@ -42,10 +42,10 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
       width: '100%',
       maxWidth: '540px',
       margin: '0 auto',
-      padding: '20px 24px 48px 24px',
+      padding: '16px 20px 40px 20px',
       display: 'flex',
       flexDirection: 'column',
-      gap: '28px'
+      gap: '20px'
     }}>
       {/* Editorial Header Section */}
       <motion.div
@@ -57,7 +57,7 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '14px'
+          gap: '10px'
         }}
       >
         <HolyGroundLogo size={64} color="#c59b27" glow={false} />
@@ -98,12 +98,12 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
           maxWidth: '420px',
           fontWeight: 500
         }}>
-          Step onto holy ground with your friends, Connect Group, or leaders. Select your deck depth and spark conversations that matter.
+          Step onto holy ground with your friends. Select your deck and spark meaningful conversations.
         </p>
       </motion.div>
 
-      {/* Deck selection cards with physical box aesthetic */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      {/* Deck selection cards */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         {LEVELS.map((level, index) => (
           <motion.div
             key={level.id}
@@ -115,15 +115,15 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
             onClick={() => onSelectLevel(level)}
             className="editorial-card-frame"
             style={{
-              padding: '24px 24px 24px 28px',
-              borderRadius: '24px',
+              padding: '18px 20px 18px 22px',
+              borderRadius: '20px',
               background: '#ffffff',
               border: `1.5px solid ${level.borderColor}`,
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              gap: '16px',
+              gap: '14px',
               position: 'relative',
               overflow: 'hidden'
             }}
@@ -131,14 +131,14 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
             {/* Subtle inner debossed frame */}
             <div className="editorial-inner-border" />
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '18px', flex: 1, position: 'relative', zIndex: 2 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1, position: 'relative', zIndex: 2 }}>
               {/* Serif Number Stamp */}
               <div className="font-serif" style={{
-                fontSize: '2.2rem',
+                fontSize: '2rem',
                 fontWeight: 700,
                 color: level.accentColor,
                 lineHeight: 1,
-                width: '46px',
+                width: '40px',
                 textAlign: 'center',
                 flexShrink: 0
               }}>
@@ -147,18 +147,18 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
 
               <div style={{
                 width: '1px',
-                height: '42px',
+                height: '38px',
                 background: 'rgba(18, 24, 38, 0.08)',
                 flexShrink: 0
               }} />
 
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+              <div style={{ flex: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
                   <div style={{
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '4px',
-                    fontSize: '0.7rem',
+                    fontSize: '0.68rem',
                     fontWeight: 800,
                     letterSpacing: '0.12em',
                     color: level.accentColor,
@@ -168,31 +168,26 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
                     <span>LEVEL {level.number}</span>
                   </div>
                 </div>
-                <h3 className="font-serif" style={{ fontSize: '1.25rem', fontWeight: 700, color: '#121826', marginBottom: '4px' }}>
+                <h3 className="font-serif" style={{ fontSize: '1.15rem', fontWeight: 700, color: '#121826', marginBottom: '2px' }}>
                   {level.title}
                 </h3>
-                <p style={{ fontSize: '0.84rem', color: '#6b7280', lineHeight: 1.4, fontWeight: 500 }}>
+                <p style={{ fontSize: '0.8rem', color: '#6b7280', lineHeight: 1.4, fontWeight: 500 }}>
                   {level.tagline}
                 </p>
               </div>
             </div>
 
-            {/* Play Arrow */}
+            {/* Accent chevron indicator */}
             <div style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '50%',
-              background: level.accentColor,
-              color: '#ffffff',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              color: level.accentColor,
+              opacity: 0.5,
               flexShrink: 0,
-              boxShadow: `0 4px 14px ${level.accentColor}35`,
               position: 'relative',
-              zIndex: 2
+              zIndex: 2,
+              fontSize: '1.3rem',
+              fontWeight: 300
             }}>
-              <Play size={16} fill="#ffffff" style={{ marginLeft: '2px' }} />
+              ›
             </div>
           </motion.div>
         ))}
@@ -208,13 +203,13 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
         onClick={onSelectMixedDeck}
         style={{
           width: '100%',
-          padding: '20px 24px',
-          borderRadius: '24px',
+          padding: '16px 20px',
+          borderRadius: '20px',
           background: '#121826',
           border: '1px solid #121826',
           color: '#ffffff',
           fontWeight: 700,
-          fontSize: '0.95rem',
+          fontSize: '0.88rem',
           letterSpacing: '0.08em',
           textTransform: 'uppercase',
           cursor: 'pointer',
@@ -222,7 +217,7 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
           alignItems: 'center',
           justifyContent: 'center',
           gap: '10px',
-          boxShadow: '0 12px 30px -8px rgba(18, 24, 38, 0.3)'
+          boxShadow: '0 10px 24px -6px rgba(18, 24, 38, 0.3)'
         }}
       >
         <Shuffle size={18} color="#c59b27" />
