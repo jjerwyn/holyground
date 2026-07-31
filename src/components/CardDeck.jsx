@@ -10,6 +10,7 @@ export default function CardDeck({
   onNextCard, 
   onPrevCard, 
   onRestartDeck, 
+  onNextLevel,
   onBackToMenu 
 }) {
   const [autoReveal, setAutoReveal] = useState(() => {
@@ -52,7 +53,7 @@ export default function CardDeck({
     setIsFlipped(autoReveal);
     setShouldAnimateFlip(false);
     
-    if (deck.length > 0 && currentIndex >= deck.length) {
+    if (currentIndex === deck.length) {
       setIsCompleted(true);
       confetti({
         particleCount: 100,
@@ -90,7 +91,7 @@ export default function CardDeck({
   };
 
   const animateNext = (direction = 1) => {
-    if (isAnimatingRef.current || currentIndex >= deck.length - 1 || !topRef.current || !underRef.current) return;
+    if (isAnimatingRef.current || currentIndex >= deck.length || !topRef.current || !underRef.current) return;
     isAnimatingRef.current = true;
 
     const sign = direction >= 0 ? 1 : -1;
@@ -161,7 +162,7 @@ export default function CardDeck({
 
   // Pointer & Touch Handlers using global window listeners (100% Matching deck-preview.html)
   const handlePointerDown = (e) => {
-    if (isAnimatingRef.current || !topRef.current || !underRef.current) return;
+    if (isAnimatingRef.current || currentIndex === deck.length || !topRef.current || !underRef.current) return;
     isDraggingRef.current = true;
     startXRef.current = e.clientX || (e.touches && e.touches[0]?.clientX);
     currentXRef.current = 0;
@@ -171,7 +172,7 @@ export default function CardDeck({
 
   useEffect(() => {
     const handlePointerMove = (e) => {
-      if (!isDraggingRef.current || !topRef.current || !underRef.current) return;
+      if (!isDraggingRef.current || currentIndex === deck.length || !topRef.current || !underRef.current) return;
       const clientX = e.clientX || (e.touches && e.touches[0]?.clientX);
       if (clientX === undefined) return;
 
@@ -196,7 +197,7 @@ export default function CardDeck({
       const threshold = 50;
       const draggedDistance = Math.abs(currentXRef.current);
 
-      if (draggedDistance > threshold && currentIndex < deck.length - 1) {
+      if (draggedDistance > threshold && currentIndex < deck.length) {
         animateNext(currentXRef.current);
       } else if (draggedDistance > 0) {
         topRef.current.style.transition = 'transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.28s ease';
@@ -226,91 +227,7 @@ export default function CardDeck({
     handleToggleFlip();
   };
 
-  if (isCompleted || !activeCard) {
-    return (
-      <div style={{
-        width: '100%',
-        maxWidth: '420px',
-        margin: '0 auto',
-        padding: '40px 20px',
-        textAlign: 'center',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '20px'
-      }}>
-        <div style={{
-          width: '76px',
-          height: '76px',
-          borderRadius: '50%',
-          background: 'rgba(5, 150, 105, 0.12)',
-          border: '2px solid #059669',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#059669',
-          boxShadow: '0 8px 24px rgba(5, 150, 105, 0.15)'
-        }}>
-          <CheckCircle2 size={40} />
-        </div>
 
-        <h2 className="font-serif" style={{ fontSize: '2.2rem', fontWeight: 700, color: '#121826' }}>
-          Deck Complete
-        </h2>
-
-        <p style={{ fontSize: '0.98rem', color: '#4b5563', lineHeight: 1.6 }}>
-          You completed all {deck.length} cards in this deck. Take a moment to reflect on what God spoke through the room tonight.
-        </p>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', marginTop: '10px' }}>
-          <button
-            onClick={onRestartDeck}
-            style={{
-              width: '100%',
-              padding: '18px',
-              borderRadius: '24px',
-              background: '#121826',
-              border: 'none',
-              color: '#ffffff',
-              fontWeight: 700,
-              fontSize: '0.9rem',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              boxShadow: '0 8px 20px rgba(18, 24, 38, 0.25)'
-            }}
-          >
-            <RotateCw size={16} />
-            <span>Shuffle & Play Again</span>
-          </button>
-
-          <button
-            onClick={onBackToMenu}
-            style={{
-              width: '100%',
-              padding: '16px',
-              borderRadius: '24px',
-              background: '#ffffff',
-              border: '1px solid rgba(18, 24, 38, 0.14)',
-              color: '#121826',
-              fontWeight: 700,
-              fontSize: '0.85rem',
-              letterSpacing: '0.06em',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              boxShadow: '0 2px 8px rgba(18, 24, 38, 0.03)'
-            }}
-          >
-            Select Different Deck
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="card-stack-wrapper">
@@ -332,8 +249,8 @@ export default function CardDeck({
           }} />
         )}
 
-        {/* Underneath Card Layer (100% Matching deck-preview.html) */}
-        {nextCardTarget && (
+        {/* Underneath Card Layer */}
+        {currentIndex <= deck.length && (
           <div
             ref={underRef}
             style={{
@@ -350,77 +267,173 @@ export default function CardDeck({
               overflow: 'hidden'
             }}
           >
-            <div 
-            className={`card-3d-inner ${autoReveal ? 'flipped' : ''}`}
-            style={{ transition: 'none' }}
-          >
-            {/* UNFLIPPED CARD FRONT COVER */}
-            <div className="card-face card-face-front" style={{
-              border: `1.5px solid ${cardAccent}`,
-              boxShadow: '0 16px 36px -10px rgba(18, 24, 38, 0.06)',
-              padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              textAlign: 'center'
-            }}>
-              <div className="editorial-inner-border" />
-              <div style={{
-                padding: '4px 14px',
-                background: '#ffffff',
-                border: `1px solid ${cardAccent}40`,
-                borderRadius: '20px',
-                fontSize: '0.7rem',
-                fontWeight: 800,
-                color: cardAccent,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase'
-              }}>
-                <span>{currentLevel ? `LEVEL ${currentLevel.number}` : 'HOLY GROUND'}</span>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-                <HolyGroundLogo size={48} color={cardAccent} glow={false} />
-                <h3 className="font-serif" style={{ fontSize: '1.4rem', fontWeight: 700, letterSpacing: '0.06em', color: '#121826', textTransform: 'uppercase' }}>
-                  HOLY GROUND
-                </h3>
-                <p style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
-                  CARD #{currentIndex + 2} OF {deck.length}
-                </p>
-              </div>
-              <div style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
-                <span>Drag / Swipe left or right • Tap to flip</span>
-              </div>
-            </div>
+            {currentIndex === deck.length ? (
+              /* Last Card Underneath Completion Card */
+              <div 
+                className={`card-3d-inner ${autoReveal ? 'flipped' : ''}`}
+                style={{ transition: 'none' }}
+              >
+                {/* UNFLIPPED CARD FRONT COVER */}
+                <div className="card-face card-face-front" style={{
+                  padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  textAlign: 'center'
+                }}>
+                  <div className="editorial-inner-border" />
+                  <div style={{
+                    padding: '4px 14px',
+                    background: '#ffffff',
+                    border: `1px solid ${cardAccent}40`,
+                    borderRadius: '20px',
+                    fontSize: '0.7rem',
+                    fontWeight: 800,
+                    color: cardAccent,
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase'
+                  }}>
+                    <span>{currentLevel ? `LEVEL ${currentLevel.number}` : 'HOLY GROUND'}</span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                    <HolyGroundLogo size={48} color={cardAccent} glow={false} />
+                    <h3 className="font-serif" style={{ fontSize: '1.4rem', fontWeight: 700, letterSpacing: '0.06em', color: '#121826', textTransform: 'uppercase' }}>
+                      HOLY GROUND
+                    </h3>
+                    <p style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
+                      CARD #{deck.length} OF {deck.length}
+                    </p>
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
+                    <span>Drag / Swipe left or right • Tap to flip</span>
+                  </div>
+                </div>
 
-            {/* REVEALED QUESTION SIDE */}
-            <div className="card-face card-face-back" style={{
-              border: `1.5px solid ${cardAccent}`,
-              boxShadow: '0 16px 36px -10px rgba(18, 24, 38, 0.06)',
-              padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              textAlign: 'center'
-            }}>
-              <div className="editorial-inner-border" />
-              <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.7rem', fontWeight: 800, color: cardAccent, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                  HOLY GROUND
-                </span>
-                <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 700 }}>
-                  #{currentIndex + 2} / {deck.length}
-                </span>
+                {/* REVEALED QUESTION SIDE */}
+                <div className="card-face card-face-back" style={{
+                  padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  textAlign: 'center'
+                }}>
+                  <div className="editorial-inner-border" />
+                  <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span style={{ fontSize: '0.7rem', fontWeight: 800, color: cardAccent, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                      HOLY GROUND
+                    </span>
+                    <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 700 }}>
+                      #{deck.length} / {deck.length}
+                    </span>
+                  </div>
+                  <div style={{ margin: 'auto 0', padding: '0 8px', width: '100%' }}>
+                    <p className="card-question-text" style={{ fontSize: 'clamp(1.05rem, 3.4vw, 1.28rem)', fontWeight: 600, lineHeight: 1.55, color: '#121826' }}>
+                      "{deck[deck.length - 1]?.text}"
+                    </p>
+                  </div>
+                  <div></div>
+                </div>
               </div>
-              <div style={{ margin: 'auto 0', padding: '0 8px', width: '100%' }}>
-                <p className="card-question-text" style={{ fontSize: 'clamp(1.05rem, 3.4vw, 1.28rem)', fontWeight: 600, lineHeight: 1.55, color: '#121826' }}>
-                  "{nextCardTarget.text}"
-                </p>
+            ) : currentIndex + 1 === deck.length ? (
+              /* Completion Card Underneath */
+              <div className="card-face" style={{
+                padding: '24px 20px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                textAlign: 'center',
+                gap: '12px'
+              }}>
+                <div className="editorial-inner-border" />
+                <div style={{
+                  width: '56px',
+                  height: '56px',
+                  borderRadius: '50%',
+                  background: 'rgba(5, 150, 105, 0.12)',
+                  border: '1.5px solid #059669',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#059669'
+                }}>
+                  <CheckCircle2 size={32} />
+                </div>
+                <h3 className="font-serif" style={{ fontSize: '1.6rem', fontWeight: 700, color: '#121826' }}>
+                  Deck Complete
+                </h3>
               </div>
-              <div></div>
-            </div>
-          </div>
+            ) : (
+              <div 
+                className={`card-3d-inner ${autoReveal ? 'flipped' : ''}`}
+                style={{ transition: 'none' }}
+              >
+                {/* UNFLIPPED CARD FRONT COVER */}
+                <div className="card-face card-face-front" style={{
+                  padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  textAlign: 'center'
+                }}>
+                  <div className="editorial-inner-border" />
+                  <div style={{
+                    padding: '4px 14px',
+                    background: '#ffffff',
+                    border: `1px solid ${cardAccent}40`,
+                    borderRadius: '20px',
+                    fontSize: '0.7rem',
+                    fontWeight: 800,
+                    color: cardAccent,
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase'
+                  }}>
+                    <span>{currentLevel ? `LEVEL ${currentLevel.number}` : 'HOLY GROUND'}</span>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                    <HolyGroundLogo size={48} color={cardAccent} glow={false} />
+                    <h3 className="font-serif" style={{ fontSize: '1.4rem', fontWeight: 700, letterSpacing: '0.06em', color: '#121826', textTransform: 'uppercase' }}>
+                      HOLY GROUND
+                    </h3>
+                    <p style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
+                      CARD #{currentIndex + 2} OF {deck.length}
+                    </p>
+                  </div>
+                  <div style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
+                    <span>Drag / Swipe left or right • Tap to flip</span>
+                  </div>
+                </div>
+
+                {/* REVEALED QUESTION SIDE */}
+                <div className="card-face card-face-back" style={{
+                  padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  textAlign: 'center'
+                }}>
+                  <div className="editorial-inner-border" />
+                  <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span style={{ fontSize: '0.7rem', fontWeight: 800, color: cardAccent, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                      HOLY GROUND
+                    </span>
+                    <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 700 }}>
+                      #{currentIndex + 2} / {deck.length}
+                    </span>
+                  </div>
+                  <div style={{ margin: 'auto 0', padding: '0 8px', width: '100%' }}>
+                    <p className="card-question-text" style={{ fontSize: 'clamp(1.05rem, 3.4vw, 1.28rem)', fontWeight: 600, lineHeight: 1.55, color: '#121826' }}>
+                      "{nextCardTarget.text}"
+                    </p>
+                  </div>
+                  <div></div>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
@@ -442,83 +455,216 @@ export default function CardDeck({
           onTouchStart={handlePointerDown}
           onClick={handleCardClick}
         >
-          {/* 3D Card Container */}
-          <div 
-            className={`card-3d-inner ${isFlipped ? 'flipped' : ''}`}
-            style={{
-              transition: shouldAnimateFlip ? 'transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)' : 'none'
-            }}
-          >
-            {/* UNFLIPPED CARD FRONT COVER */}
-            <div className="card-face card-face-front" style={{
-              border: `1.5px solid ${cardAccent}`,
-              boxShadow: '0 16px 36px -10px rgba(18, 24, 38, 0.12)',
-              padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
+          {/* 3D Card Container or Completion Card */}
+          {currentIndex === deck.length ? (
+            <div className="card-face" style={{
+              border: `1.5px solid #059669`,
+              boxShadow: '0 16px 36px -10px rgba(5, 150, 105, 0.15)',
+              padding: '24px 20px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
               alignItems: 'center',
-              textAlign: 'center'
+              textAlign: 'center',
+              background: '#ffffff'
             }}>
               <div className="editorial-inner-border" />
+              
               <div style={{
-                padding: '4px 14px',
-                background: '#ffffff',
-                border: `1px solid ${cardAccent}40`,
-                borderRadius: '20px',
-                fontSize: '0.7rem',
-                fontWeight: 800,
-                color: cardAccent,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase'
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                background: 'rgba(5, 150, 105, 0.12)',
+                border: '1.5px solid #059669',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#059669',
+                marginTop: '10px'
               }}>
-                <span>{currentLevel ? `LEVEL ${currentLevel.number}` : 'HOLY GROUND'}</span>
+                <CheckCircle2 size={34} />
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
-                <HolyGroundLogo size={48} color={cardAccent} glow={false} />
-                <h3 className="font-serif" style={{ fontSize: '1.4rem', fontWeight: 700, letterSpacing: '0.06em', color: '#121826', textTransform: 'uppercase' }}>
-                  HOLY GROUND
-                </h3>
-                <p style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
-                  CARD #{currentIndex + 1} OF {deck.length}
+              <div style={{ margin: 'auto 0' }}>
+                <h2 className="font-serif" style={{ fontSize: '1.8rem', fontWeight: 700, color: '#121826', marginBottom: '8px' }}>
+                  Deck Complete
+                </h2>
+                <p style={{ fontSize: '0.85rem', color: '#4b5563', lineHeight: 1.5, padding: '0 12px' }}>
+                  You completed all {deck.length} cards in this deck. Reflect on what God spoke through your time together.
                 </p>
               </div>
 
-              <div style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
-                <span>Drag / Swipe left or right • Tap to flip</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%', pointerEvents: 'auto' }}>
+                {currentLevel?.id !== 'wildcards' && currentLevel?.id !== 'mixed' ? (
+                  <>
+                    <button
+                      onClick={onNextLevel}
+                      style={{
+                        width: '100%',
+                        padding: '12px',
+                        borderRadius: '18px',
+                        background: currentLevel?.accentColor || '#059669',
+                        border: 'none',
+                        color: '#ffffff',
+                        fontWeight: 700,
+                        fontSize: '0.78rem',
+                        letterSpacing: '0.06em',
+                        textTransform: 'uppercase',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '6px',
+                        boxShadow: `0 4px 14px ${(currentLevel?.accentColor || '#059669')}35`
+                      }}
+                    >
+                      <ChevronRight size={16} strokeWidth={2.5} />
+                      <span>Move to Next Deck</span>
+                    </button>
+
+                    <button
+                      onClick={onRestartDeck}
+                      style={{
+                        width: '100%',
+                        padding: '10px',
+                        borderRadius: '18px',
+                        background: '#121826',
+                        border: 'none',
+                        color: '#ffffff',
+                        fontWeight: 700,
+                        fontSize: '0.75rem',
+                        letterSpacing: '0.04em',
+                        textTransform: 'uppercase',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Reshuffle Deck
+                    </button>
+
+                    <button
+                      onClick={onBackToMenu}
+                      style={{
+                        width: '100%',
+                        padding: '8px',
+                        borderRadius: '18px',
+                        background: 'transparent',
+                        border: 'none',
+                        color: '#6b7280',
+                        fontWeight: 700,
+                        fontSize: '0.73rem',
+                        letterSpacing: '0.04em',
+                        textTransform: 'uppercase',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Choose Another Deck
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={onBackToMenu}
+                    style={{
+                      width: '100%',
+                      padding: '12px',
+                      borderRadius: '18px',
+                      background: currentLevel?.accentColor || '#059669',
+                      border: 'none',
+                      color: '#ffffff',
+                      fontWeight: 700,
+                      fontSize: '0.78rem',
+                      letterSpacing: '0.06em',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '6px',
+                      boxShadow: `0 4px 14px ${(currentLevel?.accentColor || '#059669')}35`
+                    }}
+                  >
+                    <span>Choose Another Deck</span>
+                  </button>
+                )}
               </div>
             </div>
+          ) : (
+            <div 
+              className={`card-3d-inner ${isFlipped ? 'flipped' : ''}`}
+              style={{
+                transition: shouldAnimateFlip ? 'transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)' : 'none'
+              }}
+            >
+              {/* UNFLIPPED CARD FRONT COVER */}
+              <div className="card-face card-face-front" style={{
+                border: `1.5px solid ${cardAccent}`,
+                boxShadow: '0 16px 36px -10px rgba(18, 24, 38, 0.12)',
+                padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                textAlign: 'center'
+              }}>
+                <div className="editorial-inner-border" />
+                <div style={{
+                  padding: '4px 14px',
+                  background: '#ffffff',
+                  border: `1px solid ${cardAccent}40`,
+                  borderRadius: '20px',
+                  fontSize: '0.7rem',
+                  fontWeight: 800,
+                  color: cardAccent,
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase'
+                }}>
+                  <span>{currentLevel ? `LEVEL ${currentLevel.number}` : 'HOLY GROUND'}</span>
+                </div>
 
-            {/* REVEALED QUESTION SIDE */}
-            <div className="card-face card-face-back" style={{
-              border: `1.5px solid ${cardAccent}`,
-              boxShadow: '0 16px 36px -10px rgba(18, 24, 38, 0.12)',
-              padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              textAlign: 'center'
-            }}>
-              <div className="editorial-inner-border" />
-              <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '0.7rem', fontWeight: 800, color: cardAccent, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                  HOLY GROUND
-                </span>
-                <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 700 }}>
-                  #{currentIndex + 1} / {deck.length}
-                </span>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+                  <HolyGroundLogo size={48} color={cardAccent} glow={false} />
+                  <h3 className="font-serif" style={{ fontSize: '1.4rem', fontWeight: 700, letterSpacing: '0.06em', color: '#121826', textTransform: 'uppercase' }}>
+                    HOLY GROUND
+                  </h3>
+                  <p style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
+                    CARD #{currentIndex + 1} OF {deck.length}
+                  </p>
+                </div>
+
+                <div style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 600 }}>
+                  <span>Drag / Swipe left or right • Tap to flip</span>
+                </div>
               </div>
 
-              <div style={{ margin: 'auto 0', padding: '0 8px', width: '100%' }}>
-                <p className="card-question-text" style={{ fontSize: 'clamp(1.05rem, 3.4vw, 1.28rem)', fontWeight: 600, lineHeight: 1.55, color: '#121826' }}>
-                  "{activeCard.text}"
-                </p>
+              {/* REVEALED QUESTION SIDE */}
+              <div className="card-face card-face-back" style={{
+                border: `1.5px solid ${cardAccent}`,
+                boxShadow: '0 16px 36px -10px rgba(18, 24, 38, 0.12)',
+                padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                textAlign: 'center'
+              }}>
+                <div className="editorial-inner-border" />
+                <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <span style={{ fontSize: '0.7rem', fontWeight: 800, color: cardAccent, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                    HOLY GROUND
+                  </span>
+                  <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 700 }}>
+                    #{currentIndex + 1} / {deck.length}
+                  </span>
+                </div>
+
+                <div style={{ margin: 'auto 0', padding: '0 8px', width: '100%' }}>
+                  <p className="card-question-text" style={{ fontSize: 'clamp(1.05rem, 3.4vw, 1.28rem)', fontWeight: 600, lineHeight: 1.55, color: '#121826' }}>
+                    "{activeCard.text}"
+                  </p>
+                </div>
+                <div></div>
               </div>
-              <div></div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
@@ -580,19 +726,19 @@ export default function CardDeck({
 
         <button
           onClick={animateNext}
-          disabled={currentIndex === deck.length - 1}
+          disabled={currentIndex === deck.length}
           style={{
             width: '48px',
             height: '48px',
             borderRadius: '50%',
-            background: currentIndex === deck.length - 1 ? '#e5e7eb' : cardAccent,
+            background: currentIndex === deck.length ? '#e5e7eb' : cardAccent,
             border: 'none',
             color: '#ffffff',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            cursor: currentIndex === deck.length - 1 ? 'not-allowed' : 'pointer',
-            boxShadow: currentIndex === deck.length - 1 ? 'none' : `0 6px 20px ${cardAccent}35`,
+            cursor: currentIndex === deck.length ? 'not-allowed' : 'pointer',
+            boxShadow: currentIndex === deck.length ? 'none' : `0 6px 20px ${cardAccent}35`,
             flexShrink: 0
           }}
         >

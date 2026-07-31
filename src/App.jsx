@@ -114,7 +114,7 @@ export default function App() {
   };
 
   const handleNextCard = () => {
-    if (currentIndex < deck.length) {
+    if (currentIndex <= deck.length) {
       setCurrentIndex((prev) => prev + 1);
     }
   };
@@ -129,6 +129,17 @@ export default function App() {
     const shuffled = shuffleArray(deck);
     setDeck(shuffled);
     setCurrentIndex(0);
+  };
+
+  const handleNextLevel = () => {
+    if (!currentLevel) return;
+    const currentIdx = LEVELS.findIndex((l) => l.id === currentLevel.id);
+    if (currentIdx !== -1 && currentIdx < LEVELS.length - 1) {
+      const nextLevel = LEVELS[currentIdx + 1];
+      handleSelectLevel(nextLevel);
+    } else {
+      handleBackToMenu();
+    }
   };
 
   const handleBackToMenu = () => {
@@ -178,6 +189,7 @@ export default function App() {
             onNextCard={handleNextCard}
             onPrevCard={handlePrevCard}
             onRestartDeck={handleShuffleDeck}
+            onNextLevel={handleNextLevel}
             onBackToMenu={handleBackToMenu}
           />
         )}
