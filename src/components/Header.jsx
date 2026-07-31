@@ -19,26 +19,26 @@ export default function Header({ currentLevel, activeDeckCount, currentIndex, on
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <HolyGroundLogo size={32} color="#c59b27" glow={false} />
             <div>
-              <h1 className="font-serif" style={{ 
-                fontSize: '1.2rem', 
-                fontWeight: 700, 
-                letterSpacing: '0.08em', 
-                lineHeight: 1, 
+              <h1 className="font-serif" style={{
+                fontSize: '1.2rem',
+                fontWeight: 700,
+                letterSpacing: '0.08em',
+                lineHeight: 1,
                 color: '#121826',
                 textTransform: 'uppercase'
               }}>
                 HOLY GROUND
               </h1>
-              <p style={{ 
-                fontSize: '0.62rem', 
-                color: '#6b7280', 
-                fontWeight: 600, 
+              <p style={{
+                fontSize: '0.62rem',
+                color: '#6b7280',
+                fontWeight: 600,
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
                 marginTop: '2px',
                 whiteSpace: 'nowrap'
               }}>
-                Real Community • Everyday Life
+                Creating space for God in every conversation.
               </p>
             </div>
           </div>
@@ -47,7 +47,7 @@ export default function Header({ currentLevel, activeDeckCount, currentIndex, on
 
       {/* Center level title indicator */}
       {currentLevel && (
-        <div 
+        <div
           className="header-level-title"
           style={{
             borderColor: `${currentLevel.accentColor}40`,
