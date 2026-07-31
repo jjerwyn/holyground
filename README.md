@@ -1,6 +1,6 @@
 # 🕊️ Holy Ground — Christian Conversation Card App
 
-**Holy Ground** (also known as *Not Just Sundays*) is an interactive, web-based conversation card application built to foster deep fellowship, intentional spiritual reflection, and authentic relationships within Christian communities, small groups, youth ministries, and cell groups.
+**Holy Ground** is an interactive, web-based conversation card application built to foster deep fellowship, intentional spiritual reflection, and authentic relationships within Christian communities, small groups, youth ministries, and cell groups.
 
 Inspired by modern deep-connection card games, Holy Ground elevates everyday conversations into sacred spaces of vulnerability, faith, and joy.
 
