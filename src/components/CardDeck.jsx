@@ -16,9 +16,9 @@ export default function CardDeck({
   const [autoReveal, setAutoReveal] = useState(() => {
     try {
       const saved = localStorage.getItem('holyground_auto_reveal');
-      return saved !== null ? JSON.parse(saved) : true;
+      return saved !== null ? JSON.parse(saved) : false;
     } catch {
-      return true;
+      return false;
     }
   });
 
@@ -49,10 +49,14 @@ export default function CardDeck({
     }
   }, [autoReveal]);
 
-  useEffect(() => {
+  const [prevIndex, setPrevIndex] = useState(currentIndex);
+  if (prevIndex !== currentIndex) {
+    setPrevIndex(currentIndex);
     setIsFlipped(autoReveal);
     setShouldAnimateFlip(false);
-    
+  }
+
+  useEffect(() => {
     if (currentIndex === deck.length) {
       setIsCompleted(true);
       confetti({
@@ -63,7 +67,7 @@ export default function CardDeck({
     } else {
       setIsCompleted(false);
     }
-  }, [currentIndex, deck.length, autoReveal]);
+  }, [currentIndex, deck.length]);
 
   // Synchronously reset transform positions before browser paint on index change
   useLayoutEffect(() => {
@@ -84,10 +88,8 @@ export default function CardDeck({
   }, [currentIndex]);
 
   const handleToggleFlip = () => {
-    if (!isFlipped) {
-      setShouldAnimateFlip(true);
-      setIsFlipped(true);
-    }
+    setShouldAnimateFlip(true);
+    setIsFlipped((prev) => !prev);
   };
 
   const animateNext = (direction = 1) => {
@@ -106,6 +108,7 @@ export default function CardDeck({
 
     setTimeout(() => {
       setShouldAnimateFlip(false);
+      setIsFlipped(autoReveal);
       onNextCard();
     }, 280);
   };
@@ -260,7 +263,6 @@ export default function CardDeck({
               height: '100%',
               borderRadius: '28px',
               background: '#ffffff',
-              border: `1.5px solid ${cardAccent}`,
               boxShadow: '0 8px 24px rgba(18, 24, 38, 0.06)',
               transform: 'translateY(8px) scale(0.96)',
               zIndex: 2,
@@ -699,30 +701,6 @@ export default function CardDeck({
           }}
         >
           <ChevronLeft size={22} />
-        </button>
-
-        <button
-          onClick={handleToggleFlip}
-          style={{
-            padding: '12px 22px',
-            borderRadius: '24px',
-            background: '#ffffff',
-            border: `1.5px solid ${cardAccent}`,
-            color: '#121826',
-            fontWeight: 800,
-            fontSize: '0.8rem',
-            letterSpacing: '0.06em',
-            textTransform: 'uppercase',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            boxShadow: `0 4px 14px rgba(197, 155, 39, 0.18)`,
-            whiteSpace: 'nowrap'
-          }}
-        >
-          🔄
-          <span>{isFlipped ? 'Show Cover' : 'Flip Question'}</span>
         </button>
 
         <button
