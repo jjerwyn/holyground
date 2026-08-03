@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Header from './components/Header';
 import LevelSelector from './components/LevelSelector';
 import CardDeck from './components/CardDeck';
@@ -196,6 +197,7 @@ export default function App() {
       </main>
 
       {!currentLevel && <Footer />}
+      <Analytics />
     </div>
   );
 }
