@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Compass, MessageCircle, HeartHandshake, Zap, Shuffle } from 'lucide-react';
-import { LEVELS } from '../data/questions';
+import { LEVELS, QUESTIONS } from '../data/questions';
 import HolyGroundLogo from './HolyGroundLogo';
 
 const ChristianCross = ({ size = 22, color = "#D97706", strokeWidth = 1.8 }) => (
@@ -221,7 +221,7 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
         }}
       >
         <Shuffle size={18} color="#c59b27" />
-        <span>Mix All Decks (115 Cards)</span>
+        <span>Mix All Decks ({QUESTIONS.length} Cards)</span>
       </motion.button>
     </div>
   );
