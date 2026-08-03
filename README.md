@@ -14,9 +14,9 @@ Inspired by modern deep-connection card games, Holy Ground elevates everyday con
 - 🎯 **5 Categorized Fellowship Levels**:
   - **Level 01 — First Impressions & Good Vibes**: Icebreakers, perception checks, and lighthearted connection.
   - **Level 02 — Real Talk & Life Stories**: Vulnerability, personal growth, habits, and life experiences.
-  - **Level 03 — Faith & Life with Jesus**: Deep personal identity, quiet tensions, self-awareness, and relational closeness (35 cards).
-  - **Level 04 — Heart to Heart**: Conviction, surrender, spiritual depth, and radical vulnerability (35 cards).
-  - **Level 05 — Wildcards & Group Actions**: Interactive group challenges, instant prayers, and honor rounds (15 cards).
+  - **Level 03 — Faith & Life with Jesus**: Deep personal identity, quiet tensions, self-awareness, and relational closeness.
+  - **Level 04 — Heart to Heart**: Conviction, surrender, spiritual depth, and radical vulnerability.
+  - **Level 05 — Wildcards & Group Actions**: Interactive group challenges, instant prayers, and honor rounds.
 - 🔀 **Mix All Decks**: Shuffled hybrid deck dynamically aggregating all levels and wildcards into one spontaneous session.
 - ⚡ **Auto-Reveal Question Preference**: Toggle preference to automatically reveal cards or flip on demand.
 - ⌨️ **Keyboard & Touch Controls**: Arrow key shortcuts (`←` / `→`), spacebar flip toggle, touch gestures, and floating control buttons.
