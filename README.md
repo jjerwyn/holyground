@@ -4,21 +4,24 @@
 
 Inspired by modern deep-connection card games, Holy Ground elevates everyday conversations into sacred spaces of vulnerability, faith, and joy.
 
-https://holyground.vercel.app
+🌐 **Live Web App**: [holyground.vercel.app](https://holyground.vercel.app)
 
 ---
 
 ## ✨ Key Features
 
-- 🃏 **Interactive Card Deck Experience**: Smooth animated 3D card flips, intuitive swiping, and tactile card interactions powered by Framer Motion.
-- 🎯 **Categorized Fellowship Levels**:
-  - **Level 1 — Icebreakers & Light Connections**: Fun, engaging questions to warm up conversations.
-  - **Level 2 — Faith & Life**: Meaningful prompts bridging everyday experiences with spiritual walk.
-  - **Level 3 — Deep Waters**: Vulnerable, introspective questions built for trusted small groups.
-  - **Group Night Mix**: A shuffled hybrid deck combining all levels and wildcards for unpredictable group sessions.
-- ⌨️ **Keyboard & Gesture Navigation**: Support for arrow key shortcuts (`←` Previous / `→` Next) and direct touch interaction.
-- 🎉 **Completion Celebrations**: Festive confetti visual effects (`canvas-confetti`) when completing card decks.
-- 📱 **Responsive & Glassmorphic Design**: Sleek dark-mode aesthetic with modern typography, smooth gradients, and mobile-first responsive layouts.
+- 🃏 **Interactive Card Deck Experience**: Smooth 3D card flips, direct touch dragging/swiping, and physical stack physics matching native mobile app feel.
+- 🎯 **5 Categorized Fellowship Levels**:
+  - **Level 01 — First Impressions & Good Vibes**: Icebreakers, perception checks, and lighthearted connection.
+  - **Level 02 — Real Talk & Life Stories**: Vulnerability, personal growth, habits, and life experiences.
+  - **Level 03 — Faith & Life with Jesus**: Deep personal identity, quiet tensions, self-awareness, and relational closeness (35 cards).
+  - **Level 04 — Heart to Heart**: Conviction, surrender, spiritual depth, and radical vulnerability (35 cards).
+  - **Level 05 — Wildcards & Group Actions**: Interactive group challenges, instant prayers, and honor rounds (15 cards).
+- 🔀 **Mix All Decks**: Shuffled hybrid deck dynamically aggregating all levels and wildcards into one spontaneous session.
+- ⚡ **Auto-Reveal Question Preference**: Toggle preference to automatically reveal cards or flip on demand.
+- ⌨️ **Keyboard & Touch Controls**: Arrow key shortcuts (`←` / `→`), spacebar flip toggle, touch gestures, and floating control buttons.
+- 🎉 **Completion Celebrations**: Festive confetti visual effects (`canvas-confetti`) upon finishing any deck.
+- 🎨 **Editorial Design & Aesthetics**: Warm cream palettes, Bodoni Moda serif typography, debossed card frames, and glassmorphic header navigation.
 
 ---
 
@@ -26,23 +29,24 @@ https://holyground.vercel.app
 
 ```text
 Holy Ground/
-├── public/                # Static assets & favicon
+├── public/                # Static assets, SVG icons & favicons
 ├── src/
-│   ├── assets/            # Project image resources & branding
+│   ├── assets/            # Branding assets & SVG resources
 │   ├── components/        # UI Components
-│   │   ├── CardDeck.jsx          # 3D interactive card renderer & control suite
-│   │   ├── LevelSelector.jsx     # Level selection menu & Group Night mix trigger
-│   │   ├── Header.jsx            # App header, progress tracking & deck controls
-│   │   ├── Footer.jsx            # Branding footer
-│   │   └── HolyGroundLogo.jsx    # Custom SVG logo component
+│   │   ├── CardDeck.jsx          # Direct DOM ref animated 3D stack physics renderer
+│   │   ├── LevelSelector.jsx     # Dynamic card counter & level selection menu
+│   │   ├── Header.jsx            # Progress bar, live counter & navigation suite
+│   │   ├── Footer.jsx            # Editorial footer branding
+│   │   └── HolyGroundLogo.jsx    # Custom SVG cross & flame logo component
 │   ├── data/
-│   │   └── questions.js          # Structured prompt dataset & level metadata
-│   ├── App.jsx            # Root application state & deck shuffle logic
-│   ├── App.css            # Component-level styling & custom layout rules
+│   │   └── questions.js          # Levels schema, dataset & category metadata
+│   ├── App.jsx            # Root routing, URL path sync & Fisher-Yates shuffling
+│   ├── App.css            # Component-level layout rules
 │   ├── index.css          # Design system tokens, variables & typography
-│   └── main.jsx           # React app root mount point
-├── package.json           # Project dependencies & scripts
-└── vite.config.js         # Vite bundler configuration
+│   └── main.jsx           # React root mount point
+├── vercel.json            # Vercel SPA rewrite & deployment rules
+├── package.json           # Dependencies & build scripts
+└── vite.config.js         # Vite configuration
 ```
 
 ---
@@ -54,7 +58,7 @@ Holy Ground/
 - **Animations**: [Framer Motion](https://www.framer.com/motion/)
 - **Visual Effects**: [Canvas Confetti](https://www.npmjs.com/package/canvas-confetti)
 - **Icons**: [Lucide React](https://lucide.dev/)
-- **Linter**: [Oxlint](https://oxc.rs/)
+- **Deployment**: [Vercel](https://vercel.com/)
 
 ---
 
@@ -95,18 +99,16 @@ In the project directory, you can run:
 | Command | Description |
 | :--- | :--- |
 | `npm run dev` | Launches the local Vite development server |
-| `npm run build` | Compiles and bundles production-ready assets into the `dist/` folder |
+| `npm run build` | Compiles and bundles production-ready assets |
 | `npm run preview` | Previews the local production build |
-| `npm run lint` | Runs Oxlint code verification across the codebase |
 
 ---
 
 ## 🤝 Community & Usage
 
-Holy Ground is designed to be used in:
+Holy Ground is designed for:
 - Small groups & Cell group gatherings
 - Youth & Young Adult retreats
 - Church fellowship nights
 - One-on-one discipleship coffee chats
 - Family devotionals & dinner table discussions
-
