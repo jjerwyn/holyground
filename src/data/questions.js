@@ -79,7 +79,6 @@ export const QUESTIONS = [
     text: 'What is a gift or strength you see in me, even if I do not notice it myself?',
     subtext: 'Think about encouragement, kindness, wisdom, or leadership.'
   },
-
   {
     id: 'q1-4',
     levelId: 'level-1',
@@ -136,7 +135,6 @@ export const QUESTIONS = [
     text: 'What topic could I talk about for 30 minutes straight without stopping?',
     subtext: 'Name my ultimate topic of interest.'
   },
-
   {
     id: 'q1-12',
     levelId: 'level-1',
@@ -161,7 +159,6 @@ export const QUESTIONS = [
     text: 'In group hangouts, am I usually the planner, the hype person, or the one making sure everyone feels included?',
     subtext: 'Describe my role when we hang out.'
   },
-
   {
     id: 'q1-16',
     levelId: 'level-1',
@@ -170,7 +167,6 @@ export const QUESTIONS = [
     text: 'When did our friendship move from small talk to real friendship?',
     subtext: 'Describe that specific moment.'
   },
-
   {
     id: 'q1-18',
     levelId: 'level-1',
@@ -438,444 +434,416 @@ export const QUESTIONS = [
     subtext: 'Share your honest thoughts.'
   },
 
-  // LEVEL 3: FAITH & LIFE WITH JESUS (25 QUESTIONS)
-
+  // LEVEL 3: DEEP PERSONAL – IDENTITY, TENSION, REALITY
   {
-    id: 'q3-2',
+    id: 'q3-L3-1',
     levelId: 'level-3',
     type: 'question',
-    category: 'Hearing God',
-    text: 'How does God usually speak to your heart when you spend quiet time with him?',
-    subtext: 'Through the Bible, quiet inner peace, advice from friends, or gentle thoughts?'
+    category: 'Identity & Self-Awareness',
+    text: 'What version of yourself do people see that isn’t fully true?',
+    subtext: 'Focus on honesty and real-life specifics.'
   },
   {
-    id: 'q3-3',
+    id: 'q3-L3-2',
     levelId: 'level-3',
     type: 'question',
-    category: 'Testimony',
-    text: 'What is a moment in your life where you felt God step in and help you when you needed it most?',
-    subtext: 'Share a personal story of how he met you.'
+    category: 'Identity & Self-Awareness',
+    text: 'What’s something you pretend doesn’t affect you—but actually does?',
+    subtext: 'Examine hidden tensions and quiet impact.'
   },
   {
-    id: 'q3-4',
+    id: 'q3-L3-3',
     levelId: 'level-3',
     type: 'question',
-    category: 'Waiting Seasons',
-    text: 'If you are waiting on a decision or prayer answer right now, what is God teaching you in the middle of it?',
-    subtext: 'How are you staying hopeful while waiting?'
+    category: 'Identity & Self-Awareness',
+    text: 'When do you feel most like a "fake" version of yourself?',
+    subtext: 'Reflect on moments of performance vs authenticity.'
   },
   {
-    id: 'q3-5',
+    id: 'q3-L3-4',
     levelId: 'level-3',
     type: 'question',
-    category: 'Calling & Destiny',
-    text: 'What goal or opportunity has God put on your heart that feels exciting yet challenging?',
-    subtext: 'Why do you think he put it there?'
+    category: 'Identity & Self-Awareness',
+    text: 'What part of your personality was shaped more by survival than truth?',
+    subtext: 'Unpack habits formed out of protection.'
   },
   {
-    id: 'q3-6',
+    id: 'q3-L3-5',
     levelId: 'level-3',
     type: 'question',
-    category: 'Praise & Worship',
-    text: 'What is 1 Bible verse or song lyric that has given you strength lately?',
-    subtext: 'Share it with the group.'
+    category: 'Fear & Insecurity',
+    text: 'What are you afraid people would discover about you if they knew everything?',
+    subtext: 'Bring quiet fears into a safe, grace-filled room.'
   },
   {
-    id: 'q3-7',
+    id: 'q3-L3-6',
     levelId: 'level-3',
     type: 'question',
-    category: 'Faith Journey',
-    text: 'When did your faith shift from just something you grew up with to a real, personal relationship with Jesus?',
-    subtext: 'What marked that change for you?'
+    category: 'Fear & Insecurity',
+    text: 'What’s a quiet insecurity that still influences your decisions today?',
+    subtext: 'Recognize how subtle fears steer your choices.'
   },
   {
-    id: 'q3-8',
+    id: 'q3-L3-7',
     levelId: 'level-3',
     type: 'question',
-    category: 'Intercession',
-    text: 'Who is someone in your life that you are praying for right now?',
-    subtext: 'Let the group join you in praying for them.'
+    category: 'Fear & Insecurity',
+    text: 'When was the last time fear—not wisdom—made your choice?',
+    subtext: 'Evaluate recent decisions honestly.'
   },
   {
-    id: 'q3-9',
+    id: 'q3-L3-8',
     levelId: 'level-3',
     type: 'question',
-    category: 'Discernment',
-    text: 'What is a negative thought or distraction you had to filter out recently to stay focused on God\'s truth?',
-    subtext: 'How did you spot the distraction?'
+    category: 'Relationships',
+    text: 'Who do you feel misunderstood by—and why haven’t you fixed it?',
+    subtext: 'Reflect on relational barriers and hesitation.'
   },
   {
-    id: 'q3-10',
+    id: 'q3-L3-9',
     levelId: 'level-3',
     type: 'question',
-    category: 'Spiritual Heritage',
-    text: 'What kind of example or positive impact do you want to leave for the people around you?',
-    subtext: 'Think about your family, friends, and workplace.'
+    category: 'Relationships',
+    text: 'What kind of person do you tend to avoid, and what does that reveal about you?',
+    subtext: 'Explore personal triggers and self-awareness.'
   },
   {
-    id: 'q3-11',
+    id: 'q3-L3-10',
     levelId: 'level-3',
     type: 'question',
-    category: 'Spiritual Gifts',
-    text: 'When was a time you felt led to pray for or encourage a friend, and took that step?',
-    subtext: 'How did it go?'
+    category: 'Relationships',
+    text: 'When have you withheld love even though you knew you should give it?',
+    subtext: 'Acknowledge moments of emotional hesitation.'
   },
   {
-    id: 'q3-12',
+    id: 'q3-L3-11',
     levelId: 'level-3',
     type: 'question',
-    category: 'Encounters',
-    text: 'Describe a moment in church, prayer, or worship where you felt God\'s peace cover you.',
-    subtext: 'What shifted in your heart?'
-  },
-
-  {
-    id: 'q3-14',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Obedience',
-    text: 'What was a step of faith or obedience that was hard to take, but brought good results afterward?',
-    subtext: 'Reflect on the journey.'
+    category: 'Regret & Reflection',
+    text: 'What’s a decision you still think about more than you’d like?',
+    subtext: 'Reflect on lingering thoughts and grace.'
   },
   {
-    id: 'q3-15',
+    id: 'q3-L3-12',
     levelId: 'level-3',
     type: 'question',
-    category: 'Prayer Life',
-    text: 'How has your quiet time with God changed over time?',
-    subtext: 'Is it structured, conversational, quick, or relaxed?'
+    category: 'Regret & Reflection',
+    text: 'What lesson did you learn too late?',
+    subtext: 'Share hard-earned wisdom.'
   },
   {
-    id: 'q3-16',
+    id: 'q3-L3-13',
     levelId: 'level-3',
     type: 'question',
-    category: 'Spiritual Warfare',
-    text: 'What truth from God do you lean on when doubts try to mess with your confidence?',
-    subtext: 'Share what grounds your identity in Christ.'
+    category: 'Regret & Reflection',
+    text: 'If your past self could confront you today, what would they call you out on?',
+    subtext: 'Look at your growth and remaining compromises.'
   },
   {
-    id: 'q3-17',
+    id: 'q3-L3-14',
     levelId: 'level-3',
     type: 'question',
-    category: 'Fast & Consecration',
-    text: 'Have you ever taken a fast from social media, news, or food to focus more on God? What did you discover?',
-    subtext: 'Share what you learned during that time.'
+    category: 'Habits & Patterns',
+    text: 'What cycle do you keep repeating even though you know better?',
+    subtext: 'Identify persistent personal loops.'
   },
   {
-    id: 'q3-18',
+    id: 'q3-L3-15',
     levelId: 'level-3',
     type: 'question',
-    category: 'Church Community',
-    text: 'Why do you think having a local church family is important in a world where many people feel isolated?',
-    subtext: 'Share why connection matters.'
+    category: 'Habits & Patterns',
+    text: 'What do you run to when life gets overwhelming?',
+    subtext: 'Examine your default coping mechanisms.'
+  },
+  {
+    id: 'q3-L3-16',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Habits & Patterns',
+    text: 'What’s one unhealthy pattern you’ve normalized?',
+    subtext: 'Bring awareness to subtle unhealthy routines.'
   },
 
+  // LEVEL 4: SPIRITUAL DEPTH – CONVICTION, SURRENDER, TRANSFORMATION
   {
-    id: 'q3-20',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Holy Spirit',
-    text: 'How do you involve God in your daily choices, like career steps or relationships?',
-    subtext: 'Share how you ask for his direction.'
-  },
-  {
-    id: 'q3-21',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Testimony',
-    text: 'What is a prayer God answered differently than you expected, but it turned out even better?',
-    subtext: 'Reflect on how he works things out.'
-  },
-  {
-    id: 'q3-22',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Generosity',
-    text: 'What has giving or being generous taught you about trusting God to provide?',
-    subtext: 'Share a story of kindness or provision.'
-  },
-  {
-    id: 'q3-23',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Surrender',
-    text: 'What area of your life are you learning to trust God with step by step?',
-    subtext: 'Control, future plans, relationships, or comfort?'
-  },
-  {
-    id: 'q3-24',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Discernment',
-    text: 'How do you know when an opportunity is right for you versus when it is just a distraction?',
-    subtext: 'Share how you make wise choices.'
-  },
-  {
-    id: 'q3-25',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Hope',
-    text: 'What gives you genuine hope for your future and for the Church moving forward?',
-    subtext: 'Speak hope over the group.'
-  },
-  {
-    id: 'q3-26',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Surrender & Response',
-    text: 'If Jesus personally walked into the room right now and asked, "What do you want me to do for you?", how would you respond?',
-    subtext: 'Be completely honest with what your heart needs most.'
-  },
-  {
-    id: 'q3-27',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Calling & Response',
-    text: 'If God explicitly told you, "Leave your comfort zone and take this step," what area of your life would hurt or scare you most to step out of?',
-    subtext: 'Security, career, reputation, or convenience?'
-  },
-  {
-    id: 'q3-28',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Faith & Prompt',
-    text: 'If Jesus looked at your daily routine, what is 1 thing he would gently tell you to stop worrying about?',
-    subtext: 'Consider what anxiety takes up unnecessary space.'
-  },
-
-  // LEVEL 4: HEART TO HEART (25 DEEP & RAW QUESTIONS)
-  {
-    id: 'q4-1',
+    id: 'q4-L4-1',
     levelId: 'level-4',
     type: 'question',
-    category: 'Confessions',
-    text: 'What is 1 silent struggle or worry you carry that you rarely tell anyone about?',
-    subtext: 'Take your time. You are surrounded by kindness and grace.'
+    category: 'Faith vs Reality',
+    text: 'When has your life not matched what you say you believe?',
+    subtext: 'Be transparent about faith gaps.'
   },
   {
-    id: 'q4-2',
+    id: 'q4-L4-2',
     levelId: 'level-4',
     type: 'question',
-    category: 'Surrender',
-    text: 'What is the hardest thing God has ever asked you to lay down or let go of?',
-    subtext: 'A relationship, control, a backup plan, or a personal goal?'
+    category: 'Faith vs Reality',
+    text: 'What truth from God do you struggle to fully accept?',
+    subtext: 'Grace, identity, forgiveness, or sovereign plan?'
   },
   {
-    id: 'q4-3',
+    id: 'q4-L4-3',
     levelId: 'level-4',
     type: 'question',
-    category: 'Wilderness',
-    text: 'What do you do when God feels quiet and you are still waiting for clarity?',
-    subtext: 'How do you keep your heart steady in the quiet?'
+    category: 'Faith vs Reality',
+    text: 'Where do you trust God in words but not in action?',
+    subtext: 'Pinpoint practical friction in trusting Him.'
   },
   {
-    id: 'q4-4',
+    id: 'q4-L4-4',
     levelId: 'level-4',
     type: 'question',
-    category: 'Forgiveness',
-    text: 'Is there a past hurt or betrayal where forgiving felt almost impossible at first?',
-    subtext: 'How did you take the first step toward releasing it?'
+    category: 'Conviction & Obedience',
+    text: 'What is God asking you to do that you’re delaying?',
+    subtext: 'Reflect on obedience vs hesitation.'
   },
   {
-    id: 'q4-5',
+    id: 'q4-L4-5',
     levelId: 'level-4',
     type: 'question',
-    category: 'Breakthrough',
-    text: 'What is 1 moment where you were at your lowest, and God met you right there to rescue you?',
-    subtext: 'Share your turning point story.'
+    category: 'Conviction & Obedience',
+    text: 'When was the last time you clearly felt conviction, and what did you do with it?',
+    subtext: 'Share your response to the Holy Spirit.'
   },
   {
-    id: 'q4-6',
+    id: 'q4-L4-6',
     levelId: 'level-4',
     type: 'question',
-    category: 'Doubts & Faith',
-    text: 'Have you ever had a season of quiet doubt or questions about faith? What helped anchor your heart?',
-    subtext: 'Honest questions are safe here.'
+    category: 'Conviction & Obedience',
+    text: 'What area of your life do you keep negotiating with God about?',
+    subtext: 'Finances, relationships, timing, or habits?'
   },
   {
-    id: 'q4-7',
+    id: 'q4-L4-7',
     levelId: 'level-4',
     type: 'question',
-    category: 'Inner Peace',
-    text: 'What is 1 secret insecurity that sometimes tries to make you feel like you are not enough?',
-    subtext: 'Speak truth over that feeling.'
+    category: 'Surrender & Control',
+    text: 'What are you still trying to control instead of surrendering?',
+    subtext: 'Identify what you need to release.'
   },
   {
-    id: 'q4-8',
+    id: 'q4-L4-8',
     levelId: 'level-4',
     type: 'question',
-    category: 'Surrender',
-    text: 'Where in your life right now are you trying to manage everything yourself instead of trusting God?',
-    subtext: 'Career, finances, family, or future?'
+    category: 'Surrender & Control',
+    text: 'If God said "give this up," what would be hardest to release?',
+    subtext: 'Examine where attachment is strongest.'
   },
   {
-    id: 'q4-9',
+    id: 'q4-L4-9',
     levelId: 'level-4',
     type: 'question',
-    category: 'Comparison',
-    text: 'Have you ever caught yourself comparing your journey or season to someone else? How did you reset?',
-    subtext: 'Overcoming envy with gratitude.'
+    category: 'Surrender & Control',
+    text: 'What outcome are you afraid to trust God with?',
+    subtext: 'Talk about fear of the unknown outcome.'
   },
   {
-    id: 'q4-10',
+    id: 'q4-L4-10',
     levelId: 'level-4',
     type: 'question',
-    category: 'Unanswered Prayer',
-    text: 'What is 1 prayer you prayed for a long time that seemed to get a "no" or "wait"? How did you process it?',
-    subtext: 'Trusting his heart even when plans change.'
+    category: 'Authenticity in Faith',
+    text: 'When do you feel most spiritually "performative"?',
+    subtext: 'Reflect on appearance vs heart state.'
   },
   {
-    id: 'q4-11',
+    id: 'q4-L4-11',
     levelId: 'level-4',
     type: 'question',
-    category: 'Calling & Fear',
-    text: 'What dream or calling makes you feel completely dependent on God\'s strength to pull off?',
-    subtext: 'When a vision is bigger than your own capacity.'
+    category: 'Authenticity in Faith',
+    text: 'What part of your faith feels real, and what part feels forced?',
+    subtext: 'Dissect genuine spiritual fruit vs duty.'
   },
   {
-    id: 'q4-12',
+    id: 'q4-L4-12',
     levelId: 'level-4',
     type: 'question',
-    category: 'Heart Check',
-    text: 'What is 1 habit, mindset, or distraction you know is holding back your personal growth right now?',
-    subtext: 'Honest evaluation of what needs to change.'
+    category: 'Authenticity in Faith',
+    text: 'What do you do spiritually just because it’s expected?',
+    subtext: 'Evaluate religious habits vs heart devotions.'
   },
   {
-    id: 'q4-13',
+    id: 'q4-L4-13',
     levelId: 'level-4',
     type: 'question',
-    category: 'Breakthrough',
-    text: 'What is a breakthrough in your health, mind, or relationships that you know only God could have done?',
-    subtext: 'Give honor to his goodness.'
+    category: 'Calling & Purpose',
+    text: 'What do you think God is calling you to, but you feel unqualified for?',
+    subtext: 'Relying on His strength over personal capability.'
   },
   {
-    id: 'q4-14',
+    id: 'q4-L4-14',
     levelId: 'level-4',
     type: 'question',
-    category: 'Deep Rest',
-    text: 'When was the last time you felt truly rested in your soul, not just physically tired?',
-    subtext: 'What helps you find real, quiet rest?'
+    category: 'Calling & Purpose',
+    text: 'Where do you feel burdened for others but haven’t acted yet?',
+    subtext: 'Turn compassion into faithful action.'
   },
   {
-    id: 'q4-15',
+    id: 'q4-L4-15',
     levelId: 'level-4',
     type: 'question',
-    category: 'Sacrifice',
-    text: 'What choice did you make out of faith that cost you comfort, money, or reputation, but was 100% worth it?',
-    subtext: 'Reflect on that step of courage.'
+    category: 'Calling & Purpose',
+    text: 'If you fully obeyed God right now, what would actually change?',
+    subtext: 'Envision the radical output of total surrender.'
   },
   {
-    id: 'q4-16',
+    id: 'q4-L4-16',
     levelId: 'level-4',
     type: 'question',
-    category: 'Healing',
-    text: 'What is an old emotional wound that you feel God has gently healed over time?',
-    subtext: 'Share the grace you experienced.'
+    category: 'Grace & Gospel Depth',
+    text: 'Where do you still feel like you have to earn God’s approval?',
+    subtext: 'Rest in the finished work of Jesus.'
   },
   {
-    id: 'q4-17',
+    id: 'q4-L4-17',
     levelId: 'level-4',
     type: 'question',
-    category: 'Authenticity',
-    text: 'What mask or expectation do you feel tempted to wear around people, and how are you taking it off?',
-    subtext: 'Being your real, authentic self.'
+    category: 'Mutual Vulnerability',
+    text: 'What is something you have never said out loud to a group before, but feel safe enough to share right now?',
+    subtext: 'Trust the room. This is holy ground.'
   },
   {
-    id: 'q4-18',
+    id: 'q4-L4-18',
     levelId: 'level-4',
     type: 'question',
-    category: 'Fear of Man',
-    text: 'When was a time you were afraid of what people would think, but chose to follow your convictions anyway?',
-    subtext: 'Choosing truth over approval.'
+    category: 'Empathetic Witness',
+    text: 'What is a weight you have been carrying alone that you wish someone would just acknowledge without trying to fix it?',
+    subtext: 'Sometimes being seen is the healing.'
   },
   {
-    id: 'q4-19',
+    id: 'q4-L4-19',
     levelId: 'level-4',
     type: 'question',
-    category: 'Surrender',
-    text: 'If God asked you to change your plans tomorrow, how easily could you let go of your current timeline?',
-    subtext: 'Checking how tightly we hold our plans.'
+    category: 'Shared Burden',
+    text: 'If the person next to you was going through the hardest season of their life, what is 1 thing you would want them to know they could ask you for (no questions asked)?',
+    subtext: 'Declare your loyalty before it is tested.'
   },
   {
-    id: 'q4-20',
+    id: 'q4-L4-20',
     levelId: 'level-4',
     type: 'question',
-    category: 'Miracle Story',
-    text: 'What is a financial or practical miracle you experienced when things looked impossible on paper?',
-    subtext: 'A story of provision.'
+    category: 'Identity Mirror',
+    text: 'Look at the person across from you and tell them: what strength do you see in them that you genuinely wish you had more of?',
+    subtext: 'Speak life. Let them hear what you actually see.'
   },
   {
-    id: 'q4-21',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Love & Grace',
-    text: 'When did you first realize that God\'s love for you is not based on your performance, but on who he is?',
-    subtext: 'A powerful truth about grace.'
-  },
-  {
-    id: 'q4-22',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Second Chances',
-    text: 'What is 1 second chance God gave you that completely restored your hope?',
-    subtext: 'Celebrating fresh starts.'
-  },
-  {
-    id: 'q4-23',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Burden for Others',
-    text: 'Who in your family or friend group keeps you up at night with prayer and care for their future?',
-    subtext: 'Holding space for those you love.'
-  },
-  {
-    id: 'q4-24',
+    id: 'q4-L4-21',
     levelId: 'level-4',
     type: 'question',
     category: 'Deep Trust',
-    text: 'What is 1 promise from God that you are holding onto with everything you have right now?',
-    subtext: 'Declare it over your life.'
+    text: 'What is a conversation you have been avoiding with someone you love, and what is holding you back from having it?',
+    subtext: 'Name the gap between what you feel and what you have said.'
   },
   {
-    id: 'q4-25',
+    id: 'q4-L4-22',
     levelId: 'level-4',
     type: 'question',
-    category: 'Holy Ground',
-    text: 'Looking around this room tonight, what makes you feel that you are standing on Holy Ground together?',
-    subtext: 'A quiet moment of gratitude.'
+    category: 'Honest Need',
+    text: 'What kind of friend do you actually need right now - not the kind you think you should want, but the kind your heart is quietly asking for?',
+    subtext: 'Be specific. Let people know how to reach you.'
   },
   {
-    id: 'q4-26',
+    id: 'q4-L4-23',
     levelId: 'level-4',
     type: 'question',
-    category: 'Generational Freedom',
-    text: 'Is there a negative family pattern, cycle, or generational struggle you are trusting Jesus to break in your life?',
-    subtext: 'Acknowledge the courage it takes to step into freedom and start a new story.'
+    category: 'Emotional Courage',
+    text: 'When was the last time you cried, and what were the tears really about underneath the surface?',
+    subtext: 'Tears reveal what words sometimes cannot.'
   },
   {
-    id: 'q4-27',
+    id: 'q4-L4-24',
     levelId: 'level-4',
     type: 'question',
-    category: 'Inner Renewal',
-    text: 'What is 1 battle in your mind that you are learning to take captive and replace with God\'s peace?',
-    subtext: 'Sharing how you guard your thoughts daily.'
-  },
-
-  {
-    id: 'q4-29',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Identity & Truth',
-    text: 'If Jesus whispered, "You don\'t have to prove anything to anyone anymore," what pressure in your life would drop immediately?',
-    subtext: 'Reflect on freedom from performance.'
+    category: 'Radical Honesty',
+    text: 'If everyone in this room could see the internal dialogue you had with yourself today, what would surprise them most?',
+    subtext: 'Let people into the conversation you usually have alone.'
   },
   {
-    id: 'q4-30',
+    id: 'q4-L4-25',
     levelId: 'level-4',
     type: 'question',
-    category: 'Trust & Faith',
-    text: 'If God asked you to surrender your biggest dream and wait for him, what fear would surface first?',
-    subtext: 'A safe space to discuss fear of the unknown.'
+    category: 'Sacred Belonging',
+    text: 'What is 1 thing about this group or season that has made you feel less alone, even if you have not said it until now?',
+    subtext: 'Gratitude spoken out loud builds permanent bonds.'
+  },
+  {
+    id: 'q4-L4-26',
+    levelId: 'level-4',
+    type: 'question',
+    category: 'Healing Confession',
+    text: 'What is a story from your past that still shapes how you show up in relationships today, and are you ready to let it stop defining you?',
+    subtext: 'Share the origin. Name the pattern. Choose freedom.'
+  },
+  {
+    id: 'q4-L4-27',
+    levelId: 'level-4',
+    type: 'question',
+    category: 'Unspoken Gratitude',
+    text: 'Is there someone in your life who changed your trajectory and never knew it? What would you say to them if they were here right now?',
+    subtext: 'Speak it out. The room can hold it.'
+  },
+  {
+    id: 'q4-L4-28',
+    levelId: 'level-4',
+    type: 'question',
+    category: 'Relational Courage',
+    text: 'What is 1 thing you wish you could hear from someone you love, but have never asked them to say?',
+    subtext: 'Name the words your heart has been waiting for.'
+  },
+  {
+    id: 'q4-L4-29',
+    levelId: 'level-4',
+    type: 'question',
+    category: 'Inner Child',
+    text: 'If you could go back and sit with yourself at your lowest point, what would you say to that version of you?',
+    subtext: 'Speak with the tenderness you needed then.'
+  },
+  {
+    id: 'q4-L4-30',
+    levelId: 'level-4',
+    type: 'question',
+    category: 'Quiet Grief',
+    text: 'What is a loss or ending you never fully grieved because you felt like you had to keep going?',
+    subtext: 'You are allowed to feel it here.'
+  },
+  {
+    id: 'q4-L4-31',
+    levelId: 'level-4',
+    type: 'question',
+    category: 'Inherited Weight',
+    text: 'What burden did you inherit from your family that was never yours to carry in the first place?',
+    subtext: 'Naming it is the first step to putting it down.'
+  },
+  {
+    id: 'q4-L4-32',
+    levelId: 'level-4',
+    type: 'question',
+    category: 'True Belonging',
+    text: 'When was the last time you felt fully accepted without having to explain, perform, or prove anything?',
+    subtext: 'Recall what that safety felt like.'
+  },
+  {
+    id: 'q4-L4-33',
+    levelId: 'level-4',
+    type: 'question',
+    category: 'Protective Walls',
+    text: 'What wall have you built to protect yourself that is now keeping good things out?',
+    subtext: 'Sometimes the thing that saved you is the thing you need to release.'
+  },
+  {
+    id: 'q4-L4-34',
+    levelId: 'level-4',
+    type: 'question',
+    category: 'Honest Prayer',
+    text: 'If you could pray the most brutally honest prayer right now with zero filter, what would you actually say?',
+    subtext: 'He already knows. Say it anyway.'
+  },
+  {
+    id: 'q4-L4-35',
+    levelId: 'level-4',
+    type: 'question',
+    category: 'Legacy & Impact',
+    text: 'If the people closest to you described the impact you have had on their lives, what do you hope they would say, and what are you afraid they would say?',
+    subtext: 'Let the gap between the two teach you something.'
   },
 
   // LEVEL 5: WILDCARDS & GROUP ACTIONS (15 CARDS)
