@@ -563,6 +563,158 @@ export const QUESTIONS = [
     text: 'What’s one unhealthy pattern you’ve normalized?',
     subtext: 'Bring awareness to subtle unhealthy routines.'
   },
+  {
+    id: 'q3-L3-17',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Gentle Vulnerability',
+    text: 'What is something about your current season that you wish people understood without you having to explain it?',
+    subtext: 'Give others a window into what you are actually carrying.'
+  },
+  {
+    id: 'q3-L3-18',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Seen & Known',
+    text: 'When was the last time someone noticed you were not okay before you said anything? What did that feel like?',
+    subtext: 'Being seen before you speak is one of the deepest gifts.'
+  },
+  {
+    id: 'q3-L3-19',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Shared Experience',
+    text: 'What is a struggle you used to think was only yours, and then realized other people go through it too?',
+    subtext: 'Shared experiences dissolve shame.'
+  },
+  {
+    id: 'q3-L3-20',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Encouragement Exchange',
+    text: 'Turn to the person on your right and tell them: what is something you genuinely admire about how they live their life?',
+    subtext: 'Be specific. Vague compliments are forgettable. Specific ones change people.'
+  },
+  {
+    id: 'q3-L3-21',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Unspoken Thanks',
+    text: 'Is there someone in your life who quietly supported you through a hard time, and you never properly thanked them? What would you say?',
+    subtext: 'Let gratitude flow where it has been sitting quietly.'
+  },
+  {
+    id: 'q3-L3-22',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Friendship Depth',
+    text: 'What is 1 thing a close friend did for you that made you think, "this person really knows me"?',
+    subtext: 'Celebrate the people who pay attention.'
+  },
+  {
+    id: 'q3-L3-23',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Emotional Honesty',
+    text: 'What emotion do you find hardest to express to the people closest to you, and why?',
+    subtext: 'Anger, sadness, need, disappointment, or joy?'
+  },
+  {
+    id: 'q3-L3-24',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Trust Building',
+    text: 'What is something small that makes you trust a person quickly, and something small that makes you pull back?',
+    subtext: 'Help the group understand your signals.'
+  },
+  {
+    id: 'q3-L3-25',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Inner World',
+    text: 'What does your mind tend to replay when you are alone at night and everything is quiet?',
+    subtext: 'Share what fills the silence.'
+  },
+  {
+    id: 'q3-L3-26',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Relational Awareness',
+    text: 'How do you typically act when you feel hurt by a friend? Do you confront, withdraw, or pretend nothing happened?',
+    subtext: 'Understanding your pattern helps others love you better.'
+  },
+  {
+    id: 'q3-L3-27',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Hopes & Fears',
+    text: 'What is a hope you have for your future that feels both exciting and terrifying at the same time?',
+    subtext: 'Name both the dream and the fear attached to it.'
+  },
+  {
+    id: 'q3-L3-28',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Belonging',
+    text: 'What makes you feel like you truly belong somewhere versus just being invited?',
+    subtext: 'There is a difference between showing up and being home.'
+  },
+  {
+    id: 'q3-L3-29',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Asking for Help',
+    text: 'What is 1 thing you genuinely need help with right now but have not asked anyone for?',
+    subtext: 'Let people step in. That is what community is for.'
+  },
+  {
+    id: 'q3-L3-30',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Growing Pains',
+    text: 'What is an area of your character that you know is still under construction, and how are you being patient with yourself about it?',
+    subtext: 'Growth is messy. Give yourself grace.'
+  },
+  {
+    id: 'q3-L3-31',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Quiet Strength',
+    text: 'What is something difficult you walked through recently that no one around you even knows about?',
+    subtext: 'You do not always have to carry things silently.'
+  },
+  {
+    id: 'q3-L3-32',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Real Friendship',
+    text: 'If you could describe the perfect friend for this season of your life, what would they be like?',
+    subtext: 'Be honest about what you actually need, not what sounds good.'
+  },
+  {
+    id: 'q3-L3-33',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Family Dynamics',
+    text: 'What is 1 conversation you wish you could have with a family member but do not know how to start?',
+    subtext: 'Sometimes naming it is the beginning of healing.'
+  },
+  {
+    id: 'q3-L3-34',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Self-Compassion',
+    text: 'What is something you are hard on yourself about that you would easily forgive in a friend?',
+    subtext: 'Extend to yourself the kindness you give to others.'
+  },
+  {
+    id: 'q3-L3-35',
+    levelId: 'level-3',
+    type: 'question',
+    category: 'Meaningful Connection',
+    text: 'What is 1 question you wish someone would ask you, that nobody ever does?',
+    subtext: 'Now is your chance. Answer it here.'
+  },
 
   // LEVEL 4: SPIRITUAL DEPTH – CONVICTION, SURRENDER, TRANSFORMATION
   {
