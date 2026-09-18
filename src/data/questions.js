@@ -3,9 +3,9 @@ export const LEVELS = [
     id: 'level-1',
     slug: 'level1',
     number: '01',
-    title: 'First Impressions & Good Vibes',
-    subtitle: 'Icebreakers and getting to know each other',
-    tagline: 'Perfect for breaking the ice and getting to know one another.',
+    title: 'Who Are You?',
+    subtitle: 'Personality, quirks, and everyday life',
+    tagline: 'Get past small talk into how you think, what makes you laugh, and what makes you tick.',
     accentColor: '#E11D48',
     bgColor: 'rgba(225, 29, 72, 0.08)',
     cardBg: '#FFFFFF',
@@ -15,1108 +15,1391 @@ export const LEVELS = [
     id: 'level-2',
     slug: 'level2',
     number: '02',
-    title: 'Real Talk & Life Stories',
-    subtitle: 'Vulnerability, growth, and real life',
-    tagline: 'Go past surface answers into what is actually on your heart.',
-    accentColor: '#0284C7',
-    bgColor: 'rgba(2, 132, 199, 0.08)',
-    cardBg: '#FFFFFF',
-    borderColor: 'rgba(2, 132, 199, 0.25)'
-  },
-  {
-    id: 'level-3',
-    slug: 'level3',
-    number: '03',
-    title: 'Faith & Life with Jesus',
-    subtitle: 'Walking with God, hearing his voice, and growing together',
-    tagline: 'Warm, honest conversation about walking with Jesus every single day.',
+    title: 'What Made You You?',
+    subtitle: 'Origins, childhood, and shaping experiences',
+    tagline: 'Unpack the stories, family patterns, and turning points that shaped who you are today.',
     accentColor: '#D97706',
     bgColor: 'rgba(217, 119, 6, 0.08)',
     cardBg: '#FFFFFF',
     borderColor: 'rgba(217, 119, 6, 0.25)'
   },
   {
+    id: 'level-3',
+    slug: 'level3',
+    number: '03',
+    title: 'How You Connect',
+    subtitle: 'Attachment, trust, conflict, and communication',
+    tagline: 'Discover how you give and receive love, navigate conflict, and build deep trust.',
+    accentColor: '#0284C7',
+    bgColor: 'rgba(2, 132, 199, 0.08)',
+    cardBg: '#FFFFFF',
+    borderColor: 'rgba(2, 132, 199, 0.25)'
+  },
+  {
     id: 'level-4',
     slug: 'level4',
     number: '04',
-    title: 'Heart to Heart',
-    subtitle: 'Raw vulnerability, confessions, and miracle turning points',
-    tagline: 'A safe space for deep transparency, hard surrender, and breakthrough stories.',
+    title: "What's Going On Inside?",
+    subtitle: 'Inner world, coping, fears, and quiet hopes',
+    tagline: 'Understand the person beneath the mask—your internal dialogue, tensions, and gratitude.',
     accentColor: '#8B5CF6',
     bgColor: 'rgba(139, 92, 246, 0.08)',
     cardBg: '#FFFFFF',
     borderColor: 'rgba(139, 92, 246, 0.25)'
   },
   {
-    id: 'wildcards',
+    id: 'level-5',
     slug: 'level5',
     number: '05',
-    title: 'Wildcards & Group Actions',
-    subtitle: 'Group actions, quick prayers, and fun challenges',
-    tagline: 'Interactive moments to encourage, activate, and bless one another.',
+    title: 'Who Are You With Jesus?',
+    subtitle: 'Surrender, calling, grace, and transformation',
+    tagline: 'Where theology meets your real story—discovering how Jesus walks with and changes you.',
+    accentColor: '#C59B27',
+    bgColor: 'rgba(197, 155, 39, 0.08)',
+    cardBg: '#FFFFFF',
+    borderColor: 'rgba(197, 155, 39, 0.25)'
+  },
+  {
+    id: 'final-round',
+    slug: 'reflection',
+    number: 'FINAL',
+    title: 'The Reflection Round',
+    subtitle: 'Mutual understanding, honor, and blessing',
+    tagline: 'Synthesize what you learned about each other, speak blessing, and step out changed.',
     accentColor: '#059669',
     bgColor: 'rgba(5, 150, 105, 0.08)',
     cardBg: '#FFFFFF',
     borderColor: 'rgba(5, 150, 105, 0.25)'
+  },
+  {
+    id: 'wildcards',
+    slug: 'wildcards',
+    number: 'SPICE',
+    title: 'Wildcards & Group Actions',
+    subtitle: 'Spontaneous prompts, quick prayers, and group encouragement',
+    tagline: 'Interactive moments to activate, bless, and encourage one another on the spot.',
+    accentColor: '#10B981',
+    bgColor: 'rgba(16, 185, 129, 0.08)',
+    cardBg: '#FFFFFF',
+    borderColor: 'rgba(16, 185, 129, 0.25)'
   }
 ];
 
 export const QUESTIONS = [
-  // LEVEL 1: FIRST IMPRESSIONS & GOOD VIBES (25 QUESTIONS)
+  // ==========================================
+  // LEVEL 1: WHO ARE YOU? (20 CARDS)
+  // ==========================================
   {
     id: 'q1-1',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Perception',
-    text: 'What was your honest first impression of me when we first met?',
-    subtext: 'Keep it fun and real!'
+    archetype: 'standard',
+    category: 'Passion',
+    text: 'What’s something you could spend three hours doing and not realize three hours passed?',
+    deeper: 'When did this first become a love of yours?',
+    options: null,
+    subtext: 'Share what naturally absorbs your focus and brings you joy.'
   },
   {
     id: 'q1-2',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Observation',
-    text: 'What is a gift or strength you see in me, even if I do not notice it myself?',
-    subtext: 'Think about encouragement, kindness, wisdom, or leadership.'
+    archetype: 'standard',
+    category: 'Social Personality',
+    text: 'When you’re completely comfortable around people, what version of you comes out?',
+    deeper: 'What is an environment where that version of you feels easiest to access?',
+    options: null,
+    subtext: 'Think about who you are when you have zero need to impress anyone.'
+  },
+  {
+    id: 'q1-3',
+    levelId: 'level-1',
+    archetype: 'standard',
+    category: 'Quirks & Competition',
+    text: 'What’s something you get weirdly competitive about, even when it doesn’t matter?',
+    deeper: 'Where did that competitive streak come from?',
+    options: null,
+    subtext: 'Board games, driving, walking speed, trivia, or packing efficiently?'
   },
   {
     id: 'q1-4',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Vibe Check',
-    text: 'What is something people often get wrong about me before they get to know me?',
-    subtext: 'Share what surprised you when you got past the surface.'
+    archetype: 'standard',
+    category: 'Emotional Preferences',
+    text: 'What’s a very small, specific thing that can instantly make a bad day better?',
+    deeper: 'When was the last time that small thing saved your day?',
+    options: null,
+    subtext: 'A specific snack, a song, a quiet drive, fresh sheets, or a voice memo?'
   },
   {
     id: 'q1-5',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Daily Life',
-    text: 'What is 1 habit or routine in my life that you admire?',
-    subtext: 'It can be spiritual, practical, or just how I organize my day.'
+    archetype: 'standard',
+    category: 'Hidden Interests',
+    text: 'What’s something you genuinely love that you almost never get to talk about?',
+    deeper: 'Why does it usually stay in the background?',
+    options: null,
+    subtext: 'A niche interest, obscure genre, childhood fascination, or hobby.'
   },
   {
     id: 'q1-6',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Perception',
-    text: 'On a scale of 1 to 10, how easy is it for me to share what is on my mind?',
-    subtext: 'Explain why you picked that number.'
+    archetype: 'standard',
+    category: 'Private Side',
+    text: 'What’s something your closest friends know about you that a new person would never guess?',
+    deeper: 'Why do you think that part of you stays behind the curtain at first?',
+    options: null,
+    subtext: 'Look for the gap between first impressions and true familiarity.'
   },
   {
     id: 'q1-7',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Connection',
-    text: 'What is 1 small detail or moment that let you know we would be good friends?',
-    subtext: 'Recall a specific moment, conversation, or laugh.'
+    archetype: 'standard',
+    category: 'Private Behavior',
+    text: 'What is something you do completely differently when nobody else is in the room?',
+    deeper: 'What does that reveal about your true unmasked self?',
+    options: null,
+    subtext: 'Unfiltered habits, how you eat, how you think out loud, or how you relax.'
   },
   {
     id: 'q1-8',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Observation',
-    text: 'Do I seem more energized when I am helping others, creating things, resting, or leading?',
-    subtext: 'Where do you see me come alive most?'
+    archetype: 'standard',
+    category: 'Belonging',
+    text: 'What’s a very specific sensory detail, routine, or feeling that makes you feel at home somewhere?',
+    deeper: 'Where is a place outside of your house where you felt that instantly?',
+    options: null,
+    subtext: 'A smell, a temperature, the sound of laughter, shoes off, or music playing.'
   },
   {
     id: 'q1-9',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Fun',
-    text: 'If our group were stuck on an island, what role would I naturally take?',
-    subtext: 'Group leader, fire builder, chef, or peacekeeper?'
+    archetype: 'standard',
+    category: 'Desires & Social Needs',
+    text: 'What’s something you quietly wish people would invite you to do more often?',
+    deeper: 'What holds you back from initiating it yourself?',
+    options: null,
+    subtext: 'Spontaneous coffee, late-night talks, museum trips, outdoor adventures, or doing nothing together.'
   },
   {
     id: 'q1-10',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Vibe Check',
-    text: 'What topic could I talk about for 30 minutes straight without stopping?',
-    subtext: 'Name my ultimate topic of interest.'
+    archetype: 'standard',
+    category: 'Relational Identity',
+    text: 'What kind of person do you naturally become around your oldest, closest friends?',
+    deeper: 'Who in your life brings out the truest version of you?',
+    options: null,
+    subtext: 'The storyteller, the listener, the goofy one, or the practical anchor?'
+  },
+  {
+    id: 'q1-11',
+    levelId: 'level-1',
+    archetype: 'diagnostic',
+    category: 'Social Dynamics',
+    text: 'In a group gathering, which mode do you naturally default into?',
+    deeper: null,
+    options: [
+      'The Observant Listener',
+      'The Conversation Spark',
+      'The Quiet Anchor',
+      'The Host Making Sure Everyone is OK'
+    ],
+    subtext: 'Point to your natural reflex in the room.'
   },
   {
     id: 'q1-12',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Observation',
-    text: 'If you had to pick 1 emotion I bring into a room, what is it?',
-    subtext: 'Joy, calm, focus, excitement, or peace?'
+    archetype: 'standard',
+    category: 'Harmless Opinions',
+    text: 'What is something you have surprisingly passionate opinions about that ultimately doesn’t matter at all?',
+    deeper: 'What hill are you irrationally prepared to die on?',
+    options: null,
+    subtext: 'Food debates, movie sequels, pronunciation, or household rules.'
   },
   {
     id: 'q1-13',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Everyday Habits',
-    text: 'What drink or snack do you immediately think of when you see me?',
-    subtext: 'Match me with my go-to order.'
+    archetype: 'standard',
+    category: 'Daily Rhythm',
+    text: 'What part of your daily routine do you fiercely protect from interruption?',
+    deeper: 'What happens to your mood if that rhythm gets thrown off?',
+    options: null,
+    subtext: 'Morning silence, post-work decompression, workout, or reading before sleep.'
   },
   {
     id: 'q1-14',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Group Dynamic',
-    text: 'In group hangouts, am I usually the planner, the hype person, or the one making sure everyone feels included?',
-    subtext: 'Describe my role when we hang out.'
+    archetype: 'diagnostic',
+    category: 'Energy Drain',
+    text: 'What drains your social battery faster than anything else?',
+    deeper: null,
+    options: [
+      'Surface Small Talk',
+      'Chaos & Loud Noise',
+      'Constant Decision Making',
+      'Unresolved Conflict in the Room',
+      'Feeling Pressure to Perform'
+    ],
+    subtext: 'Identify what wears you out first.'
+  },
+  {
+    id: 'q1-15',
+    levelId: 'level-1',
+    archetype: 'standard',
+    category: 'First Impressions',
+    text: 'What is something people often misinterpret about you before they actually get to know you?',
+    deeper: 'Can you recall a time someone admitted their initial impression was totally wrong?',
+    options: null,
+    subtext: 'Intimidating, shy, aloof, overly serious, or overly bubbly?'
   },
   {
     id: 'q1-16',
     levelId: 'level-1',
-    type: 'question',
-    category: 'First Impressions',
-    text: 'When did our friendship move from small talk to real friendship?',
-    subtext: 'Describe that specific moment.'
+    archetype: 'standard',
+    category: 'Humor & Joy',
+    text: 'What kind of humor makes you laugh so hard your stomach hurts?',
+    deeper: 'Who is the person who can make you laugh faster than anyone else?',
+    options: null,
+    subtext: 'Dry sarcasm, physical comedy, awkward situations, or unhinged memes?'
+  },
+  {
+    id: 'q1-17',
+    levelId: 'level-1',
+    archetype: 'standard',
+    category: 'Spontaneity vs Order',
+    text: 'How do you react when a whole weekend’s plans get cancelled at the last minute?',
+    deeper: 'Is it secret relief or restless frustration?',
+    options: null,
+    subtext: 'Do you rejoice in the open schedule or scramble to fill it?'
   },
   {
     id: 'q1-18',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Observation',
-    text: 'How do I react when plans change at the last minute?',
-    subtext: 'Do I adapt quickly, or do I need a minute to reset?'
+    archetype: 'standard',
+    category: 'Natural Gravitation',
+    text: 'If you were left completely alone in a giant bookstore or record shop for two hours, which section would we find you in?',
+    deeper: 'What draws you toward that world?',
+    options: null,
+    subtext: 'History, theology, design, sci-fi, biography, cooking, or psychology?'
   },
   {
     id: 'q1-19',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Perception',
-    text: 'What compliment have I given you that actually stuck with you?',
-    subtext: 'Share why it meant something to you.'
+    archetype: 'diagnostic',
+    category: 'Group Decisions',
+    text: 'When a group cannot decide where to eat or what to do next, what is your instinct?',
+    deeper: null,
+    options: [
+      'Step in and make the call',
+      'Go with whatever others want',
+      'Secretly feel impatient',
+      'Quietly slip away'
+    ],
+    subtext: 'Your instinct when inertia strikes.'
   },
   {
     id: 'q1-20',
     levelId: 'level-1',
-    type: 'question',
-    category: 'Everyday Life',
-    text: 'What time of day do you think I am most active and productive?',
-    subtext: 'Early morning riser or late night thinker?'
-  },
-  {
-    id: 'q1-21',
-    levelId: 'level-1',
-    type: 'question',
-    category: 'Fun',
-    text: 'If my life were a movie, what style or genre would the soundtrack be?',
-    subtext: 'Indie film, feel-good comedy, or high-energy adventure?'
-  },
-  {
-    id: 'q1-22',
-    levelId: 'level-1',
-    type: 'question',
-    category: 'Observation',
-    text: 'What do I do when I am secretly stressed or tired, even if I try to hide it?',
-    subtext: 'Point out my telltale sign.'
-  },
-  {
-    id: 'q1-23',
-    levelId: 'level-1',
-    type: 'question',
-    category: 'Perception',
-    text: 'What is 1 word you would use to describe the feeling you get when hanging out with me?',
-    subtext: 'Peaceful, inspiring, fun, joyful, or grounded?'
-  },
-  {
-    id: 'q1-24',
-    levelId: 'level-1',
-    type: 'question',
-    category: 'Connection',
-    text: 'What is a memory of us together that always makes you smile?',
-    subtext: 'Take a moment to share it.'
-  },
-  {
-    id: 'q1-25',
-    levelId: 'level-1',
-    type: 'question',
-    category: 'Perception',
-    text: 'If you had to pick 1 Bible story or person that reminds you of me, who comes to mind?',
-    subtext: 'David, Barnabas, Mary, Peter, or Nehemiah?'
+    archetype: 'story',
+    category: 'Signature Story',
+    text: 'Tell us about a funny, quirky, or absurd moment in your life that perfectly summarizes your personality.',
+    deeper: null,
+    options: null,
+    subtext: 'A story that captures your essence in under two minutes.'
   },
 
-  // LEVEL 2: REAL TALK & LIFE STORIES (25 QUESTIONS)
+  // ==========================================
+  // LEVEL 2: WHAT MADE YOU YOU? (20 CARDS)
+  // ==========================================
   {
     id: 'q2-1',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Current Season',
-    text: 'What is a challenge you are navigating right now that you have not talked about much?',
-    subtext: 'Take your time. You are in a safe, caring space.'
+    archetype: 'standard',
+    category: 'Childhood Continuity',
+    text: 'What were you like as an eight-year-old that you are still like today?',
+    deeper: 'Can you recall a specific childhood moment when that trait was on full display?',
+    options: null,
+    subtext: 'Look for the continuous thread connecting your past to your present.'
   },
   {
     id: 'q2-2',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Growth',
-    text: 'What is an area of your life where God has been helping you grow recently?',
-    subtext: 'Think about patience, trust, boundaries, or letting go of pride.'
+    archetype: 'standard',
+    category: 'Childhood Desires',
+    text: 'What did you love doing as a child that you eventually stopped doing as you grew up?',
+    deeper: 'Why did you let it go, and do you ever miss it?',
+    options: null,
+    subtext: 'Drawing, climbing, writing stories, playing instruments, or daydreaming?'
   },
   {
     id: 'q2-3',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Vulnerability',
-    text: 'What is a prayer you prayed recently that felt really honest and deep?',
-    subtext: 'What changed in your heart after praying it?'
+    archetype: 'standard',
+    category: 'Family Role',
+    text: 'What was something you were known for in your family or household growing up?',
+    deeper: 'Did that role feel like a gift or an expectation you had to carry?',
+    options: null,
+    subtext: 'The peacemaker, the responsible one, the achiever, the baby, or the rebel?'
   },
   {
     id: 'q2-4',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Relationships',
-    text: 'What does good community look like to you in this season?',
-    subtext: 'Share how friends can support you best right now.'
+    archetype: 'standard',
+    category: 'Childhood Needs',
+    text: 'What did you need a lot of as a child that you didn’t always get or know how to ask for?',
+    deeper: 'How does that unmet need still echo in your life today?',
+    options: null,
+    subtext: 'Validation, emotional safety, freedom, guidance, or tenderness.'
   },
   {
     id: 'q2-5',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Heart Check',
-    text: 'What is 1 thing you are holding onto right now that you know you need to let go of?',
-    subtext: 'It could be an expectation, a past hurt, or a timeline.'
+    archetype: 'story',
+    category: 'Defining Memory',
+    text: 'Tell us about one childhood or teenage memory that explains a lot about who you are today.',
+    deeper: null,
+    options: null,
+    subtext: 'An origin scene that acts as a key to your personality.'
   },
   {
     id: 'q2-6',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Reflection',
-    text: 'Looking back at who you were 2 years ago, what lesson would you share with that version of yourself?',
-    subtext: 'Give yourself some grace and encouragement.'
+    archetype: 'standard',
+    category: 'Generational Lessons: Success',
+    text: 'What did your family or upbringing teach you about what it means to be "successful"?',
+    deeper: 'How much of that definition do you still agree with today?',
+    options: null,
+    subtext: 'Hard work, reputation, stability, financial security, or serving others?'
   },
   {
     id: 'q2-7',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Work & Rest',
-    text: 'How are you balancing work and rest right now?',
-    subtext: 'Are you resting well, or running on empty?'
+    archetype: 'standard',
+    category: 'Generational Lessons: Failure',
+    text: 'What did your family teach you about failure—was it met with anger, silence, humor, or problem-solving?',
+    deeper: 'Can you remember a specific mistake you made and how the adults around you reacted?',
+    options: null,
+    subtext: 'Notice how your response to failure was conditioned early on.'
   },
   {
     id: 'q2-8',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Friendship',
-    text: 'When you feel overwhelmed or down, how can a friend support you best?',
-    subtext: 'Quiet space, encouraging words, practical help, or a coffee run?'
+    archetype: 'standard',
+    category: 'Generational Lessons: Love',
+    text: 'How was love expressed in your home growing up: words, affection, acts of service, providing, or high expectations?',
+    deeper: 'What felt easiest to feel, and what felt rare?',
+    options: null,
+    subtext: 'What did love look and feel like in your living room?'
   },
   {
     id: 'q2-9',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Gratitude',
-    text: 'What is a good thing that happened this past month that you forgot to give thanks for?',
-    subtext: 'Take a moment to celebrate it.'
+    archetype: 'standard',
+    category: 'Generational Lessons: Conflict',
+    text: 'What did you learn about conflict from watching the adults around you?',
+    deeper: 'Did you learn to yell, appease, withdraw, or resolve?',
+    options: null,
+    subtext: 'Was conflict an explosive storm, a cold silence, or a calm conversation?'
   },
   {
     id: 'q2-10',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Honesty',
-    text: 'What is 1 dream in your heart that you sometimes worry might not happen?',
-    subtext: 'Share it openly with the group.'
+    archetype: 'contrast',
+    category: 'Generational Legacy',
+    text: 'What is one value or habit from your upbringing you are determined to carry forward, and what is one you want to leave behind?',
+    deeper: null,
+    options: null,
+    subtext: 'Honor what was good while intentionally breaking unhelpful cycles.'
   },
   {
     id: 'q2-11',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Vulnerability',
-    text: 'What is a healthy boundary you set recently to protect your peace?',
-    subtext: 'Was it hard to stick to?'
+    archetype: 'standard',
+    category: 'Relational Guardrails',
+    text: 'What happened in your life that taught you to become careful about trusting people?',
+    deeper: 'What was the turning point where you realized not everyone is safe?',
+    options: null,
+    subtext: 'Share the experience that put up your emotional guardrails.'
   },
   {
     id: 'q2-12',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Mental Health',
-    text: 'When worry or stress creeps in, what is your first response?',
-    subtext: 'Do you pull back, talk to a friend, or go straight to prayer?'
+    archetype: 'story',
+    category: 'Growing Up',
+    text: 'Tell us about a specific moment when you suddenly realized, "I am not a kid anymore."',
+    deeper: null,
+    options: null,
+    subtext: 'The moment adulthood, responsibility, or mortality became real.'
   },
   {
     id: 'q2-13',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Growth',
-    text: 'What mistake from your past turned into a valuable lesson that made you stronger?',
-    subtext: 'Reflect on how you grew from it.'
+    archetype: 'story',
+    category: 'The Unseen Believer',
+    text: 'Tell us about a time someone believed in you before you believed in yourself.',
+    deeper: null,
+    options: null,
+    subtext: 'A mentor, friend, teacher, or relative who saw potential in you first.'
   },
   {
     id: 'q2-14',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Relationships',
-    text: 'Have you ever felt lonely even in a crowd or at church? What helped you get through it?',
-    subtext: 'Share what made a difference.'
+    archetype: 'story',
+    category: 'Out of Place',
+    text: 'Tell us about a time you felt completely out of place, and how you handled being on the outside.',
+    deeper: null,
+    options: null,
+    subtext: 'A school, church, city, or gathering where you felt like a total stranger.'
   },
   {
     id: 'q2-15',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Heart Check',
-    text: 'Is there a situation where you know you need to forgive someone, but it still feels hard?',
-    subtext: 'Share as much or as little as you feel comfortable.'
+    archetype: 'story',
+    category: 'Friendship Turning Point',
+    text: 'Tell us about a friendship that changed the trajectory of your life.',
+    deeper: null,
+    options: null,
+    subtext: 'A friend who opened a new door, introduced you to faith, or changed your worldview.'
   },
   {
     id: 'q2-16',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Career & Calling',
-    text: 'Are you feeling energized by your daily work or studies right now, or are you looking for a change?',
-    subtext: 'An honest check-in on your daily routine.'
+    archetype: 'standard',
+    category: 'School Years',
+    text: 'What kind of kid were you in school—the rule follower, the invisible one, the perfectionist, the class clown, or the rebel?',
+    deeper: 'What were you trying to protect or prove back then?',
+    options: null,
+    subtext: 'How did your younger self navigate social belonging?'
   },
   {
     id: 'q2-17',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Family & Roots',
-    text: 'What habit or mindset from your family background are you choosing to change in your own life?',
-    subtext: 'Recognize the courage it takes to change.'
+    archetype: 'story',
+    category: 'Fork in the Road',
+    text: 'Tell us about a decision that felt small at the time, but completely changed the direction of your life.',
+    deeper: null,
+    options: null,
+    subtext: 'An unplanned conversation, showing up to an event, or taking a chance.'
   },
   {
     id: 'q2-18',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Honesty',
-    text: 'What is 1 request you feel hesitant to ask God for because you are worried about the answer?',
-    subtext: 'Talk through that feeling.'
+    archetype: 'standard',
+    category: 'Outside Influences',
+    text: 'Besides your parents, who was an adult who had a profound, lasting impact on the person you became?',
+    deeper: 'What did they say or model that stayed with you?',
+    options: null,
+    subtext: 'A coach, pastor, youth leader, aunt, uncle, or neighbor.'
   },
   {
     id: 'q2-19',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Friendship',
-    text: 'What makes you feel truly appreciated and valued by a friend?',
-    subtext: 'Help us understand what matters most to you.'
+    archetype: 'standard',
+    category: 'Perspective Shift',
+    text: 'What is something you were confident you were right about when you were younger that you now see completely differently?',
+    deeper: 'What experience humbled or expanded your view?',
+    options: null,
+    subtext: 'Reflect on how experience softened your certainties.'
   },
   {
     id: 'q2-20',
     levelId: 'level-2',
-    type: 'question',
-    category: 'Current Season',
-    text: 'If you had to give this current chapter of your life a book title, what would it be?',
-    subtext: 'A New Start, The Learning Curve, Building Momentum, or Quiet Rest?'
-  },
-  {
-    id: 'q2-21',
-    levelId: 'level-2',
-    type: 'question',
-    category: 'Growth',
-    text: 'What piece of advice from a leader, parent, or friend saved you from a big mistake?',
-    subtext: 'Share the wisdom you received.'
-  },
-  {
-    id: 'q2-22',
-    levelId: 'level-2',
-    type: 'question',
-    category: 'Vulnerability',
-    text: 'What is an insecurity you thought you moved past, but felt again recently?',
-    subtext: 'How are you reminding yourself of what is true?'
-  },
-  {
-    id: 'q2-23',
-    levelId: 'level-2',
-    type: 'question',
-    category: 'Gratitude',
-    text: 'Who in your life or community has quietly encouraged or helped you recently?',
-    subtext: 'Give them a quick shoutout right now.'
-  },
-  {
-    id: 'q2-24',
-    levelId: 'level-2',
-    type: 'question',
-    category: 'Reflection',
-    text: 'What is 1 simple habit you started recently that gave you more peace of mind?',
-    subtext: 'Share a practical tip.'
-  },
-  {
-    id: 'q2-25',
-    levelId: 'level-2',
-    type: 'question',
-    category: 'Real Talk',
-    text: 'If you could improve 1 thing about how our generation builds friendships, what would it be?',
-    subtext: 'Share your honest thoughts.'
+    archetype: 'standard',
+    category: 'Overcoming',
+    text: 'What was a season in your earlier life that felt overwhelming while you were in it, but gave you strength you still rely on today?',
+    deeper: 'What did you learn about your own resilience?',
+    options: null,
+    subtext: 'A battle you survived that now serves as proof of your endurance.'
   },
 
-  // LEVEL 3: DEEP PERSONAL – IDENTITY, TENSION, REALITY
+  // ==========================================
+  // LEVEL 3: HOW YOU CONNECT (20 CARDS)
+  // ==========================================
   {
-    id: 'q3-L3-1',
+    id: 'q3-1',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Identity & Self-Awareness',
-    text: 'What version of yourself do people see that isn’t fully true?',
-    subtext: 'Focus on honesty and real-life specifics.'
+    archetype: 'standard',
+    category: 'Feeling Cared For',
+    text: 'What makes you feel deeply cared for by a friend?',
+    deeper: 'Can you share a specific moment when someone did that for you?',
+    options: null,
+    subtext: 'Remembering details, proactive checking in, food, prayers, or quiet company.'
   },
   {
-    id: 'q3-L3-2',
+    id: 'q3-2',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Identity & Self-Awareness',
-    text: 'What’s something you pretend doesn’t affect you—but actually does?',
-    subtext: 'Examine hidden tensions and quiet impact.'
+    archetype: 'standard',
+    category: 'Relational Safety',
+    text: 'What makes you feel safe enough to be completely honest with someone without filtering yourself?',
+    deeper: 'What is an immediate sign that tells you a room or person is not safe?',
+    options: null,
+    subtext: 'Zero judgment, confidentiality, steady presence, or reciprocated vulnerability.'
   },
   {
-    id: 'q3-L3-3',
+    id: 'q3-3',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Identity & Self-Awareness',
-    text: 'When do you feel most like a "fake" version of yourself?',
-    subtext: 'Reflect on moments of performance vs authenticity.'
+    archetype: 'standard',
+    category: 'Withdrawal Instincts',
+    text: 'What makes you instinctively pull back or go cold toward someone you care about?',
+    deeper: 'What does your withdrawal look like—silence, busyness, humor, or physical distance?',
+    options: null,
+    subtext: 'Knowing your withdrawal cues helps others recognize when you are hurting.'
   },
   {
-    id: 'q3-L3-4',
+    id: 'q3-4',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Identity & Self-Awareness',
-    text: 'What part of your personality was shaped more by survival than truth?',
-    subtext: 'Unpack habits formed out of protection.'
+    archetype: 'diagnostic',
+    category: 'Conflict Style',
+    text: 'When someone hurts your feelings or frustrates you, what is your immediate first reflex?',
+    deeper: null,
+    options: [
+      'Explain myself / Confront immediately',
+      'Withdraw into quiet distance',
+      'Rush to fix it & smooth things over',
+      'Pretend I’m fine / Brush it off',
+      'Vent to a third party'
+    ],
+    subtext: 'Your default instinct before you have time to think.'
   },
   {
-    id: 'q3-L3-5',
+    id: 'q3-5',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Fear & Insecurity',
-    text: 'What are you afraid people would discover about you if they knew everything?',
-    subtext: 'Bring quiet fears into a safe, grace-filled room.'
+    archetype: 'diagnostic',
+    category: 'Vulnerability Gate',
+    text: 'Which sentence is genuinely hardest for you to say out loud to someone close to you?',
+    deeper: null,
+    options: [
+      '“I need help.”',
+      '“I was wrong / I’m sorry.”',
+      '“I don’t know.”',
+      '“You hurt my feelings.”'
+    ],
+    subtext: 'Identify which phrase triggers the greatest internal friction.'
   },
   {
-    id: 'q3-L3-6',
+    id: 'q3-6',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Fear & Insecurity',
-    text: 'What’s a quiet insecurity that still influences your decisions today?',
-    subtext: 'Recognize how subtle fears steer your choices.'
+    archetype: 'standard',
+    category: 'Unspoken Needs',
+    text: 'What is something you genuinely need from people close to you, but almost never ask for?',
+    deeper: 'What makes it so difficult to ask for directly?',
+    options: null,
+    subtext: 'Affirmation, practical support, uninterrupted time, touch, or honest feedback.'
   },
   {
-    id: 'q3-L3-7',
+    id: 'q3-7',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Fear & Insecurity',
-    text: 'When was the last time fear—not wisdom—made your choice?',
-    subtext: 'Evaluate recent decisions honestly.'
+    archetype: 'contrast',
+    category: 'Giving vs Receiving',
+    text: 'What is something you are very generous at giving to other people, but feel terribly awkward receiving yourself?',
+    deeper: null,
+    options: null,
+    subtext: 'Gifts, compliments, hospitality, grace, or financial help?'
   },
   {
-    id: 'q3-L3-8',
+    id: 'q3-8',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Relationships',
-    text: 'Who do you feel misunderstood by—and why haven’t you fixed it?',
-    subtext: 'Reflect on relational barriers and hesitation.'
+    archetype: 'standard',
+    category: 'Being Misunderstood',
+    text: 'Who in your life do you feel most misunderstood by, and what has made it hard to clear the air?',
+    deeper: 'What is the assumption they make about you that hurts the most?',
+    options: null,
+    subtext: 'Examine where the communication bridge broke down.'
   },
   {
-    id: 'q3-L3-9',
+    id: 'q3-9',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Relationships',
-    text: 'What kind of person do you tend to avoid, and what does that reveal about you?',
-    subtext: 'Explore personal triggers and self-awareness.'
+    archetype: 'standard',
+    category: 'Boundaries',
+    text: 'What is a healthy boundary you’ve had to learn the hard way in relationships?',
+    deeper: 'What did it cost you before you learned to set it?',
+    options: null,
+    subtext: 'Saying no, protecting your peace, or stopping people-pleasing.'
   },
   {
-    id: 'q3-L3-10',
+    id: 'q3-10',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Relationships',
-    text: 'When have you withheld love even though you knew you should give it?',
-    subtext: 'Acknowledge moments of emotional hesitation.'
+    archetype: 'standard',
+    category: 'Space vs Closeness',
+    text: 'When you are going through a difficult time, do you want people to check in constantly, or do you need space first?',
+    deeper: 'What is the ideal way a friend can step into your world when you’re overwhelmed?',
+    options: null,
+    subtext: 'Help your friends know how to love you when the storm hits.'
   },
   {
-    id: 'q3-L3-11',
+    id: 'q3-11',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Regret & Reflection',
-    text: 'What’s a decision you still think about more than you’d like?',
-    subtext: 'Reflect on lingering thoughts and grace.'
+    archetype: 'standard',
+    category: 'Loneliness in Community',
+    text: 'Have you ever felt completely lonely even while surrounded by friends or at church? What was going on underneath?',
+    deeper: 'What would have helped bridge the gap?',
+    options: null,
+    subtext: 'Physical proximity is not the same as being known.'
   },
   {
-    id: 'q3-L3-12',
+    id: 'q3-12',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Regret & Reflection',
-    text: 'What lesson did you learn too late?',
-    subtext: 'Share hard-earned wisdom.'
+    archetype: 'standard',
+    category: 'Trust Signals',
+    text: 'What is one small green flag that makes you trust a person quickly, and one red flag that makes you shut down?',
+    deeper: 'Where did you learn to watch for that red flag?',
+    options: null,
+    subtext: 'How they speak about others, how they listen, or consistency.'
   },
   {
-    id: 'q3-L3-13',
+    id: 'q3-13',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Regret & Reflection',
-    text: 'If your past self could confront you today, what would they call you out on?',
-    subtext: 'Look at your growth and remaining compromises.'
+    archetype: 'story',
+    category: 'Grace Encounter',
+    text: 'Tell us about a time someone gave you unexpected grace when you fully expected frustration, anger, or judgment.',
+    deeper: null,
+    options: null,
+    subtext: 'A moment where mercy completely disarmed your defenses.'
   },
   {
-    id: 'q3-L3-14',
+    id: 'q3-14',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Habits & Patterns',
-    text: 'What cycle do you keep repeating even though you know better?',
-    subtext: 'Identify persistent personal loops.'
+    archetype: 'standard',
+    category: 'Showing Love',
+    text: 'How do you naturally show love to others when you really care about them?',
+    deeper: 'Do the people in your life usually recognize it as love, or does it get missed?',
+    options: null,
+    subtext: 'Practical errands, sending songs, showing up silently, or verbal praise.'
   },
   {
-    id: 'q3-L3-15',
+    id: 'q3-15',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Habits & Patterns',
-    text: 'What do you run to when life gets overwhelming?',
-    subtext: 'Examine your default coping mechanisms.'
+    archetype: 'story',
+    category: 'Seen Without Speaking',
+    text: 'Tell us about a time someone noticed you were struggling before you said a single word. What did that feel like?',
+    deeper: null,
+    options: null,
+    subtext: 'Being noticed in silence is one of the deepest gifts.'
   },
   {
-    id: 'q3-L3-16',
+    id: 'q3-16',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Habits & Patterns',
-    text: 'What’s one unhealthy pattern you’ve normalized?',
-    subtext: 'Bring awareness to subtle unhealthy routines.'
+    archetype: 'standard',
+    category: 'Repair & Apology',
+    text: 'What does a meaningful apology sound like to you—and what kind of apology feels completely empty?',
+    deeper: 'Can you recall an apology that genuinely healed a relationship for you?',
+    options: null,
+    subtext: 'Taking ownership vs offering excuses.'
   },
   {
-    id: 'q3-L3-17',
+    id: 'q3-17',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Gentle Vulnerability',
-    text: 'What is something about your current season that you wish people understood without you having to explain it?',
-    subtext: 'Give others a window into what you are actually carrying.'
+    archetype: 'standard',
+    category: 'Rejection Sensitivity',
+    text: 'When a friend takes days to respond or plans fall through, what narrative does your mind instinctively jump to?',
+    deeper: 'How do you bring yourself back to what is actually true?',
+    options: null,
+    subtext: '“They don’t care,” “I did something wrong,” or “They are just busy”?'
   },
   {
-    id: 'q3-L3-18',
+    id: 'q3-18',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Seen & Known',
-    text: 'When was the last time someone noticed you were not okay before you said anything? What did that feel like?',
-    subtext: 'Being seen before you speak is one of the deepest gifts.'
+    archetype: 'standard',
+    category: 'Ideal Friendship',
+    text: 'If you could describe the exact kind of friendship your heart is longing for in this season, what does it look like?',
+    deeper: 'What step can you take to invite that in?',
+    options: null,
+    subtext: 'Accountability, laughter, spiritual depth, or effortless hangouts.'
   },
   {
-    id: 'q3-L3-19',
+    id: 'q3-19',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Shared Experience',
-    text: 'What is a struggle you used to think was only yours, and then realized other people go through it too?',
-    subtext: 'Shared experiences dissolve shame.'
+    archetype: 'contrast',
+    category: 'Patience',
+    text: 'Where are you noticeably more patient and forgiving with other people than you are with yourself?',
+    deeper: null,
+    options: null,
+    subtext: 'Give yourself the same grace you hand out so freely to others.'
   },
   {
-    id: 'q3-L3-20',
+    id: 'q3-20',
     levelId: 'level-3',
-    type: 'question',
-    category: 'Encouragement Exchange',
-    text: 'Turn to the person on your right and tell them: what is something you genuinely admire about how they live their life?',
-    subtext: 'Be specific. Vague compliments are forgettable. Specific ones change people.'
-  },
-  {
-    id: 'q3-L3-21',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Unspoken Thanks',
-    text: 'Is there someone in your life who quietly supported you through a hard time, and you never properly thanked them? What would you say?',
-    subtext: 'Let gratitude flow where it has been sitting quietly.'
-  },
-  {
-    id: 'q3-L3-22',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Friendship Depth',
-    text: 'What is 1 thing a close friend did for you that made you think, "this person really knows me"?',
-    subtext: 'Celebrate the people who pay attention.'
-  },
-  {
-    id: 'q3-L3-23',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Emotional Honesty',
-    text: 'What emotion do you find hardest to express to the people closest to you, and why?',
-    subtext: 'Anger, sadness, need, disappointment, or joy?'
-  },
-  {
-    id: 'q3-L3-24',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Trust Building',
-    text: 'What is something small that makes you trust a person quickly, and something small that makes you pull back?',
-    subtext: 'Help the group understand your signals.'
-  },
-  {
-    id: 'q3-L3-25',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Inner World',
-    text: 'What does your mind tend to replay when you are alone at night and everything is quiet?',
-    subtext: 'Share what fills the silence.'
-  },
-  {
-    id: 'q3-L3-26',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Relational Awareness',
-    text: 'How do you typically act when you feel hurt by a friend? Do you confront, withdraw, or pretend nothing happened?',
-    subtext: 'Understanding your pattern helps others love you better.'
-  },
-  {
-    id: 'q3-L3-27',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Hopes & Fears',
-    text: 'What is a hope you have for your future that feels both exciting and terrifying at the same time?',
-    subtext: 'Name both the dream and the fear attached to it.'
-  },
-  {
-    id: 'q3-L3-28',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Belonging',
-    text: 'What makes you feel like you truly belong somewhere versus just being invited?',
-    subtext: 'There is a difference between showing up and being home.'
-  },
-  {
-    id: 'q3-L3-29',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Asking for Help',
-    text: 'What is 1 thing you genuinely need help with right now but have not asked anyone for?',
-    subtext: 'Let people step in. That is what community is for.'
-  },
-  {
-    id: 'q3-L3-30',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Growing Pains',
-    text: 'What is an area of your character that you know is still under construction, and how are you being patient with yourself about it?',
-    subtext: 'Growth is messy. Give yourself grace.'
-  },
-  {
-    id: 'q3-L3-31',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Quiet Strength',
-    text: 'What is something difficult you walked through recently that no one around you even knows about?',
-    subtext: 'You do not always have to carry things silently.'
-  },
-  {
-    id: 'q3-L3-32',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Real Friendship',
-    text: 'If you could describe the perfect friend for this season of your life, what would they be like?',
-    subtext: 'Be honest about what you actually need, not what sounds good.'
-  },
-  {
-    id: 'q3-L3-33',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Family Dynamics',
-    text: 'What is 1 conversation you wish you could have with a family member but do not know how to start?',
-    subtext: 'Sometimes naming it is the beginning of healing.'
-  },
-  {
-    id: 'q3-L3-34',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Self-Compassion',
-    text: 'What is something you are hard on yourself about that you would easily forgive in a friend?',
-    subtext: 'Extend to yourself the kindness you give to others.'
-  },
-  {
-    id: 'q3-L3-35',
-    levelId: 'level-3',
-    type: 'question',
-    category: 'Meaningful Connection',
-    text: 'What is 1 question you wish someone would ask you, that nobody ever does?',
-    subtext: 'Now is your chance. Answer it here.'
+    archetype: 'standard',
+    category: 'Encouragement That Landed',
+    text: 'What is a compliment or word of encouragement someone gave you years ago that you still remember word for word?',
+    deeper: 'Why did that particular sentence stick to your bones?',
+    options: null,
+    subtext: 'Specific words spoken in love hold permanent power.'
   },
 
-  // LEVEL 4: SPIRITUAL DEPTH – CONVICTION, SURRENDER, TRANSFORMATION
+  // ==========================================
+  // LEVEL 4: WHAT'S GOING ON INSIDE? (20 CARDS)
+  // ==========================================
   {
-    id: 'q4-L4-1',
+    id: 'q4-1',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Faith vs Reality',
-    text: 'When has your life not matched what you say you believe?',
-    subtext: 'Be transparent about faith gaps.'
+    archetype: 'standard',
+    category: 'The Shield',
+    text: 'What is something you pretend doesn’t affect you—but secretly gets to you every time?',
+    deeper: 'Why do you feel the need to act unbothered by it?',
+    options: null,
+    subtext: 'Examine the comments or situations that pierce right through your armor.'
   },
   {
-    id: 'q4-L4-2',
+    id: 'q4-2',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Faith vs Reality',
-    text: 'What truth from God do you struggle to fully accept?',
-    subtext: 'Grace, identity, forgiveness, or sovereign plan?'
+    archetype: 'standard',
+    category: 'Survival Mechanisms',
+    text: 'What part of your personality was shaped more by survival or self-protection than truth?',
+    deeper: 'When did that protective wall start going up?',
+    options: null,
+    subtext: 'Humor, perfectionism, hyper-independence, aggression, or being agreeable?'
   },
   {
-    id: 'q4-L4-3',
+    id: 'q4-3',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Faith vs Reality',
-    text: 'Where do you trust God in words but not in action?',
-    subtext: 'Pinpoint practical friction in trusting Him.'
+    archetype: 'standard',
+    category: 'Midnight Thoughts',
+    text: 'What does your mind tend to replay when you are alone in bed at night and everything is quiet?',
+    deeper: 'Is it past conversations, worries about tomorrow, or old regrets?',
+    options: null,
+    subtext: 'What fills the silence when all external distractions fade?'
   },
   {
-    id: 'q4-L4-4',
+    id: 'q4-4',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Conviction & Obedience',
-    text: 'What is God asking you to do that you’re delaying?',
-    subtext: 'Reflect on obedience vs hesitation.'
+    archetype: 'diagnostic',
+    category: 'Under Stress',
+    text: 'When life feels completely overwhelming and stress peaks, what do you become more of?',
+    deeper: null,
+    options: [
+      'Hyper-Quiet & Withdrawn',
+      'Controlling & Micromanaging',
+      'Sarcastic / Overly Funny',
+      'Frantic & Ultra-Busy',
+      'Irritated & Short-Tempered'
+    ],
+    subtext: 'Your signature stress disguise.'
   },
   {
-    id: 'q4-L4-5',
+    id: 'q4-5',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Conviction & Obedience',
-    text: 'When was the last time you clearly felt conviction, and what did you do with it?',
-    subtext: 'Share your response to the Holy Spirit.'
+    archetype: 'diagnostic',
+    category: 'Failure Reflex',
+    text: 'When you fail at something you cared deeply about, what is the very first sentence your mind says to you?',
+    deeper: null,
+    options: [
+      '“You should have known better.”',
+      '“You’re not cut out for this.”',
+      '“How do I fix this right now?”',
+      '“It wasn’t my fault anyway.”'
+    ],
+    subtext: 'Notice the immediate voice of your internal critic.'
   },
   {
-    id: 'q4-L4-6',
+    id: 'q4-6',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Conviction & Obedience',
-    text: 'What area of your life do you keep negotiating with God about?',
-    subtext: 'Finances, relationships, timing, or habits?'
+    archetype: 'diagnostic',
+    category: 'Uncertainty Reflex',
+    text: 'When life feels completely unpredictable, what is the thing you instinctively try to control?',
+    deeper: null,
+    options: [
+      'My schedule & routine',
+      'Other people’s perceptions',
+      'Food / Exercise / Body',
+      'Money & Spending',
+      'Nothing (I freeze / check out)'
+    ],
+    subtext: 'Where you reach for the illusion of control.'
   },
   {
-    id: 'q4-L4-7',
+    id: 'q4-7',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Surrender & Control',
-    text: 'What are you still trying to control instead of surrendering?',
-    subtext: 'Identify what you need to release.'
+    archetype: 'contrast',
+    category: 'Public vs Private Self',
+    text: 'What do you want other people to think about you, and what do you actually think about yourself in private?',
+    deeper: null,
+    options: null,
+    subtext: 'Name the difference between your public impression and private reality.'
   },
   {
-    id: 'q4-L4-8',
+    id: 'q4-8',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Surrender & Control',
-    text: 'If God said "give this up," what would be hardest to release?',
-    subtext: 'Examine where attachment is strongest.'
+    archetype: 'contrast',
+    category: 'Stated Values vs Reality',
+    text: 'What is something you sincerely say you value, but your schedule and habits prove you struggle to make room for?',
+    deeper: null,
+    options: null,
+    subtext: 'Rest, relationships, prayer, health, or creative pursuits?'
   },
   {
-    id: 'q4-L4-9',
+    id: 'q4-9',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Surrender & Control',
-    text: 'What outcome are you afraid to trust God with?',
-    subtext: 'Talk about fear of the unknown outcome.'
+    archetype: 'contrast',
+    category: 'Confidence vs Fragility',
+    text: 'What is an area of life where you feel rock-solid confident, and what is an area where you feel surprisingly fragile?',
+    deeper: null,
+    options: null,
+    subtext: 'We are all strong in places and tender in others.'
   },
   {
-    id: 'q4-L4-10',
+    id: 'q4-10',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Authenticity in Faith',
-    text: 'When do you feel most spiritually "performative"?',
-    subtext: 'Reflect on appearance vs heart state.'
+    archetype: 'values',
+    category: 'What You Won’t Become',
+    text: 'What is something you would never want to become, even if becoming it guaranteed you wealth and success?',
+    deeper: 'Where did that conviction come from?',
+    options: null,
+    subtext: 'Arrogant, distant, disconnected from family, cynical, or compromising.'
   },
   {
-    id: 'q4-L4-11',
+    id: 'q4-11',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Authenticity in Faith',
-    text: 'What part of your faith feels real, and what part feels forced?',
-    subtext: 'Dissect genuine spiritual fruit vs duty.'
+    archetype: 'values',
+    category: 'Earning Respect',
+    text: 'What kind of person earns your respect almost immediately—and what makes you lose respect for someone just as fast?',
+    deeper: 'What core boundary does that touch in you?',
+    options: null,
+    subtext: 'Humility, courage, loyalty, follow-through, or kindness to the vulnerable.'
   },
   {
-    id: 'q4-L4-12',
+    id: 'q4-12',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Authenticity in Faith',
-    text: 'What do you do spiritually just because it’s expected?',
-    subtext: 'Evaluate religious habits vs heart devotions.'
+    archetype: 'values',
+    category: 'Beneath the Resume',
+    text: 'If someone described you accurately to a room of strangers but left out all your titles, work, and achievements, what would you want them to mention?',
+    deeper: null,
+    options: null,
+    subtext: 'Who are you when the accolades are stripped away?'
   },
   {
-    id: 'q4-L4-13',
+    id: 'q4-13',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Calling & Purpose',
-    text: 'What do you think God is calling you to, but you feel unqualified for?',
-    subtext: 'Relying on His strength over personal capability.'
+    archetype: 'standard',
+    category: 'Comparison Trap',
+    text: 'When you find yourself falling into comparison or envy, who or what is usually triggering it?',
+    deeper: 'What fear does that comparison tap into?',
+    options: null,
+    subtext: 'Career timing, relationship status, appearance, or spiritual depth?'
   },
   {
-    id: 'q4-L4-14',
+    id: 'q4-14',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Calling & Purpose',
-    text: 'Where do you feel burdened for others but haven’t acted yet?',
-    subtext: 'Turn compassion into faithful action.'
+    archetype: 'standard',
+    category: 'Hidden Gratitude',
+    text: 'What is something you are deeply grateful happened to you now, even though you hated every second of it when it occurred?',
+    deeper: 'How did that season reshape your character?',
+    options: null,
+    subtext: 'Pain that produced endurance and unexpected wisdom.'
   },
   {
-    id: 'q4-L4-15',
+    id: 'q4-15',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Calling & Purpose',
-    text: 'If you fully obeyed God right now, what would actually change?',
-    subtext: 'Envision the radical output of total surrender.'
+    archetype: 'standard',
+    category: 'Present Wonder',
+    text: 'What is something about your life right now that you genuinely don’t want to take for granted?',
+    deeper: 'Take a moment to speak that gratitude out loud.',
+    options: null,
+    subtext: 'A friend, your health, peace in your home, or a simple routine.'
   },
   {
-    id: 'q4-L4-16',
+    id: 'q4-16',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Grace & Gospel Depth',
-    text: 'Where do you still feel like you have to earn God’s approval?',
-    subtext: 'Rest in the finished work of Jesus.'
+    archetype: 'values',
+    category: 'Protecting What Matters',
+    text: 'What is one conviction or relationship you would protect even if it cost you your reputation or convenience?',
+    deeper: null,
+    options: null,
+    subtext: 'What is non-negotiable on your holy ground?'
   },
   {
-    id: 'q4-L4-17',
+    id: 'q4-17',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Mutual Vulnerability',
-    text: 'What is something you have never said out loud to a group before, but feel safe enough to share right now?',
-    subtext: 'Trust the room. This is holy ground.'
+    archetype: 'standard',
+    category: 'The Unspoken Wish',
+    text: 'What is something you wish the people in your life understood about what you carry every day, without you having to explain it?',
+    deeper: 'What stops you from letting them carry it with you?',
+    options: null,
+    subtext: 'Bring the quiet weight into a room that can hold it.'
   },
   {
-    id: 'q4-L4-18',
+    id: 'q4-18',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Empathetic Witness',
-    text: 'What is a weight you have been carrying alone that you wish someone would just acknowledge without trying to fix it?',
-    subtext: 'Sometimes being seen is the healing.'
+    archetype: 'standard',
+    category: 'Lingering Regret',
+    text: 'What’s a past decision or conversation that you still think about more than you’d like to admit?',
+    deeper: 'What grace or closure has been hard to accept there?',
+    options: null,
+    subtext: 'Where do you need to finally release yourself from the hook?'
   },
   {
-    id: 'q4-L4-19',
+    id: 'q4-19',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Shared Burden',
-    text: 'If the person next to you was going through the hardest season of their life, what is 1 thing you would want them to know they could ask you for (no questions asked)?',
-    subtext: 'Declare your loyalty before it is tested.'
+    archetype: 'standard',
+    category: 'Looking Forward',
+    text: 'What would make you look back at your life thirty years from now and think, “I am so glad I lived this way”?',
+    deeper: 'What choice today keeps you on that path?',
+    options: null,
+    subtext: 'Focus on legacy, love, faithfulness, and character.'
   },
   {
-    id: 'q4-L4-20',
+    id: 'q4-20',
     levelId: 'level-4',
-    type: 'question',
-    category: 'Identity Mirror',
-    text: 'Look at the person across from you and tell them: what strength do you see in them that you genuinely wish you had more of?',
-    subtext: 'Speak life. Let them hear what you actually see.'
-  },
-  {
-    id: 'q4-L4-21',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Deep Trust',
-    text: 'What is a conversation you have been avoiding with someone you love, and what is holding you back from having it?',
-    subtext: 'Name the gap between what you feel and what you have said.'
-  },
-  {
-    id: 'q4-L4-22',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Honest Need',
-    text: 'What kind of friend do you actually need right now - not the kind you think you should want, but the kind your heart is quietly asking for?',
-    subtext: 'Be specific. Let people know how to reach you.'
-  },
-  {
-    id: 'q4-L4-23',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Emotional Courage',
-    text: 'When was the last time you cried, and what were the tears really about underneath the surface?',
-    subtext: 'Tears reveal what words sometimes cannot.'
-  },
-  {
-    id: 'q4-L4-24',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Radical Honesty',
-    text: 'If everyone in this room could see the internal dialogue you had with yourself today, what would surprise them most?',
-    subtext: 'Let people into the conversation you usually have alone.'
-  },
-  {
-    id: 'q4-L4-25',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Sacred Belonging',
-    text: 'What is 1 thing about this group or season that has made you feel less alone, even if you have not said it until now?',
-    subtext: 'Gratitude spoken out loud builds permanent bonds.'
-  },
-  {
-    id: 'q4-L4-26',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Healing Confession',
-    text: 'What is a story from your past that still shapes how you show up in relationships today, and are you ready to let it stop defining you?',
-    subtext: 'Share the origin. Name the pattern. Choose freedom.'
-  },
-  {
-    id: 'q4-L4-27',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Unspoken Gratitude',
-    text: 'Is there someone in your life who changed your trajectory and never knew it? What would you say to them if they were here right now?',
-    subtext: 'Speak it out. The room can hold it.'
-  },
-  {
-    id: 'q4-L4-28',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Relational Courage',
-    text: 'What is 1 thing you wish you could hear from someone you love, but have never asked them to say?',
-    subtext: 'Name the words your heart has been waiting for.'
-  },
-  {
-    id: 'q4-L4-29',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Inner Child',
-    text: 'If you could go back and sit with yourself at your lowest point, what would you say to that version of you?',
-    subtext: 'Speak with the tenderness you needed then.'
-  },
-  {
-    id: 'q4-L4-30',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Quiet Grief',
-    text: 'What is a loss or ending you never fully grieved because you felt like you had to keep going?',
-    subtext: 'You are allowed to feel it here.'
-  },
-  {
-    id: 'q4-L4-31',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Inherited Weight',
-    text: 'What burden did you inherit from your family that was never yours to carry in the first place?',
-    subtext: 'Naming it is the first step to putting it down.'
-  },
-  {
-    id: 'q4-L4-32',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'True Belonging',
-    text: 'When was the last time you felt fully accepted without having to explain, perform, or prove anything?',
-    subtext: 'Recall what that safety felt like.'
-  },
-  {
-    id: 'q4-L4-33',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Protective Walls',
-    text: 'What wall have you built to protect yourself that is now keeping good things out?',
-    subtext: 'Sometimes the thing that saved you is the thing you need to release.'
-  },
-  {
-    id: 'q4-L4-34',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Honest Prayer',
-    text: 'What is something that you are praying for God to remove it from you?',
-    subtext: 'He already knows. Say it anyway.'
-  },
-  {
-    id: 'q4-L4-35',
-    levelId: 'level-4',
-    type: 'question',
-    category: 'Legacy & Impact',
-    text: 'If the people closest to you described the impact you have had on their lives, what do you hope they would say, and what are you afraid they would say?',
-    subtext: 'Let the gap between the two teach you something.'
+    archetype: 'story',
+    category: 'The Mask Comes Off',
+    text: 'Tell us about a time you tried so hard to keep it all together until you finally broke down and let someone see you were falling apart.',
+    deeper: null,
+    options: null,
+    subtext: 'The relief that comes when the facade collapses.'
   },
 
-  // LEVEL 5: WILDCARDS & GROUP ACTIONS (15 CARDS)
+  // ==========================================
+  // LEVEL 5: WHO ARE YOU WITH JESUS? (20 CARDS)
+  // ==========================================
+  {
+    id: 'q5-1',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'Character of God',
+    text: 'What part of God’s character is easiest for you to believe, and which part is hardest to believe when life gets difficult?',
+    deeper: 'Compassion, sovereignty, justice, presence, or provision?',
+    options: null,
+    subtext: 'Tether your theology to your actual lived experience.'
+  },
+  {
+    id: 'q5-2',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'Trust & Release',
+    text: 'What is hardest for you to trust God with, and why do you think that particular thing is so difficult to release?',
+    deeper: 'What outcome are you terrified will happen if you let go?',
+    options: null,
+    subtext: 'Your timeline, your children, finances, relationships, or your calling?'
+  },
+  {
+    id: 'q5-3',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'The Divine Gaze',
+    text: 'When you picture God looking directly at you right now, what do you honestly imagine He sees and feels?',
+    deeper: 'Is it disappointment, patience, affection, or expectation?',
+    options: null,
+    subtext: 'Unpack the lens through which you view your Heavenly Father.'
+  },
+  {
+    id: 'q5-4',
+    levelId: 'level-5',
+    archetype: 'contrast',
+    category: 'Forgiveness vs Enjoyment',
+    text: 'Which is easier for your heart to believe: that God forgives you, or that God actually enjoys being with you?',
+    deeper: null,
+    options: null,
+    subtext: 'There is a vast difference between being pardoned and being cherished.'
+  },
+  {
+    id: 'q5-5',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'Spiritual Silence',
+    text: 'What do you tend to do when God feels silent or distant in your life?',
+    deeper: 'Do you press in, get cynical, work harder, or drift into numbness?',
+    options: null,
+    subtext: 'Notice how you navigate the quiet seasons of faith.'
+  },
+  {
+    id: 'q5-6',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'Head vs Heart',
+    text: 'What is something about God you understand completely in your head, but still struggle to live like it’s true?',
+    deeper: 'What would your daily life look like if your heart caught up with your mind?',
+    options: null,
+    subtext: 'Name the gap between doctrine and your daily emotional reality.'
+  },
+  {
+    id: 'q5-7',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'Faith Evolution',
+    text: 'What did you believe about God when you were younger that has matured or changed as you’ve experienced real life?',
+    deeper: 'What shattered the earlier, simpler view?',
+    options: null,
+    subtext: 'How has your faith outgrown tidy formulas?'
+  },
+  {
+    id: 'q5-8',
+    levelId: 'level-5',
+    archetype: 'story',
+    category: 'Unexpected Kindness',
+    text: 'Tell us about a time you experienced God’s kindness in a way you completely didn’t expect or deserve.',
+    deeper: null,
+    options: null,
+    subtext: 'A moment where His tenderness caught you off guard.'
+  },
+  {
+    id: 'q5-9',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'Gospel in the Flesh',
+    text: 'What part of following Jesus has most visibly changed the way you treat other people?',
+    deeper: 'Who is someone you love differently today because of Jesus?',
+    options: null,
+    subtext: 'Where has Christ’s love altered your patience, forgiveness, or generosity?'
+  },
+  {
+    id: 'q5-10',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'The Resisted Lesson',
+    text: 'What is something you keep asking God to change or take away, and what do you think He might be teaching you through it instead?',
+    deeper: 'Why is that lesson so hard to embrace?',
+    options: null,
+    subtext: 'Surrendering your agenda for His refining work.'
+  },
+  {
+    id: 'q5-11',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'Performance vs Grace',
+    text: 'Where in your life or faith do you still quietly feel like you have to earn God’s approval?',
+    deeper: 'What happens to your peace when you slip up?',
+    options: null,
+    subtext: 'Resting in the finished work of Jesus over your spiritual checklist.'
+  },
+  {
+    id: 'q5-12',
+    levelId: 'level-5',
+    archetype: 'story',
+    category: 'The Surprising God',
+    text: 'Tell us about a time God surprised you—either by an unexpected answer, a shut door, or a sudden peace.',
+    deeper: null,
+    options: null,
+    subtext: 'When His ways were demonstrably higher than your plans.'
+  },
+  {
+    id: 'q5-13',
+    levelId: 'level-5',
+    archetype: 'values',
+    category: 'The Overlooked Christ',
+    text: 'What do you think Jesus cares deeply about in a person that the modern church or culture often overlooks?',
+    deeper: 'How does that challenge your own priorities?',
+    options: null,
+    subtext: 'Quiet humility, mercy to outcasts, sincerity, or secret obedience.'
+  },
+  {
+    id: 'q5-14',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'Calling & Reluctance',
+    text: 'What is something you sense God nudging you toward, but you feel unqualified or hesitant to step into?',
+    deeper: 'What is the fear saying to you?',
+    options: null,
+    subtext: 'Stepping out of the boat when the waves look high.'
+  },
+  {
+    id: 'q5-15',
+    levelId: 'level-5',
+    archetype: 'story',
+    category: 'Prayer in the Dark',
+    text: 'Tell us about a time a season of prayer changed your heart, even when your external circumstances didn’t change at all.',
+    deeper: null,
+    options: null,
+    subtext: 'When the miracle was peace inside instead of a changed situation outside.'
+  },
+  {
+    id: 'q5-16',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'What He Is Forming',
+    text: 'Knowing your quirks, wounds, and hopes, what kind of person do you sense Jesus is patiently forming you into?',
+    deeper: 'What old layer of yourself is having to die in the process?',
+    options: null,
+    subtext: 'Trusting the slow, intentional work of the Master Potter.'
+  },
+  {
+    id: 'q5-17',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'Doubts & Anchors',
+    text: 'What kind of situation makes you wrestle most with your faith, and what is the anchor that always pulls you back?',
+    deeper: 'What truth keeps you from walking away?',
+    options: null,
+    subtext: 'Honest questions and the foundational truth you cannot deny.'
+  },
+  {
+    id: 'q5-18',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'Generous Grace',
+    text: 'When has your understanding of the cross gone from an abstract doctrine to something that broke your heart wide open?',
+    deeper: 'What was happening in your life when that clicked?',
+    options: null,
+    subtext: 'Moving from knowledge to personal salvation and tears of gratitude.'
+  },
+  {
+    id: 'q5-19',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'Spiritual Hunger',
+    text: 'If Jesus sat across the table from you tonight and asked, “What do you want Me to do for you?”, what would you say?',
+    deeper: 'Speak the raw, unedited answer.',
+    options: null,
+    subtext: 'Name the deepest longing sitting in your chest right now.'
+  },
+  {
+    id: 'q5-20',
+    levelId: 'level-5',
+    archetype: 'standard',
+    category: 'Holy Ground',
+    text: 'Where in your life right now are you standing on holy ground—in a place that requires reverence, courage, and faith?',
+    deeper: 'Who are you inviting into that space with you?',
+    options: null,
+    subtext: 'Take off your sandals; God is present in this exact moment.'
+  },
+
+  // ==========================================
+  // FINAL ROUND: THE REFLECTION ROUND (8 CARDS)
+  // ==========================================
+  {
+    id: 'qf-1',
+    levelId: 'final-round',
+    archetype: 'reflection',
+    category: 'Being Understood',
+    text: 'After everything you’ve shared tonight, what is something about who you are that you hope this group understands better now?',
+    deeper: null,
+    options: null,
+    subtext: 'Name the fruit of being truly seen.'
+  },
+  {
+    id: 'qf-2',
+    levelId: 'final-round',
+    archetype: 'reflection',
+    category: 'The Unexpected Gift',
+    text: 'What is something you learned about someone sitting here tonight that you didn’t expect, and why did it move you?',
+    deeper: null,
+    options: null,
+    subtext: 'Celebrate the stories that touched your heart.'
+  },
+  {
+    id: 'qf-3',
+    levelId: 'final-round',
+    archetype: 'reflection',
+    category: 'How to Be Loved',
+    text: 'Knowing where you are in life right now, what is one practical way this community can genuinely love and support you in the coming weeks?',
+    deeper: null,
+    options: null,
+    subtext: 'Prayer, checking in, dinner, quiet support, or fun distractions.'
+  },
+  {
+    id: 'qf-4',
+    levelId: 'final-round',
+    archetype: 'reflection',
+    category: 'What to Remember',
+    text: 'If this group only remembered one thing you said tonight, what would you want it to be?',
+    deeper: null,
+    options: null,
+    subtext: 'Your single anchor takeaway.'
+  },
+  {
+    id: 'qf-5',
+    levelId: 'final-round',
+    archetype: 'reflection',
+    category: 'The Ongoing Story',
+    text: 'Knowing what you know about yourself now—your history, your struggles, and your hopes—what do you hope Jesus is still writing into your story?',
+    deeper: null,
+    options: null,
+    subtext: 'He who began a good work in you will carry it on to completion.'
+  },
+  {
+    id: 'qf-6',
+    levelId: 'final-round',
+    archetype: 'reflection',
+    category: 'Relief & Truth',
+    text: 'What was the most surprising moment of relief or freedom you felt during this game tonight?',
+    deeper: null,
+    options: null,
+    subtext: 'The weight that lifted when honesty entered the room.'
+  },
+  {
+    id: 'qf-7',
+    levelId: 'final-round',
+    archetype: 'reflection',
+    category: 'Seeing Christ in Others',
+    text: 'Look at the person to your right: What is one reflection of Jesus’ character that you saw clearly in them as they shared tonight?',
+    deeper: null,
+    options: null,
+    subtext: 'His tenderness, wisdom, joy, steadfastness, or courage.'
+  },
+  {
+    id: 'qf-8',
+    levelId: 'final-round',
+    archetype: 'reflection',
+    category: 'A Blessing Spoken',
+    text: 'Before we close, speak a one-sentence blessing, prayer, or declaration of hope over the person across from you.',
+    deeper: null,
+    options: null,
+    subtext: 'Speak life into their next season.'
+  },
+
+  // ==========================================
+  // WILDCARDS & GROUP ACTIONS (15 CARDS)
+  // ==========================================
   {
     id: 'qw-1',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
     category: 'Prayer Action',
     text: 'Group Action: Choose 1 person in the circle and take 60 seconds to pray a quick prayer of encouragement and strength for them.',
+    deeper: null,
+    options: null,
     subtext: 'Everyone can extend a hand or speak a word of encouragement.'
   },
   {
     id: 'qw-2',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
     category: 'Encouragement',
     text: 'Group Action: Everyone in the circle says 1 genuine sentence of appreciation for the person on their left.',
+    deeper: null,
+    options: null,
     subtext: 'No skipping! Keep it simple and sweet.'
   },
   {
     id: 'qw-3',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
     category: 'Testimony Blitz',
     text: '60-Second Challenge: Share 1 good thing God did for you this week in under 60 seconds.',
+    deeper: null,
+    options: null,
     subtext: 'Keep it brief, joyful, and encouraging.'
   },
   {
     id: 'qw-4',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
     category: 'Encouragement',
     text: 'Group Action: Think of 1 encouraging thought or Bible verse for the person sitting across from you, and share it with them.',
+    deeper: null,
+    options: null,
     subtext: 'Keep it warm and uplifting.'
   },
   {
     id: 'qw-5',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
     category: 'Honest Talk',
     text: 'Wildcard: Share 1 thing you are trusting God for, and 1 worry you are ready to let go of tonight.',
+    deeper: null,
+    options: null,
     subtext: 'Being honest brings freedom.'
   },
   {
     id: 'qw-6',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
     category: 'Community Connection',
     text: 'Group Action: Pair up with someone and swap 1 prayer request. Check in with each other before Wednesday.',
+    deeper: null,
+    options: null,
     subtext: 'Building genuine friendship that lasts.'
   },
   {
     id: 'qw-7',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
-    category: 'Honor Round',
-    text: 'Group Action: Share 1 great quality you notice in the person who drew this card.',
-    subtext: 'Encourage one another.'
+    category: 'Honor Call',
+    text: 'Group Action: Call out 1 person in the group and share 1 specific way they have quietly served or blessed you.',
+    deeper: null,
+    options: null,
+    subtext: 'Notice the quiet contributors.'
   },
   {
     id: 'qw-8',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
-    category: 'Worship Moment',
-    text: 'Worship Moment: Sing or read 2 lines of your favorite worship song right now.',
-    subtext: 'Do not be shy! Bring joy into the room.'
+    category: 'Worship Reset',
+    text: '60-Second Challenge: Put on 1 favorite worship song for 1 minute and let everyone sit in quiet gratitude.',
+    deeper: null,
+    options: null,
+    subtext: 'Reset your heart and refocus on Jesus.'
   },
   {
     id: 'qw-9',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
-    category: 'Hot Seat',
-    text: 'Hot Seat: The person on your right gets to ask you 1 respectful question, and you get to answer honestly.',
-    subtext: 'Friendly and safe space.'
+    category: 'Vulnerability Swap',
+    text: 'Group Action: Turn to the person on your right and share 1 area where you feel completely in over your head right now.',
+    deeper: null,
+    options: null,
+    subtext: 'You are not meant to carry it alone.'
   },
   {
     id: 'qw-10',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
-    category: 'Scripture Challenge',
-    text: 'Scripture Challenge: Everyone in the circle gets 30 seconds to share their favorite Bible verse out loud.',
-    subtext: 'Help each other out if needed!'
+    category: 'Speaking Life',
+    text: 'Group Action: Everyone writes down 1 word that describes the future they see for the person on their right, and hands it to them.',
+    deeper: null,
+    options: null,
+    subtext: 'A written word of faith to carry home.'
   },
   {
     id: 'qw-11',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
-    category: 'Prayer for Peace',
-    text: 'Group Action: Is anyone in the group feeling tired, sick, or stressed out right now? Take a moment to pray for them.',
-    subtext: 'Believing for peace and healing together.'
+    category: 'Laughter Release',
+    text: 'Wildcard: Share the most embarrassing thing that happened to you in the past 6 months.',
+    deeper: null,
+    options: null,
+    subtext: 'Holy Ground is a room filled with joy and grace.'
   },
   {
     id: 'qw-12',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
-    category: 'Gratitude Blitz',
-    text: '30-Second Challenge: Name 5 things you are grateful for in under 30 seconds.',
-    subtext: 'Ready, set, go!'
+    category: 'Heart Confession',
+    text: 'Wildcard: If you had to name 1 thing you are currently avoiding dealing with, what is it?',
+    deeper: null,
+    options: null,
+    subtext: 'Freedom begins when avoidance ends.'
   },
   {
     id: 'qw-13',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
-    category: 'Kindness Action',
-    text: 'Kindness Challenge: Send a quick text right now to a friend outside this room letting them know you are thinking of them.',
-    subtext: 'Spread encouragement today.'
+    category: 'Circle Blessing',
+    text: 'Group Action: Go around the circle and each person says 1 thing they love about being part of this community.',
+    deeper: null,
+    options: null,
+    subtext: 'Recognize the gift of being together.'
   },
   {
     id: 'qw-14',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
-    category: 'Prayer Swap',
-    text: 'Prayer Swap: Pair up in 2s and pray for 45 seconds for your partner\'s family, work, and week ahead.',
-    subtext: 'Supporting each other in prayer.'
+    category: 'Generosity Moment',
+    text: 'Group Action: Think of 1 small practical blessing you can do for someone in this room this week, and commit to it.',
+    deeper: null,
+    options: null,
+    subtext: 'Coffee, a meal, a note, or a ride.'
   },
   {
     id: 'qw-15',
     levelId: 'wildcards',
+    archetype: 'wildcard',
     type: 'wildcard',
-    category: 'Group Blessing',
-    text: 'Group Blessing: Speak a warm sentence of blessing over the youngest person in the room.',
-    subtext: 'Encouraging the next generation.'
+    category: 'Final Benediction',
+    text: 'Group Action: Everyone stands up, joins hands, and 1 person prays a blessing over the whole group before you leave.',
+    deeper: null,
+    options: null,
+    subtext: 'Leave this place carrying the presence of God.'
   }
 ];

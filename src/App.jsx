@@ -48,9 +48,13 @@ function getDeckAndLevelFromPath(pathname) {
     'level-3': 'level-3',
     'level4': 'level-4',
     'level-4': 'level-4',
-    'level5': 'wildcards',
-    'level-5': 'wildcards',
-    'wildcards': 'wildcards'
+    'level5': 'level-5',
+    'level-5': 'level-5',
+    'reflection': 'final-round',
+    'final': 'final-round',
+    'final-round': 'final-round',
+    'wildcards': 'wildcards',
+    'spice': 'wildcards'
   };
 
   const targetLevelId = levelMap[cleanPath];
@@ -134,8 +138,15 @@ export default function App() {
 
   const handleNextLevel = () => {
     if (!currentLevel) return;
+    if (currentLevel.id === 'level-5') {
+      const finalRound = LEVELS.find((l) => l.id === 'final-round');
+      if (finalRound) {
+        handleSelectLevel(finalRound);
+        return;
+      }
+    }
     const currentIdx = LEVELS.findIndex((l) => l.id === currentLevel.id);
-    if (currentIdx !== -1 && currentIdx < LEVELS.length - 1) {
+    if (currentIdx !== -1 && currentIdx < LEVELS.length - 1 && currentLevel.id !== 'final-round' && currentLevel.id !== 'wildcards') {
       const nextLevel = LEVELS[currentIdx + 1];
       handleSelectLevel(nextLevel);
     } else {

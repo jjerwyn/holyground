@@ -25,6 +25,8 @@ export default function CardDeck({
   const [isFlipped, setIsFlipped] = useState(autoReveal);
   const [shouldAnimateFlip, setShouldAnimateFlip] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [showDeeper, setShowDeeper] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const topRef = useRef(null);
   const underRef = useRef(null);
@@ -38,8 +40,31 @@ export default function CardDeck({
   const activeCard = deck[currentIndex];
   const nextCardTarget = deck[Math.min(currentIndex + 1, deck.length - 1)];
 
-  const isWildcard = activeCard?.type === 'wildcard';
-  const cardAccent = isWildcard ? '#059669' : (currentLevel?.accentColor || '#c59b27');
+  const isWildcard = activeCard?.type === 'wildcard' || activeCard?.archetype === 'wildcard';
+  const cardAccent = isWildcard ? '#10B981' : (currentLevel?.accentColor || '#c59b27');
+
+  const getArchetypeBadge = (card) => {
+    if (!card) return null;
+    if (card.archetype === 'story') {
+      return { label: 'TELL ME THE STORY', icon: '📖', color: '#D97706', bg: 'rgba(217, 119, 6, 0.1)' };
+    }
+    if (card.archetype === 'diagnostic') {
+      return { label: 'HOW DO YOU OPERATE?', icon: '🧭', color: '#0284C7', bg: 'rgba(2, 132, 199, 0.1)' };
+    }
+    if (card.archetype === 'contrast') {
+      return { label: 'INTERNAL CONTRAST', icon: '⚖️', color: '#8B5CF6', bg: 'rgba(139, 92, 246, 0.1)' };
+    }
+    if (card.archetype === 'values') {
+      return { label: 'VALUES & IDENTITY', icon: '⚓', color: '#B45309', bg: 'rgba(180, 83, 9, 0.1)' };
+    }
+    if (card.archetype === 'reflection') {
+      return { label: 'REFLECTION ROUND', icon: '✨', color: '#059669', bg: 'rgba(5, 150, 105, 0.1)' };
+    }
+    if (card.archetype === 'wildcard' || card.type === 'wildcard') {
+      return { label: 'GROUP ACTION', icon: '⚡', color: '#10B981', bg: 'rgba(16, 185, 129, 0.1)' };
+    }
+    return null;
+  };
 
   useEffect(() => {
     try {
@@ -54,6 +79,8 @@ export default function CardDeck({
     setPrevIndex(currentIndex);
     setIsFlipped(autoReveal);
     setShouldAnimateFlip(false);
+    setShowDeeper(false);
+    setSelectedOption(null);
   }
 
   useEffect(() => {
@@ -226,8 +253,11 @@ export default function CardDeck({
     };
   }, [currentIndex, deck.length]);
 
-  const handleCardClick = () => {
+  const handleCardClick = (e) => {
     if (Math.abs(currentXRef.current) > 10) return;
+    if (e && e.target && e.target.closest && (e.target.closest('button') || e.target.closest('.no-card-flip'))) {
+      return;
+    }
     handleToggleFlip();
   };
 
@@ -422,7 +452,7 @@ export default function CardDeck({
                   <div className="editorial-inner-border" />
                   <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <span style={{ fontSize: '0.7rem', fontWeight: 800, color: cardAccent, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                      HOLY GROUND
+                      {nextCardTarget?.category || (currentLevel ? `LEVEL ${currentLevel.number}` : 'HOLY GROUND')}
                     </span>
                     <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 700 }}>
                       #{currentIndex + 2} / {deck.length}
@@ -490,15 +520,19 @@ export default function CardDeck({
 
               <div style={{ margin: 'auto 0' }}>
                 <h2 className="font-serif" style={{ fontSize: '1.8rem', fontWeight: 700, color: '#121826', marginBottom: '8px' }}>
-                  Deck Complete
+                  {currentLevel?.id === 'final-round' ? 'Journey Complete' : 'Deck Complete'}
                 </h2>
                 <p style={{ fontSize: '0.85rem', color: '#4b5563', lineHeight: 1.5, padding: '0 12px' }}>
-                  You completed all {deck.length} cards in this deck. Reflect on what God spoke through your time together.
+                  {currentLevel?.id === 'final-round'
+                    ? "You walked through who you are, what made you, how you connect, what's inside, and where Jesus meets you. Carry these bonds forward."
+                    : currentLevel?.id === 'level-5'
+                    ? "You completed all 5 core levels of Holy Ground. Step into the Final Reflection Round together."
+                    : `You completed all ${deck.length} cards in this deck. Reflect on what God spoke through your time together.`}
                 </p>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%', pointerEvents: 'auto' }}>
-                {currentLevel?.id !== 'wildcards' && currentLevel?.id !== 'mixed' ? (
+                {currentLevel?.id !== 'wildcards' && currentLevel?.id !== 'mixed' && currentLevel?.id !== 'final-round' ? (
                   <>
                     <button
                       onClick={onNextLevel}
@@ -506,7 +540,7 @@ export default function CardDeck({
                         width: '100%',
                         padding: '12px',
                         borderRadius: '18px',
-                        background: currentLevel?.accentColor || '#059669',
+                        background: currentLevel?.id === 'level-5' ? '#059669' : (currentLevel?.accentColor || '#059669'),
                         border: 'none',
                         color: '#ffffff',
                         fontWeight: 700,
@@ -518,11 +552,11 @@ export default function CardDeck({
                         alignItems: 'center',
                         justifyContent: 'center',
                         gap: '6px',
-                        boxShadow: `0 4px 14px ${(currentLevel?.accentColor || '#059669')}35`
+                        boxShadow: `0 4px 14px ${(currentLevel?.id === 'level-5' ? '#059669' : (currentLevel?.accentColor || '#059669'))}35`
                       }}
                     >
                       <ChevronRight size={16} strokeWidth={2.5} />
-                      <span>Move to Next Deck</span>
+                      <span>{currentLevel?.id === 'level-5' ? 'Enter The Reflection Round' : 'Move to Next Deck'}</span>
                     </button>
 
                     <button
@@ -642,29 +676,162 @@ export default function CardDeck({
               <div className="card-face card-face-back" style={{
                 border: `1.5px solid ${cardAccent}`,
                 boxShadow: '0 16px 36px -10px rgba(18, 24, 38, 0.12)',
-                padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
+                padding: 'clamp(18px, 3vh, 26px) clamp(16px, 3.5vw, 22px)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                textAlign: 'center'
+                textAlign: 'center',
+                overflowY: 'auto'
               }}>
                 <div className="editorial-inner-border" />
-                <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: '0.7rem', fontWeight: 800, color: cardAccent, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                    HOLY GROUND
-                  </span>
+                
+                {/* Top Bar: Category / Archetype badge & Number */}
+                <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    {getArchetypeBadge(activeCard) ? (
+                      <span style={{
+                        fontSize: '0.66rem',
+                        fontWeight: 800,
+                        color: getArchetypeBadge(activeCard).color,
+                        background: getArchetypeBadge(activeCard).bg,
+                        padding: '2px 8px',
+                        borderRadius: '10px',
+                        letterSpacing: '0.06em',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px'
+                      }}>
+                        <span>{getArchetypeBadge(activeCard).icon}</span>
+                        <span>{getArchetypeBadge(activeCard).label}</span>
+                      </span>
+                    ) : (
+                      <span style={{ fontSize: '0.7rem', fontWeight: 800, color: cardAccent, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                        {activeCard?.category || (currentLevel ? `LEVEL ${currentLevel.number}` : 'HOLY GROUND')}
+                      </span>
+                    )}
+                  </div>
                   <span style={{ fontSize: '0.72rem', color: '#9ca3af', fontWeight: 700 }}>
                     #{currentIndex + 1} / {deck.length}
                   </span>
                 </div>
 
-                <div style={{ margin: 'auto 0', padding: '0 8px', width: '100%' }}>
-                  <p className="card-question-text" style={{ fontSize: 'clamp(1.05rem, 3.4vw, 1.28rem)', fontWeight: 600, lineHeight: 1.55, color: '#121826' }}>
+                {/* Main Question Body */}
+                <div style={{ margin: 'auto 0', padding: '6px 4px', width: '100%' }}>
+                  <p className="card-question-text" style={{ fontSize: 'clamp(1.02rem, 3.2vw, 1.25rem)', fontWeight: 600, lineHeight: 1.5, color: '#121826' }}>
                     "{activeCard.text}"
                   </p>
+
+                  {/* Diagnostic Options Chips (if present) */}
+                  {activeCard.options && activeCard.options.length > 0 && (
+                    <div 
+                      className="no-card-flip"
+                      style={{ 
+                        display: 'flex', 
+                        flexWrap: 'wrap', 
+                        gap: '6px', 
+                        justifyContent: 'center', 
+                        marginTop: '12px'
+                      }} 
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      {activeCard.options.map((option, idx) => {
+                        const isSelected = selectedOption === option;
+                        return (
+                          <button
+                            key={idx}
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedOption(isSelected ? null : option);
+                            }}
+                            style={{
+                              padding: '5px 11px',
+                              borderRadius: '14px',
+                              background: isSelected ? cardAccent : 'rgba(18, 24, 38, 0.04)',
+                              border: isSelected ? `1.5px solid ${cardAccent}` : '1px solid rgba(18, 24, 38, 0.1)',
+                              color: isSelected ? '#ffffff' : '#374151',
+                              fontSize: '0.72rem',
+                              fontWeight: 600,
+                              cursor: 'pointer',
+                              transition: 'all 0.15s ease',
+                              boxShadow: isSelected ? `0 2px 8px ${cardAccent}35` : 'none'
+                            }}
+                          >
+                            {option}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
-                <div></div>
+
+                {/* Go Deeper Section or Subtext */}
+                {activeCard.deeper ? (
+                  <div 
+                    className="no-card-flip"
+                    style={{ width: '100%', marginTop: 'auto', paddingTop: '6px' }}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {!showDeeper ? (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowDeeper(true);
+                        }}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                          padding: '6px 14px',
+                          borderRadius: '16px',
+                          background: `${cardAccent}0D`,
+                          border: `1px solid ${cardAccent}35`,
+                          color: cardAccent,
+                          fontSize: '0.72rem',
+                          fontWeight: 700,
+                          letterSpacing: '0.04em',
+                          cursor: 'pointer',
+                          transition: 'all 0.2s ease'
+                        }}
+                      >
+                        <span>Want to go deeper? Tap</span>
+                        <span style={{ fontSize: '0.85rem' }}>→</span>
+                      </button>
+                    ) : (
+                      <div
+                        style={{
+                          background: `${cardAccent}0D`,
+                          border: `1px solid ${cardAccent}35`,
+                          borderRadius: '14px',
+                          padding: '8px 12px',
+                          textAlign: 'center',
+                          cursor: 'pointer'
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowDeeper(false);
+                        }}
+                      >
+                        <div style={{ fontSize: '0.64rem', fontWeight: 800, color: cardAccent, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '3px' }}>
+                          GO DEEPER • TAP TO HIDE
+                        </div>
+                        <p style={{ fontSize: '0.82rem', fontStyle: 'italic', color: '#1f2937', lineHeight: 1.4, margin: 0 }}>
+                          "{activeCard.deeper}"
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ) : activeCard.subtext ? (
+                  <div style={{ width: '100%', marginTop: 'auto', paddingTop: '4px' }}>
+                    <p style={{ fontSize: '0.72rem', color: '#9ca3af', fontStyle: 'italic', margin: 0 }}>
+                      {activeCard.subtext}
+                    </p>
+                  </div>
+                ) : (
+                  <div style={{ height: '6px' }}></div>
+                )}
               </div>
             </div>
           )}

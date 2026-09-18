@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Compass, MessageCircle, HeartHandshake, Zap, Shuffle } from 'lucide-react';
+import { Compass, BookOpen, Users, Shield, Zap, Shuffle, Sparkles } from 'lucide-react';
 import { LEVELS, QUESTIONS } from '../data/questions';
 import HolyGroundLogo from './HolyGroundLogo';
 
-const ChristianCross = ({ size = 22, color = "#D97706", strokeWidth = 1.8 }) => (
+const ChristianCross = ({ size = 22, color = "#C59B27", strokeWidth = 1.8 }) => (
   <svg
     width={size}
     height={size}
@@ -23,17 +23,21 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
   const getLevelIcon = (id) => {
     switch (id) {
       case 'level-1':
-        return <Compass size={22} color="#E11D48" strokeWidth={2} />;
+        return <Compass size={20} color="#E11D48" strokeWidth={2} />;
       case 'level-2':
-        return <MessageCircle size={22} color="#0284C7" strokeWidth={2} />;
+        return <BookOpen size={20} color="#D97706" strokeWidth={2} />;
       case 'level-3':
-        return <ChristianCross size={22} color="#D97706" strokeWidth={2} />;
+        return <Users size={20} color="#0284C7" strokeWidth={2} />;
       case 'level-4':
-        return <HeartHandshake size={22} color="#8B5CF6" strokeWidth={2} />;
+        return <Shield size={20} color="#8B5CF6" strokeWidth={2} />;
+      case 'level-5':
+        return <ChristianCross size={20} color="#C59B27" strokeWidth={2} />;
+      case 'final-round':
+        return <Sparkles size={20} color="#059669" strokeWidth={2} />;
       case 'wildcards':
-        return <Zap size={22} color="#059669" strokeWidth={2} />;
+        return <Zap size={20} color="#10B981" strokeWidth={2} />;
       default:
-        return <Compass size={22} color="#d97706" strokeWidth={2} />;
+        return <Compass size={20} color="#c59b27" strokeWidth={2} />;
     }
   };
 
@@ -134,13 +138,14 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1, position: 'relative', zIndex: 2 }}>
               {/* Serif Number Stamp */}
               <div className="font-serif" style={{
-                fontSize: '2rem',
+                fontSize: level.number === 'FINAL' ? '0.9rem' : level.number === 'SPICE' ? '0.85rem' : '1.9rem',
                 fontWeight: 700,
                 color: level.accentColor,
                 lineHeight: 1,
-                width: '40px',
+                width: '42px',
                 textAlign: 'center',
-                flexShrink: 0
+                flexShrink: 0,
+                letterSpacing: level.number === 'FINAL' || level.number === 'SPICE' ? '0.04em' : 'normal'
               }}>
                 {level.number}
               </div>
@@ -153,7 +158,7 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
               }} />
 
               <div style={{ flex: 1 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px', flexWrap: 'wrap' }}>
                   <div style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -165,8 +170,13 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
                     textTransform: 'uppercase'
                   }}>
                     {getLevelIcon(level.id)}
-                    <span>LEVEL {level.number}</span>
+                    <span>
+                      {level.number === 'FINAL' ? 'FINAL ROUND' : level.number === 'SPICE' ? 'BONUS DECK' : `LEVEL ${level.number}`}
+                    </span>
                   </div>
+                  <span style={{ fontSize: '0.65rem', color: '#9ca3af', fontWeight: 700, letterSpacing: '0.05em' }}>
+                    • {QUESTIONS.filter(q => q.levelId === level.id).length} CARDS
+                  </span>
                 </div>
                 <h3 className="font-serif" style={{ fontSize: '1.15rem', fontWeight: 700, color: '#121826', marginBottom: '2px' }}>
                   {level.title}
