@@ -237,6 +237,100 @@ export default function CardDeck({
     handleToggleFlip();
   };
 
+  const renderCardBack = (card, index, isTop = false) => {
+    if (!card) return null;
+    return (
+      <div className="card-face card-face-back" style={{
+        border: isTop ? `1.5px solid ${cardAccent}` : undefined,
+        boxShadow: isTop ? '0 16px 36px -10px rgba(18, 24, 38, 0.12)' : undefined,
+        padding: 'clamp(20px, 4vh, 32px) clamp(20px, 4vw, 28px)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        textAlign: 'center'
+      }}>
+        <div className="editorial-inner-border" />
+        
+        {/* Top Bar: Card Number in upper right only */}
+        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+          <span style={{ fontSize: '0.74rem', color: '#9ca3af', fontWeight: 700, letterSpacing: '0.04em' }}>
+            #{index + 1} / {deck.length}
+          </span>
+        </div>
+
+        {/* Main Question Body */}
+        <div style={{ margin: 'auto 0', padding: '0 8px', width: '100%' }}>
+          <p className="card-question-text" style={{ fontSize: 'clamp(1.08rem, 3.6vw, 1.32rem)', fontWeight: 600, lineHeight: 1.55, color: '#121826' }}>
+            "{card.text}"
+          </p>
+        </div>
+
+        {/* Go Deeper Section */}
+        {card.deeper ? (
+          <div 
+            className={isTop ? "no-card-flip" : undefined}
+            style={{ width: '100%', marginTop: 'auto', paddingTop: '8px' }}
+            onClick={isTop ? (e) => e.stopPropagation() : undefined}
+          >
+            {(!isTop || !showDeeper) ? (
+              <button
+                type="button"
+                onClick={isTop ? (e) => {
+                  e.stopPropagation();
+                  setShowDeeper(true);
+                } : undefined}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '6px 14px',
+                  borderRadius: '16px',
+                  background: `${cardAccent}0D`,
+                  border: `1px solid ${cardAccent}35`,
+                  color: cardAccent,
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.04em',
+                  cursor: isTop ? 'pointer' : 'default',
+                  transition: 'all 0.2s ease',
+                  pointerEvents: isTop ? 'auto' : 'none'
+                }}
+              >
+                <span>Want to go deeper? Tap</span>
+                <span style={{ fontSize: '0.85rem' }}>→</span>
+              </button>
+            ) : (
+              <div
+                style={{
+                  background: `${cardAccent}0D`,
+                  border: `1px solid ${cardAccent}35`,
+                  borderRadius: '14px',
+                  padding: '8px 12px',
+                  textAlign: 'center',
+                  cursor: 'pointer'
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowDeeper(false);
+                }}
+              >
+                <div style={{ fontSize: '0.64rem', fontWeight: 800, color: cardAccent, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '3px' }}>
+                  GO DEEPER • TAP TO HIDE
+                </div>
+                <p style={{ fontSize: '0.82rem', fontStyle: 'italic', color: '#1f2937', lineHeight: 1.4, margin: 0 }}>
+                  "{card.deeper}"
+                </p>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div style={{ height: '14px' }}></div>
+        )}
+      </div>
+    );
+  };
+
 
 
   return (
@@ -320,27 +414,7 @@ export default function CardDeck({
                 </div>
 
                 {/* REVEALED QUESTION SIDE */}
-                <div className="card-face card-face-back" style={{
-                  padding: 'clamp(20px, 4vh, 32px) clamp(20px, 4vw, 28px)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  textAlign: 'center'
-                }}>
-                  <div className="editorial-inner-border" />
-                  <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                    <span style={{ fontSize: '0.74rem', color: '#9ca3af', fontWeight: 700, letterSpacing: '0.04em' }}>
-                      #{deck.length} / {deck.length}
-                    </span>
-                  </div>
-                  <div style={{ margin: 'auto 0', padding: '0 8px', width: '100%' }}>
-                    <p className="card-question-text" style={{ fontSize: 'clamp(1.08rem, 3.6vw, 1.32rem)', fontWeight: 600, lineHeight: 1.55, color: '#121826' }}>
-                      "{deck[deck.length - 1]?.text}"
-                    </p>
-                  </div>
-                  <div style={{ height: '14px' }}></div>
-                </div>
+                {renderCardBack(deck[deck.length - 1], deck.length - 1, false)}
               </div>
             ) : currentIndex + 1 === deck.length ? (
               /* Completion Card Underneath */
@@ -414,27 +488,7 @@ export default function CardDeck({
                 </div>
 
                 {/* REVEALED QUESTION SIDE */}
-                <div className="card-face card-face-back" style={{
-                  padding: 'clamp(20px, 4vh, 32px) clamp(20px, 4vw, 28px)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  textAlign: 'center'
-                }}>
-                  <div className="editorial-inner-border" />
-                  <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                    <span style={{ fontSize: '0.74rem', color: '#9ca3af', fontWeight: 700, letterSpacing: '0.04em' }}>
-                      #{currentIndex + 2} / {deck.length}
-                    </span>
-                  </div>
-                  <div style={{ margin: 'auto 0', padding: '0 8px', width: '100%' }}>
-                    <p className="card-question-text" style={{ fontSize: 'clamp(1.08rem, 3.6vw, 1.32rem)', fontWeight: 600, lineHeight: 1.55, color: '#121826' }}>
-                      "{nextCardTarget.text}"
-                    </p>
-                  </div>
-                  <div style={{ height: '14px' }}></div>
-                </div>
+                {renderCardBack(nextCardTarget, currentIndex + 1, false)}
               </div>
             )}
           </div>
@@ -643,93 +697,7 @@ export default function CardDeck({
               </div>
 
               {/* REVEALED QUESTION SIDE */}
-              <div className="card-face card-face-back" style={{
-                border: `1.5px solid ${cardAccent}`,
-                boxShadow: '0 16px 36px -10px rgba(18, 24, 38, 0.12)',
-                padding: 'clamp(20px, 4vh, 32px) clamp(20px, 4vw, 28px)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                textAlign: 'center'
-              }}>
-                <div className="editorial-inner-border" />
-                
-                {/* Top Bar: Card Number in upper right only */}
-                <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                  <span style={{ fontSize: '0.74rem', color: '#9ca3af', fontWeight: 700, letterSpacing: '0.04em' }}>
-                    #{currentIndex + 1} / {deck.length}
-                  </span>
-                </div>
-
-                {/* Main Question Body */}
-                <div style={{ margin: 'auto 0', padding: '0 8px', width: '100%' }}>
-                  <p className="card-question-text" style={{ fontSize: 'clamp(1.08rem, 3.6vw, 1.32rem)', fontWeight: 600, lineHeight: 1.55, color: '#121826' }}>
-                    "{activeCard.text}"
-                  </p>
-                </div>
-
-                {/* Go Deeper Section */}
-                {activeCard.deeper ? (
-                  <div 
-                    className="no-card-flip"
-                    style={{ width: '100%', marginTop: 'auto', paddingTop: '8px' }}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {!showDeeper ? (
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowDeeper(true);
-                        }}
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                          padding: '6px 14px',
-                          borderRadius: '16px',
-                          background: `${cardAccent}0D`,
-                          border: `1px solid ${cardAccent}35`,
-                          color: cardAccent,
-                          fontSize: '0.72rem',
-                          fontWeight: 700,
-                          letterSpacing: '0.04em',
-                          cursor: 'pointer',
-                          transition: 'all 0.2s ease'
-                        }}
-                      >
-                        <span>Want to go deeper? Tap</span>
-                        <span style={{ fontSize: '0.85rem' }}>→</span>
-                      </button>
-                    ) : (
-                      <div
-                        style={{
-                          background: `${cardAccent}0D`,
-                          border: `1px solid ${cardAccent}35`,
-                          borderRadius: '14px',
-                          padding: '8px 12px',
-                          textAlign: 'center',
-                          cursor: 'pointer'
-                        }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowDeeper(false);
-                        }}
-                      >
-                        <div style={{ fontSize: '0.64rem', fontWeight: 800, color: cardAccent, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '3px' }}>
-                          GO DEEPER • TAP TO HIDE
-                        </div>
-                        <p style={{ fontSize: '0.82rem', fontStyle: 'italic', color: '#1f2937', lineHeight: 1.4, margin: 0 }}>
-                          "{activeCard.deeper}"
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div style={{ height: '14px' }}></div>
-                )}
-              </div>
+              {renderCardBack(activeCard, currentIndex, true)}
             </div>
           )}
         </div>
