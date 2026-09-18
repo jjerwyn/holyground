@@ -29,6 +29,17 @@ function shuffleArray(array) {
   return arr;
 }
 
+// Prepares and shuffles a deck, ensuring 'qf-8' (A Blessing Spoken) always appears last in the final round
+function prepareDeck(cards, levelId) {
+  if (levelId === 'final-round') {
+    const closingCard = cards.find((q) => q.id === 'qf-8');
+    const otherCards = cards.filter((q) => q.id !== 'qf-8');
+    const shuffledOthers = shuffleArray(otherCards);
+    return closingCard ? [...shuffledOthers, closingCard] : shuffledOthers;
+  }
+  return shuffleArray(cards);
+}
+
 function getDeckAndLevelFromPath(pathname) {
   const cleanPath = pathname.replace(/^\/+|\/+$/g, '').toLowerCase();
 
@@ -62,7 +73,7 @@ function getDeckAndLevelFromPath(pathname) {
       const filtered = QUESTIONS.filter((q) => q.levelId === level.id);
       return {
         level,
-        deck: shuffleArray(filtered)
+        deck: prepareDeck(filtered, level.id)
       };
     }
   }
@@ -97,7 +108,7 @@ export default function App() {
   // Handle Level Selection
   const handleSelectLevel = (level) => {
     const filteredQuestions = QUESTIONS.filter((q) => q.levelId === level.id);
-    const shuffled = shuffleArray(filteredQuestions);
+    const shuffled = prepareDeck(filteredQuestions, level.id);
     setCurrentLevel(level);
     setDeck(shuffled);
     setCurrentIndex(0);
@@ -129,7 +140,7 @@ export default function App() {
   };
 
   const handleShuffleDeck = () => {
-    const shuffled = shuffleArray(deck);
+    const shuffled = prepareDeck(deck, currentLevel?.id);
     setDeck(shuffled);
     setCurrentIndex(0);
   };

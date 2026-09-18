@@ -322,7 +322,7 @@ export const QUESTIONS = [
     levelId: 'level-2',
     archetype: 'standard',
     category: 'Family Role',
-    text: 'What was something you were known for in your family or household growing up?',
+    text: 'What was something you were known for in your family growing up?',
     deeper: 'Did that role feel like a gift or an expectation you had to carry?',
     options: null,
     subtext: 'The peacemaker, the responsible one, the achiever, the baby, or the rebel?'
@@ -352,7 +352,7 @@ export const QUESTIONS = [
     levelId: 'level-2',
     archetype: 'standard',
     category: 'Generational Lessons: Success',
-    text: 'What did your family or upbringing teach you about what it means to be "successful"?',
+    text: 'What did your family or upbringing teach you about what it means to be "successful?',
     deeper: 'How much of that definition do you still agree with today?',
     options: null,
     subtext: 'Hard work, reputation, stability, financial security, or serving others?'
@@ -362,7 +362,7 @@ export const QUESTIONS = [
     levelId: 'level-2',
     archetype: 'standard',
     category: 'Generational Lessons: Failure',
-    text: 'What did your family teach you about failure—was it met with anger, silence, humor, or problem-solving?',
+    text: 'How did your family teach you to handle failure and how did they react to it?',
     deeper: 'Can you remember a specific mistake you made and how the adults around you reacted?',
     options: null,
     subtext: 'Notice how your response to failure was conditioned early on.'
@@ -372,8 +372,8 @@ export const QUESTIONS = [
     levelId: 'level-2',
     archetype: 'standard',
     category: 'Generational Lessons: Love',
-    text: 'How was love expressed in your home growing up: words, affection, acts of service, providing, or high expectations?',
-    deeper: 'What felt easiest to feel, and what felt rare?',
+    text: 'How was love expressed in your home growing up?',
+    deeper: 'What felt easiest to feel, and what was difficult to feel?',
     options: null,
     subtext: 'What did love look and feel like in your living room?'
   },
@@ -392,7 +392,7 @@ export const QUESTIONS = [
     levelId: 'level-2',
     archetype: 'contrast',
     category: 'Generational Legacy',
-    text: 'What is one value or habit from your upbringing you are determined to carry forward, and what is one you want to leave behind?',
+    text: 'What is one value or habit from your upbringing you will keep carrying forward, and what is one you want to leave behind?',
     deeper: null,
     options: null,
     subtext: 'Honor what was good while intentionally breaking unhelpful cycles.'
@@ -432,7 +432,7 @@ export const QUESTIONS = [
     levelId: 'level-2',
     archetype: 'story',
     category: 'Out of Place',
-    text: 'Tell us about a time you felt completely out of place, and how you handled being on the outside.',
+    text: 'Tell us about a time you felt completely out of place, and how you handled it.',
     deeper: null,
     options: null,
     subtext: 'A school, church, city, or gathering where you felt like a total stranger.'
@@ -452,7 +452,7 @@ export const QUESTIONS = [
     levelId: 'level-2',
     archetype: 'standard',
     category: 'School Years',
-    text: 'What kind of kid were you in school—the rule follower, the invisible one, the perfectionist, the class clown, or the rebel?',
+    text: 'What kind of child were you in school?',
     deeper: 'What were you trying to protect or prove back then?',
     options: null,
     subtext: 'How did your younger self navigate social belonging?'
@@ -472,7 +472,7 @@ export const QUESTIONS = [
     levelId: 'level-2',
     archetype: 'standard',
     category: 'Outside Influences',
-    text: 'Besides your parents, who was an adult who had a profound, lasting impact on the person you became?',
+    text: 'Besides your parents, who had a lasting impact on the person you became?',
     deeper: 'What did they say or model that stayed with you?',
     options: null,
     subtext: 'A coach, pastor, youth leader, aunt, uncle, or neighbor.'
@@ -482,7 +482,7 @@ export const QUESTIONS = [
     levelId: 'level-2',
     archetype: 'standard',
     category: 'Perspective Shift',
-    text: 'What is something you were confident you were right about when you were younger that you now see completely differently?',
+    text: 'What is something you were once certain about that you now realize you got completely wrong?',
     deeper: 'What experience humbled or expanded your view?',
     options: null,
     subtext: 'Reflect on how experience softened your certainties.'
@@ -536,7 +536,7 @@ export const QUESTIONS = [
     levelId: 'level-3',
     archetype: 'diagnostic',
     category: 'Conflict Style',
-    text: 'When someone hurts your feelings or frustrates you, what is your immediate first reflex?',
+    text: 'When someone hurts your feelings or frustrates you, what is your first reflex?',
     deeper: null,
     options: [
       'Explain myself / Confront immediately',
@@ -577,7 +577,7 @@ export const QUESTIONS = [
     levelId: 'level-3',
     archetype: 'contrast',
     category: 'Giving vs Receiving',
-    text: 'What is something you are very generous at giving to other people, but feel terribly awkward receiving yourself?',
+    text: 'What is something you are very generous with, but feel terribly awkward receiving yourself?',
     deeper: null,
     options: null,
     subtext: 'Gifts, compliments, hospitality, grace, or financial help?'
@@ -598,7 +598,7 @@ export const QUESTIONS = [
     archetype: 'standard',
     category: 'Boundaries',
     text: 'What is a healthy boundary you’ve had to learn the hard way in relationships?',
-    deeper: 'What did it cost you before you learned to set it?',
+    deeper: 'What did the experience cost you?',
     options: null,
     subtext: 'Saying no, protecting your peace, or stopping people-pleasing.'
   },
@@ -657,7 +657,7 @@ export const QUESTIONS = [
     levelId: 'level-3',
     archetype: 'story',
     category: 'Seen Without Speaking',
-    text: 'Tell us about a time someone noticed you were struggling before you said a single word. What did that feel like?',
+    text: 'Tell us about a time someone noticed you were struggling withouht saying a word and what did that feel like?',
     deeper: null,
     options: null,
     subtext: 'Being noticed in silence is one of the deepest gifts.'
@@ -677,7 +677,7 @@ export const QUESTIONS = [
     levelId: 'level-3',
     archetype: 'standard',
     category: 'Rejection Sensitivity',
-    text: 'When a friend takes days to respond or plans fall through, what narrative does your mind instinctively jump to?',
+    text: 'When a friend takes days to respond or cancels plans, what narrative does your mind instinctively jump to?',
     deeper: 'How do you bring yourself back to what is actually true?',
     options: null,
     subtext: '“They don’t care,” “I did something wrong,” or “They are just busy”?'
@@ -687,7 +687,7 @@ export const QUESTIONS = [
     levelId: 'level-3',
     archetype: 'standard',
     category: 'Ideal Friendship',
-    text: 'If you could describe the exact kind of friendship your heart is longing for in this season, what does it look like?',
+    text: 'What kind of friendship are you most in need of right now?',
     deeper: 'What step can you take to invite that in?',
     options: null,
     subtext: 'Accountability, laughter, spiritual depth, or effortless hangouts.'
@@ -697,7 +697,7 @@ export const QUESTIONS = [
     levelId: 'level-3',
     archetype: 'contrast',
     category: 'Patience',
-    text: 'Where are you noticeably more patient and forgiving with other people than you are with yourself?',
+    text: 'Where are you more patient and forgiving with other people than you are with yourself?',
     deeper: null,
     options: null,
     subtext: 'Give yourself the same grace you hand out so freely to others.'
@@ -707,7 +707,7 @@ export const QUESTIONS = [
     levelId: 'level-3',
     archetype: 'standard',
     category: 'Encouragement That Landed',
-    text: 'What is a compliment or word of encouragement someone gave you years ago that you still remember word for word?',
+    text: 'What is a compliment or word of encouragement someone gave you years ago that you still remember?',
     deeper: 'Why did that particular sentence stick to your bones?',
     options: null,
     subtext: 'Specific words spoken in love hold permanent power.'
@@ -751,7 +751,7 @@ export const QUESTIONS = [
     levelId: 'level-4',
     archetype: 'diagnostic',
     category: 'Under Stress',
-    text: 'When life feels completely overwhelming and stress peaks, what do you become more of?',
+    text: 'When life feels completely overwhelming, what do you become more of?',
     deeper: null,
     options: [
       'Hyper-Quiet & Withdrawn',
@@ -808,7 +808,7 @@ export const QUESTIONS = [
     levelId: 'level-4',
     archetype: 'contrast',
     category: 'Stated Values vs Reality',
-    text: 'What is something you sincerely say you value, but your schedule and habits prove you struggle to make room for?',
+    text: 'What is something you sincerely value, but struggle to make room for?',
     deeper: null,
     options: null,
     subtext: 'Rest, relationships, prayer, health, or creative pursuits?'
@@ -818,7 +818,7 @@ export const QUESTIONS = [
     levelId: 'level-4',
     archetype: 'contrast',
     category: 'Confidence vs Fragility',
-    text: 'What is an area of life where you feel rock-solid confident, and what is an area where you feel surprisingly fragile?',
+    text: 'What is an area of life where you feel very confident, and what is an area where you feel surprisingly fragile?',
     deeper: null,
     options: null,
     subtext: 'We are all strong in places and tender in others.'
@@ -828,7 +828,7 @@ export const QUESTIONS = [
     levelId: 'level-4',
     archetype: 'values',
     category: 'What You Won’t Become',
-    text: 'What is something you would never want to become, even if becoming it guaranteed you wealth and success?',
+    text: 'What is something you would never want to become, even if becoming it guaranteed you success?',
     deeper: 'Where did that conviction come from?',
     options: null,
     subtext: 'Arrogant, distant, disconnected from family, cynical, or compromising.'
@@ -848,7 +848,7 @@ export const QUESTIONS = [
     levelId: 'level-4',
     archetype: 'values',
     category: 'Beneath the Resume',
-    text: 'If someone described you accurately to a room of strangers but left out all your titles, work, and achievements, what would you want them to mention?',
+    text: 'How do you want to be remembered when your titles and achievements are stripped away?',
     deeper: null,
     options: null,
     subtext: 'Who are you when the accolades are stripped away?'
@@ -858,7 +858,7 @@ export const QUESTIONS = [
     levelId: 'level-4',
     archetype: 'standard',
     category: 'Comparison Trap',
-    text: 'When you find yourself falling into comparison or envy, who or what is usually triggering it?',
+    text: 'When you find yourself falling into comparison or envy, what is usually triggering it?',
     deeper: 'What fear does that comparison tap into?',
     options: null,
     subtext: 'Career timing, relationship status, appearance, or spiritual depth?'
@@ -868,7 +868,7 @@ export const QUESTIONS = [
     levelId: 'level-4',
     archetype: 'standard',
     category: 'Hidden Gratitude',
-    text: 'What is something you are deeply grateful happened to you now, even though you hated every second of it when it occurred?',
+    text: 'What is something you are grateful that happened, even though you hated every second of it when it was happening?',
     deeper: 'How did that season reshape your character?',
     options: null,
     subtext: 'Pain that produced endurance and unexpected wisdom.'
@@ -898,7 +898,7 @@ export const QUESTIONS = [
     levelId: 'level-4',
     archetype: 'standard',
     category: 'The Unspoken Wish',
-    text: 'What is something you wish the people in your life understood about what you carry every day, without you having to explain it?',
+    text: 'What is something you wish people understood about what you carry every day, without having to explain it?',
     deeper: 'What stops you from letting them carry it with you?',
     options: null,
     subtext: 'Bring the quiet weight into a room that can hold it.'
@@ -918,7 +918,7 @@ export const QUESTIONS = [
     levelId: 'level-4',
     archetype: 'standard',
     category: 'Looking Forward',
-    text: 'What would make you look back at your life thirty years from now and think, “I am so glad I lived this way”?',
+    text: 'What would make you look back at your life years from now and think, “I am so glad I lived this way”?',
     deeper: 'What choice today keeps you on that path?',
     options: null,
     subtext: 'Focus on legacy, love, faithfulness, and character.'
@@ -952,7 +952,7 @@ export const QUESTIONS = [
     levelId: 'level-5',
     archetype: 'standard',
     category: 'Trust & Release',
-    text: 'What is hardest for you to trust God with, and why do you think that particular thing is so difficult to release?',
+    text: 'What is hardest for you to trust God with, and why do you think it is so difficult to release?',
     deeper: 'What outcome are you terrified will happen if you let go?',
     options: null,
     subtext: 'Your timeline, your children, finances, relationships, or your calling?'
@@ -1032,7 +1032,7 @@ export const QUESTIONS = [
     levelId: 'level-5',
     archetype: 'standard',
     category: 'The Resisted Lesson',
-    text: 'What is something you keep asking God to change or take away, and what do you think He might be teaching you through it instead?',
+    text: 'What is something you keep asking God to change or take away, and what do you think He might be teaching you?',
     deeper: 'Why is that lesson so hard to embrace?',
     options: null,
     subtext: 'Surrendering your agenda for His refining work.'
@@ -1052,7 +1052,7 @@ export const QUESTIONS = [
     levelId: 'level-5',
     archetype: 'story',
     category: 'The Surprising God',
-    text: 'Tell us about a time God surprised you—either by an unexpected answer, a shut door, or a sudden peace.',
+    text: 'Tell us about a time God surprised you.',
     deeper: null,
     options: null,
     subtext: 'When His ways were demonstrably higher than your plans.'
@@ -1132,7 +1132,7 @@ export const QUESTIONS = [
     levelId: 'level-5',
     archetype: 'standard',
     category: 'Holy Ground',
-    text: 'Where in your life right now are you standing on holy ground—in a place that requires reverence, courage, and faith?',
+    text: 'Where in your life right now are you in a season that is sacred, scary, and requires you to fully depend on God?',
     deeper: 'Who are you inviting into that space with you?',
     options: null,
     subtext: 'Take off your sandals; God is present in this exact moment.'
