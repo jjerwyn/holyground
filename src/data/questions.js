@@ -986,7 +986,7 @@ export const QUESTIONS = [
     levelId: 'level-4',
     type: 'question',
     category: 'Honest Prayer',
-    text: 'If you could pray the most brutally honest prayer right now with zero filter, what would you actually say?',
+    text: 'What is something that you are praying for God to remove it from you?',
     subtext: 'He already knows. Say it anyway.'
   },
   {
