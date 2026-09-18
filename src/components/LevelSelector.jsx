@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Compass, BookOpen, Users, Shield, Zap, Shuffle, Sparkles } from 'lucide-react';
+import { Compass, BookOpen, Users, Shield, Shuffle, Sparkles } from 'lucide-react';
 import { LEVELS, QUESTIONS } from '../data/questions';
 import HolyGroundLogo from './HolyGroundLogo';
 
@@ -34,8 +34,6 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
         return <ChristianCross size={20} color="#C59B27" strokeWidth={2} />;
       case 'final-round':
         return <Sparkles size={20} color="#059669" strokeWidth={2} />;
-      case 'wildcards':
-        return <Zap size={20} color="#10B981" strokeWidth={2} />;
       default:
         return <Compass size={20} color="#c59b27" strokeWidth={2} />;
     }
@@ -138,14 +136,14 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: 1, position: 'relative', zIndex: 2 }}>
               {/* Serif Number Stamp */}
               <div className="font-serif" style={{
-                fontSize: level.number === 'FINAL' ? '0.9rem' : level.number === 'SPICE' ? '0.85rem' : '1.9rem',
+                fontSize: level.number === 'FINAL' ? '0.9rem' : '1.9rem',
                 fontWeight: 700,
                 color: level.accentColor,
                 lineHeight: 1,
                 width: '42px',
                 textAlign: 'center',
                 flexShrink: 0,
-                letterSpacing: level.number === 'FINAL' || level.number === 'SPICE' ? '0.04em' : 'normal'
+                letterSpacing: level.number === 'FINAL' ? '0.04em' : 'normal'
               }}>
                 {level.number}
               </div>
@@ -171,7 +169,7 @@ export default function LevelSelector({ onSelectLevel, onSelectMixedDeck }) {
                   }}>
                     {getLevelIcon(level.id)}
                     <span>
-                      {level.number === 'FINAL' ? 'FINAL ROUND' : level.number === 'SPICE' ? 'BONUS DECK' : `LEVEL ${level.number}`}
+                      {level.number === 'FINAL' ? 'FINAL ROUND' : `LEVEL ${level.number}`}
                     </span>
                   </div>
                   <span style={{ fontSize: '0.65rem', color: '#9ca3af', fontWeight: 700, letterSpacing: '0.05em' }}>

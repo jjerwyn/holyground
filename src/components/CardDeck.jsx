@@ -40,8 +40,7 @@ export default function CardDeck({
   const activeCard = deck[currentIndex];
   const nextCardTarget = deck[Math.min(currentIndex + 1, deck.length - 1)];
 
-  const isWildcard = activeCard?.type === 'wildcard' || activeCard?.archetype === 'wildcard';
-  const cardAccent = isWildcard ? '#10B981' : (currentLevel?.accentColor || '#c59b27');
+  const cardAccent = currentLevel?.accentColor || '#c59b27';
 
   const getArchetypeBadge = (card) => {
     if (!card) return null;
@@ -59,9 +58,6 @@ export default function CardDeck({
     }
     if (card.archetype === 'reflection') {
       return { label: 'REFLECTION ROUND', icon: '✨', color: '#059669', bg: 'rgba(5, 150, 105, 0.1)' };
-    }
-    if (card.archetype === 'wildcard' || card.type === 'wildcard') {
-      return { label: 'GROUP ACTION', icon: '⚡', color: '#10B981', bg: 'rgba(16, 185, 129, 0.1)' };
     }
     return null;
   };
@@ -532,7 +528,7 @@ export default function CardDeck({
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%', pointerEvents: 'auto' }}>
-                {currentLevel?.id !== 'wildcards' && currentLevel?.id !== 'mixed' && currentLevel?.id !== 'final-round' ? (
+                {currentLevel?.id !== 'mixed' && currentLevel?.id !== 'final-round' ? (
                   <>
                     <button
                       onClick={onNextLevel}

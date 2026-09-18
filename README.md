@@ -22,7 +22,6 @@ Holy Ground organizes conversation across a thoughtful psychological arc:
 | **Level 04** | **WHAT ARE YOU CARRYING?** | **The Inner World**: The person beneath the persona—fears, coping reflexes, internal dialogues, contrasts, and deep gratitude. |
 | **Level 05** | **WHO ARE YOU WITH JESUS?** | **Faith Met in Story**: Character of God, surrender, spiritual silence, Gospel lived out, calling, and who Jesus is forming you into. |
 | **FINAL** | **THE REFLECTION ROUND** | **Synthesis & Blessing**: Mutual understanding, celebrating what you learned about each other, prayer needs, and spoken blessings. |
-| **BONUS** | **WILDCARDS & GROUP ACTIONS** | **Interactive Spice**: Spontaneous 60-second challenges, instant prayers, honor rounds, and circle affirmations. |
 
 ---
 
@@ -60,7 +59,7 @@ Holy Ground/
 │   │   ├── Footer.jsx            # Editorial footer branding
 │   │   └── HolyGroundLogo.jsx    # Custom SVG cross & flame logo component
 │   ├── data/
-│   │   └── questions.js          # 5 levels + Reflection + Wildcard dataset
+│   │   └── questions.js          # 5 levels + Reflection dataset
 │   ├── App.jsx            # Root routing, deep links & Fisher-Yates shuffling
 │   ├── App.css            # Layout & view wrappers
 │   ├── index.css          # Design system tokens, variables & typography

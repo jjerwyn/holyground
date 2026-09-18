@@ -11,7 +11,7 @@ const MIXED_LEVEL = {
   slug: 'mixed',
   number: 'ALL',
   title: 'Group Night Mix',
-  subtitle: 'Shuffled deck of all levels and wildcards',
+  subtitle: 'Shuffled deck across all 5 levels and reflection',
   tagline: 'Unpredictable, spontaneous, and deep.',
   accentColor: '#ec4899',
   bgColor: 'rgba(236, 72, 153, 0.15)',
@@ -52,9 +52,7 @@ function getDeckAndLevelFromPath(pathname) {
     'level-5': 'level-5',
     'reflection': 'final-round',
     'final': 'final-round',
-    'final-round': 'final-round',
-    'wildcards': 'wildcards',
-    'spice': 'wildcards'
+    'final-round': 'final-round'
   };
 
   const targetLevelId = levelMap[cleanPath];
@@ -146,7 +144,7 @@ export default function App() {
       }
     }
     const currentIdx = LEVELS.findIndex((l) => l.id === currentLevel.id);
-    if (currentIdx !== -1 && currentIdx < LEVELS.length - 1 && currentLevel.id !== 'final-round' && currentLevel.id !== 'wildcards') {
+    if (currentIdx !== -1 && currentIdx < LEVELS.length - 1 && currentLevel.id !== 'final-round') {
       const nextLevel = LEVELS[currentIdx + 1];
       handleSelectLevel(nextLevel);
     } else {
