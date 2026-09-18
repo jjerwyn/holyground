@@ -241,8 +241,8 @@ export default function CardDeck({
     if (!card) return null;
     return (
       <div className="card-face card-face-back" style={{
-        border: isTop ? `1.5px solid ${cardAccent}` : undefined,
-        boxShadow: isTop ? '0 16px 36px -10px rgba(18, 24, 38, 0.12)' : undefined,
+        border: `1.5px solid ${cardAccent}`,
+        boxShadow: isTop ? '0 16px 36px -10px rgba(18, 24, 38, 0.12)' : '0 8px 24px rgba(18, 24, 38, 0.06)',
         padding: 'clamp(20px, 4vh, 32px) clamp(20px, 4vw, 28px)',
         display: 'flex',
         flexDirection: 'column',
@@ -362,12 +362,9 @@ export default function CardDeck({
               width: '100%',
               height: '100%',
               borderRadius: '28px',
-              background: '#ffffff',
-              boxShadow: '0 8px 24px rgba(18, 24, 38, 0.06)',
               transform: 'translateY(8px) scale(0.96)',
               zIndex: 2,
-              pointerEvents: 'none',
-              overflow: 'hidden'
+              pointerEvents: 'none'
             }}
           >
             {currentIndex === deck.length ? (
@@ -378,6 +375,8 @@ export default function CardDeck({
               >
                 {/* UNFLIPPED CARD FRONT COVER */}
                 <div className="card-face card-face-front" style={{
+                  border: `1.5px solid ${cardAccent}`,
+                  boxShadow: '0 8px 24px rgba(18, 24, 38, 0.06)',
                   padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
                   display: 'flex',
                   flexDirection: 'column',
@@ -452,6 +451,8 @@ export default function CardDeck({
               >
                 {/* UNFLIPPED CARD FRONT COVER */}
                 <div className="card-face card-face-front" style={{
+                  border: `1.5px solid ${cardAccent}`,
+                  boxShadow: '0 8px 24px rgba(18, 24, 38, 0.06)',
                   padding: 'clamp(20px, 4vh, 32px) clamp(18px, 4vw, 24px)',
                   display: 'flex',
                   flexDirection: 'column',

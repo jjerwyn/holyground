@@ -92,7 +92,7 @@ export const QUESTIONS = [
     levelId: 'level-1',
     archetype: 'standard',
     category: 'Social Personality',
-    text: 'When you’re completely comfortable around people, what version of you comes out?',
+    text: 'What is a version of yourself that comes out that is rarely seen?',
     deeper: 'What is an environment where that version of you feels easiest to access?',
     options: null,
     subtext: 'Think about who you are when you have zero need to impress anyone.'
@@ -112,7 +112,7 @@ export const QUESTIONS = [
     levelId: 'level-1',
     archetype: 'standard',
     category: 'Emotional Preferences',
-    text: 'What’s a very small, specific thing that can instantly make a bad day better?',
+    text: 'What’s something that will instantly make your bad day better?',
     deeper: 'When was the last time that small thing saved your day?',
     options: null,
     subtext: 'A specific snack, a song, a quiet drive, fresh sheets, or a voice memo?'
@@ -132,7 +132,7 @@ export const QUESTIONS = [
     levelId: 'level-1',
     archetype: 'standard',
     category: 'Private Side',
-    text: 'What’s something your closest friends know about you that a new person would never guess?',
+    text: 'What’s something your friends know about you that a new person would never guess?',
     deeper: 'Why do you think that part of you stays behind the curtain at first?',
     options: null,
     subtext: 'Look for the gap between first impressions and true familiarity.'
@@ -152,7 +152,7 @@ export const QUESTIONS = [
     levelId: 'level-1',
     archetype: 'standard',
     category: 'Belonging',
-    text: 'What’s a very specific sensory detail, routine, or feeling that makes you feel at home somewhere?',
+    text: 'What’s a very specific  detail, routine, or feeling that makes you feel at home somewhere?',
     deeper: 'Where is a place outside of your house where you felt that instantly?',
     options: null,
     subtext: 'A smell, a temperature, the sound of laughter, shoes off, or music playing.'
@@ -172,7 +172,7 @@ export const QUESTIONS = [
     levelId: 'level-1',
     archetype: 'standard',
     category: 'Relational Identity',
-    text: 'What kind of person do you naturally become around your oldest, closest friends?',
+    text: 'What kind of person do you naturally become around your closest friends?',
     deeper: 'Who in your life brings out the truest version of you?',
     options: null,
     subtext: 'The storyteller, the listener, the goofy one, or the practical anchor?'
@@ -182,7 +182,7 @@ export const QUESTIONS = [
     levelId: 'level-1',
     archetype: 'diagnostic',
     category: 'Social Dynamics',
-    text: 'In a group gathering, which mode do you naturally default into?',
+    text: 'In a group gathering, what role do you naturally default into?',
     deeper: null,
     options: [
       'The Observant Listener',
@@ -207,7 +207,7 @@ export const QUESTIONS = [
     levelId: 'level-1',
     archetype: 'standard',
     category: 'Daily Rhythm',
-    text: 'What part of your daily routine do you fiercely protect from interruption?',
+    text: 'What part of your daily routine that is a non-negotiable?',
     deeper: 'What happens to your mood if that rhythm gets thrown off?',
     options: null,
     subtext: 'Morning silence, post-work decompression, workout, or reading before sleep.'
@@ -243,7 +243,7 @@ export const QUESTIONS = [
     levelId: 'level-1',
     archetype: 'standard',
     category: 'Humor & Joy',
-    text: 'What kind of humor makes you laugh so hard your stomach hurts?',
+    text: 'What kind of humor that always makes you laugh so hard?',
     deeper: 'Who is the person who can make you laugh faster than anyone else?',
     options: null,
     subtext: 'Dry sarcasm, physical comedy, awkward situations, or unhinged memes?'
@@ -253,7 +253,7 @@ export const QUESTIONS = [
     levelId: 'level-1',
     archetype: 'standard',
     category: 'Spontaneity vs Order',
-    text: 'How do you react when a whole weekend’s plans get cancelled at the last minute?',
+    text: 'How do you react when plans get cancelled at the last minute?',
     deeper: 'Is it secret relief or restless frustration?',
     options: null,
     subtext: 'Do you rejoice in the open schedule or scramble to fill it?'
@@ -273,7 +273,7 @@ export const QUESTIONS = [
     levelId: 'level-1',
     archetype: 'diagnostic',
     category: 'Group Decisions',
-    text: 'When a group cannot decide where to eat or what to do next, what is your instinct?',
+    text: 'What action do you take when your group cannot decide where to eat or what to do next?',
     deeper: null,
     options: [
       'Step in and make the call',
@@ -288,7 +288,7 @@ export const QUESTIONS = [
     levelId: 'level-1',
     archetype: 'story',
     category: 'Signature Story',
-    text: 'Tell us about a funny, quirky, or absurd moment in your life that perfectly summarizes your personality.',
+    text: 'Tell us about a funny or absurd moment in your life that perfectly summarizes your personality.',
     deeper: null,
     options: null,
     subtext: 'A story that captures your essence in under two minutes.'
