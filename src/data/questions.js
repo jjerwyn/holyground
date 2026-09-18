@@ -27,9 +27,9 @@ export const LEVELS = [
     id: 'level-3',
     slug: 'level3',
     number: '03',
-    title: 'How You Connect',
-    subtitle: 'Attachment, trust, conflict, and communication',
-    tagline: 'Discover how you give and receive love, navigate conflict, and build deep trust.',
+    title: 'How Do You Show Up?',
+    subtitle: 'Relationships, conflict, trust, and communication',
+    tagline: 'Discover how you relate to others, navigate conflict, communicate needs, and build trust.',
     accentColor: '#0284C7',
     bgColor: 'rgba(2, 132, 199, 0.08)',
     cardBg: '#FFFFFF',
@@ -39,9 +39,9 @@ export const LEVELS = [
     id: 'level-4',
     slug: 'level4',
     number: '04',
-    title: "What's Going On Inside?",
+    title: 'What Are You Carrying?',
     subtitle: 'Inner world, coping, fears, and quiet hopes',
-    tagline: 'Understand the person beneath the mask—your internal dialogue, tensions, and gratitude.',
+    tagline: 'Understand the person beneath the persona—internal dialogue, tensions, fears, and gratitude.',
     accentColor: '#8B5CF6',
     bgColor: 'rgba(139, 92, 246, 0.08)',
     cardBg: '#FFFFFF',
@@ -511,7 +511,7 @@ export const QUESTIONS = [
   },
 
   // ==========================================
-  // LEVEL 3: HOW YOU CONNECT (20 CARDS)
+  // LEVEL 3: HOW DO YOU SHOW UP? (20 CARDS)
   // ==========================================
   {
     id: 'q3-1',
@@ -726,7 +726,7 @@ export const QUESTIONS = [
   },
 
   // ==========================================
-  // LEVEL 4: WHAT'S GOING ON INSIDE? (20 CARDS)
+  // LEVEL 4: WHAT ARE YOU CARRYING? (20 CARDS)
   // ==========================================
   {
     id: 'q4-1',

@@ -11,8 +11,8 @@ Rather than simply increasing "vulnerability" or "pain," the game is structured 
 ```mermaid
 graph TD
     L1[Level 1: Who Are You?<br/><i>Personality, Quirks, Everyday Life</i>] --> L2[Level 2: What Made You You?<br/><i>Origins, Childhood, Defining Experiences</i>]
-    L2 --> L3[Level 3: How You Connect<br/><i>Attachment, Conflict, Needs, Boundaries</i>]
-    L3 --> L4[Level 4: What's Going On Inside?<br/><i>Inner World, Coping, Fears, Desires, Gratitude</i>]
+    L2 --> L3[Level 3: How Do You Show Up?<br/><i>Attachment, Conflict, Needs, Boundaries</i>]
+    L3 --> L4[Level 4: What Are You Carrying?<br/><i>Inner World, Coping, Fears, Desires, Gratitude</i>]
     L4 --> L5[Level 5: Who Are You With Jesus?<br/><i>Faith Met in Story, Surrender, Calling, Grace</i>]
     L5 --> FR[Final Round: Reflection & Synthesis<br/><i>Mutual Understanding, Honor, Blessing</i>]
 ```
@@ -21,8 +21,8 @@ graph TD
 |---|---|---|---|---|
 | **Level 1** | **Who Are You?** | *"What are you like in everyday life?"* | `#E11D48` (Coral Rose) | *"I know what you like, how you think, and what you're like in everyday life."* (Quirks, humor, passions, social styles). |
 | **Level 2** | **What Made You You?** | *"What experiences shaped you?"* | `#D97706` (Amber Gold) | *"I understand the childhood, family, and pivotal moments that shaped the person in front of me."* |
-| **Level 3** | **How You Connect** | *"How do you connect and relate?"* | `#0284C7` (Ocean Teal) | *"I understand how you attach, communicate, withdraw, handle conflict, and how to love you better."* |
-| **Level 4** | **What's Going On Inside?** | *"Who is the person beneath the mask?"* | `#8B5CF6` (Royal Indigo) | *"I understand your internal world, fears, coping mechanisms, contrasts, and quiet hopes."* |
+| **Level 3** | **How Do You Show Up?** | *"How do you connect and relate?"* | `#0284C7` (Ocean Teal) | *"I understand how you attach, communicate, withdraw, handle conflict, and how to love you better."* |
+| **Level 4** | **What Are You Carrying?** | *"Who is the person beneath the persona?"* | `#8B5CF6` (Royal Indigo) | *"I understand your internal world, fears, coping mechanisms, contrasts, and quiet hopes."* |
 | **Level 5** | **Who Are You With Jesus?** | *"How does Jesus meet you in your story?"* | `#C59B27` (Sacred Bronze) | *"I understand how God is transforming you, your theology in practice, and where grace meets your reality."* |
 | **Final** | **The Reflection Round** | *"What do we now understand about each other?"* | `#059669` (Emerald Jade) | Synthesis, mutual affirmation, prayer needs, and closing blessings. |
 
@@ -190,7 +190,7 @@ Every card in `src/data/questions.js` follows this enriched schema:
 
 ---
 
-### LEVEL 3 — HOW YOU CONNECT
+### LEVEL 3 — HOW DO YOU SHOW UP?
 *Relationships → attachment → conflict → needs → communication*
 
 1. **`[standard]` • Feeling Cared For**  
@@ -252,7 +252,7 @@ Every card in `src/data/questions.js` follows this enriched schema:
 
 ---
 
-### LEVEL 4 — WHAT’S GOING ON INSIDE?
+### LEVEL 4 — WHAT ARE YOU CARRYING?
 *Identity → fears → desires → coping → wounds → internal world*
 
 1. **`[standard]` • The Shield**  
